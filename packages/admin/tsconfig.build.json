@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": false,
+    "incremental": false,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@rnaga/wp-next-core/*": ["../core/dist/*"],
+      "@rnaga/wp-next-admin/*": ["./src/*"],
+      "@rnaga/wp-next-ui/*": ["../ui/dist/*"],
+      "@rnaga/wp-next-rte/*": ["../rte/dist/*"],
+      "_wp/*": ["./src/_wp/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "./src/middleware.ts", "dist"]
+}

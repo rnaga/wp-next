@@ -1,0 +1,33 @@
+{
+  "name": "@rnaga/wp-next-ui",
+  "version": "1.0.2-beta.0",
+  "scripts": {
+    "build": "node ../../scripts/build-ui.mjs",
+    "release-old": "node ../../scripts/release.mjs",
+    "release": "../../scripts/release.sh"
+  },
+  "keywords": [
+    "ui",
+    "user interface",
+    "components",
+    "material ui",
+    "wordpress"
+  ],
+  "author": "Ryohei Nagatsuka",
+  "license": "MIT",
+  "description": "User Interface components for WP Next",
+  "dependencies": {
+    "@mui/material": "^7.0.2",
+    "@rnaga/wp-next-core": "^1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.25.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rnaga/wp-next.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

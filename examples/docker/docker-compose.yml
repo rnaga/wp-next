@@ -1,0 +1,25 @@
+version: '3.9'
+
+# docker run --rm --init -it --name wp-next-example -p 3000:3000 -v public:/app/admin/public -v db:/var/lib/mysql  rnagat/wp-next-example:latest
+
+services:
+
+  wp-next-example:
+    image: rnagat/wp-next-example:latest
+    environment:
+      - WORDPRESS_HOSTNAME=${WORDPRESS_HOSTNAME}
+    volumes:
+      - public:/app/admin/public
+      - db:/var/lib/mysql
+      - html:/app/html
+    expose:
+      - 3000
+      - 33306
+    ports:
+      - 3000:3000
+      - 33306:3306
+
+volumes:
+  db:
+  public:
+  html:

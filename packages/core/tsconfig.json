@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@rnaga/wp-next-core/*": ["../core/dist/*"],
+      "@rnaga/wp-next-admin/*": ["./src/*"],
+      "_wp/*": ["./src/_wp/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules", "src/_wp"]
+}

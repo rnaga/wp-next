@@ -1,0 +1,11 @@
+.d2h-code-line,
+.d2h-code-line-ctn {
+    white-space: normal;
+}
+
+
+.d2h-code-line,
+.d2h-code-side-line,
+.d2h-code-line-ctn {
+    width: revert;
+}

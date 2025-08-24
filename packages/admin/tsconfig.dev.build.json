@@ -1,0 +1,26 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@rnaga/wp-next-core/*": [
+        "../core/dist/*"
+      ],
+      "@rnaga/wp-next-admin/*": [
+        "./src/*"
+      ],
+      "@rnaga/wp-next-ui/*": [
+        "../ui/dist/*"
+      ],
+      "@rnaga/wp-next-rte/*": [
+        "../rte/dist/*"
+      ],
+      "_wp/*": [
+        "./src/_wp/*"
+      ]
+    }
+  }
+}

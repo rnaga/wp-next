@@ -1,0 +1,181 @@
+.auth-wrapper {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90dvh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.auth-container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-wrap: break-word;
+    border: 1px solid #a7a7a7;
+}
+
+.auth-container h2 {
+    text-align: center;
+    color: #333;
+    /* margin-bottom: 20px; */
+    margin: 0 auto 20px auto;
+}
+
+.input-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.8em;
+}
+
+.login-btn {
+    margin-top: 10px;
+}
+
+.login-btn,
+.provider-btn {
+    display: flex;
+    justify-content: center;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.login-btn {
+    background: #007BFF;
+}
+
+.login-btn:hover {
+    background: #0056b3;
+}
+
+.forgot-password,
+.signup {
+    font-size: 0.8em;
+    display: block;
+    text-align: center;
+    margin: 5px 0 15px 0;
+    text-decoration: none;
+}
+
+
+.link {
+    display: flex;
+    justify-content: center;
+    /* Makes the <a> element a block-level element */
+    margin: 20px auto;
+    /* Vertically spaces the link and centers it horizontally */
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 0.8em;
+}
+
+.signup-link {
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.link:hover,
+.forgot-password:hover,
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.or-divider hr {
+    width: 40%;
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    /* margin: 0 10px; */
+}
+
+.or-divider span {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.provider-btn:hover {
+    filter: brightness(85%);
+}
+
+.signup-link a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    /* Light grey border */
+    border-top: 4px solid #007BFF;
+    /* Blue border */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message {
+    color: red;
+    /* Text color for the error message */
+    background-color: #ffcccc;
+    /* Light red background to highlight the error */
+    border: 1px solid red;
+    /* Red border to enhance visibility */
+    padding: 10px;
+    /* Padding to make the text more readable */
+    margin: 10px 0;
+    /* Spacing around the error message */
+    border-radius: 5px;
+    /* Slightly rounded corners for a softer look */
+    font-size: 0.9em;
+    /* Adjust font size as needed */
+}
+
+.success-message {
+    color: green;
+    /* Green text color indicates success */
+    background-color: #ccffcc;
+    /* Light green background to highlight the success message */
+    border: 1px solid green;
+    /* Green border to define the boundary */
+    padding: 10px;
+    /* Adequate padding to space out the text */
+    margin: 10px 0;
+    /* Margin to separate it from other elements */
+    border-radius: 5px;
+    /* Rounded corners for a smoother visual effect */
+    font-size: 0.9em;
+    /* Slightly smaller font size for emphasis */
+}

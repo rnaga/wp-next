@@ -1,0 +1,76 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/.pnp
+.pnp.js
+
+# exclude .npmrc
+/.npmrc
+
+/node_modules
+packages/**/node_modules
+public/**/*
+packages/**/public
+packages/**/dist
+packages/**/.next
+
+google-client-secret.json
+
+# testing
+/coverage
+**/.env.test
+
+# exclude test folder 
+/test/
+
+# exclude "editor" folder
+/packages/editor/
+
+# exclude "docker" folder
+/docker/
+
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+/public/files
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+test-docker
+
+dist/**/*
+
+wpconfig/**/*
+
+wp.settings.ts
+
+.env*
+.env
+
+_wp/**/*
+
+dist
+public/**/*
+
+out/**/*

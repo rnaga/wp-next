@@ -1,0 +1,64 @@
+{
+  "name": "@rnaga/wp-next-admin",
+  "version": "1.0.1",
+  "license": "MIT",
+  "description": "Admin interface for WP Next",
+  "author": "Ryohei Nagatsuka",
+  "keywords": [
+    "wordpress",
+    "admin",
+    "nextjs"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build:dev": "NEXT_BUILD_DEV=true next build",
+    "build:dev-turbopack": "NEXT_BUILD_DEV=true next build --turbo",
+    "start": "next start",
+    "lint": "next lint",
+    "build": "node ../../scripts/build-admin.mjs",
+    "release-old": "node ../../scripts/release.mjs",
+    "release": "../../scripts/release.sh",
+    "telemery:disable": "npx next telemetry disable #https://nextjs.org/telemetry"
+  },
+  "dependencies": {
+    "@mui/icons-material": "^7",
+    "@mui/material": "^7",
+    "@mui/x-date-pickers": "^7.10.0",
+    "@mui/x-tree-view": "^7.10.0",
+    "@preact/signals-react": "^2.1.0",
+    "@rnaga/wp-next-core": "^1.0",
+    "@rnaga/wp-next-rte": "^1.0",
+    "@rnaga/wp-next-ui": "^1.0",
+    "@rnaga/wp-node": "^1.0",
+    "dayjs": "^1.11.11",
+    "diff": "^5.2.0",
+    "diff2html": "^3.4.48",
+    "html-react-parser": "^5.1.10",
+    "mime-types": "^2.1.35",
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-error-boundary": "^4.0.13",
+    "react-resizable-panels": "^2.0.20",
+    "zod": "^4.0"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.6.0",
+    "@types/diff": "^5.2.1",
+    "@types/mime-types": "^2.1.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-google-recaptcha": "^2.1.9",
+    "eslint": "^8",
+    "fs-extra": "^11.2.0",
+    "typescript": "^5.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rnaga/wp-next.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@rnaga/wp-next-core/*": ["../core/src/*"],
+      "@rnaga/wp-next-admin/*": ["./src/*"],
+      "@rnaga/wp-next-ui/*": ["../ui/src/*"],
+      "@rnaga/wp-next-rte/*": ["../rte/src/*"],
+      "_wp/*": ["./src/_wp/*"]
+    },
+    "typeRoots": ["../core/dist/types"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "_wp/**/*.ts"
+  ],
+  "exclude": ["node_modules", "dist", "node_modules/next/dist"]
+}

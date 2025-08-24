@@ -1,0 +1,35 @@
+{
+  "name": "@rnaga/wp-next-cli",
+  "version": "0.1.25",
+  "description": "A command-line interface for managing WP Next projects",
+  "bin": {
+    "wp-next": "./index.js"
+  },
+  "scripts": {
+    "wp-next": "node ./dist/index.js",
+    "wp-next:dev": "ts-node ./src/index.ts",
+    "build": "npm run sync-templates && node ../../scripts/build-cli.mjs",
+    "sync-templates": "node ./scripts/sync-templates.mjs",
+    "release-old": "node ../../scripts/release.mjs",
+    "release": "../../scripts/release.sh"
+  },
+  "keywords": [
+    "wordpress",
+    "cli"
+  ],
+  "author": "Ryohei Nagatsuka",
+  "license": "MIT",
+  "dependencies": {
+    "@rnaga/wp-next-admin": "^1.0",
+    "@rnaga/wp-next-core": "^1.0",
+    "@rnaga/wp-node": "^1.0",
+    "@rnaga/wp-node-cli": "^1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rnaga/wp-next.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

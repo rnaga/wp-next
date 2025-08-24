@@ -1,0 +1,13 @@
+export * as blog from "./blog";
+export * as comment from "./comment";
+export * as meta from "./meta";
+export * as options from "./options";
+export * as passwords from "./password";
+export * as post from "./post";
+export * as response from "./response";
+export * as revision from "./revision";
+export * as roles from "./roles";
+export * as settings from "./settings";
+export * as site from "./site";
+export * as term from "./term";
+export * as user from "./user";

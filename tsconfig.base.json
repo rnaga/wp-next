@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    // "module": "NodeNext",
+    // "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true, // Should be true to avoid type checking of node_modules
+    "incremental": false,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@rnaga/wp-next-core/*": ["./src/*"],
+      "@rnaga/wp-next-admin/*": ["./src/*"],
+      "_wp/*": ["./src/_wp/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
