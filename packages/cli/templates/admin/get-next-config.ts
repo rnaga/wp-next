@@ -36,6 +36,14 @@ export default function getNextConfig(
   const nextConfig: NextConfig = {
     serverExternalPackages: ["@rnaga/wp-node", "knex", "node:events"],
 
+    experimental: {
+      serverActions: {
+        // Bump the body size limit for media uploads.
+        // https://nextjs.org/docs/app/api-reference/config/next-config-js/serverActions#bodysizelimit
+        bodySizeLimit: "10mb",
+      },
+    },
+
     // Only include TypeScript configuration when enableTypeScript is true
     ...(enableTypeScript && {
       typescript: {
