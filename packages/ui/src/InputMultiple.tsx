@@ -8,7 +8,6 @@ import { Typography } from "./Typography";
 
 const sxSelectAutocomplete = SelectAutocomplete.sx;
 const SelectAutocompleteTextField = SelectAutocomplete.TextField;
-//const RenderOption = SelectAutocomplete.RenderOption;
 
 export type InputMultipleItem = string;
 
@@ -52,7 +51,6 @@ export const InputMultiple = (props: {
   );
 
   useEffect(() => {
-    console.log("InputMultiple useEffect", props.value);
     const newValue = (props.value ?? []).filter((v) => `${v}`.trim() !== "");
     setValue(newValue);
   }, [props.value]);
