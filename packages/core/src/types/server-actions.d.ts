@@ -1,7 +1,10 @@
 import { z } from "zod";
 
+import * as actionsAdminUser from "../server/actions/admin-user";
+import * as applicationsPasswords from "../server/actions/application-passwords";
 import * as actionsBlog from "../server/actions/blog";
 import * as actionsComment from "../server/actions/comment";
+import * as actionsMedia from "../server/actions/media";
 import * as actionsMeta from "../server/actions/meta";
 import * as actionsOptions from "../server/actions/options";
 import * as actionsPost from "../server/actions/post";
@@ -11,8 +14,6 @@ import * as actionsSettings from "../server/actions/settings";
 import * as actionsSite from "../server/actions/site";
 import * as actionsTerm from "../server/actions/term";
 import * as actionsUser from "../server/actions/user";
-import * as actionsMedia from "../server/actions/media";
-import * as actionsAdminUser from "../server/actions/admin-user";
 
 import type * as wpTypes from "@rnaga/wp-node/types";
 
@@ -38,6 +39,7 @@ export type ActionResponse<T extends (...args: any) => any> = Awaited<
 
 // Server Actions
 export interface Actions {
+  applicationPasswords: typeof applicationsPasswords;
   adminUser: typeof actionsAdminUser;
   blog: typeof actionsBlog;
   meta: typeof actionsMeta;
@@ -152,6 +154,15 @@ type Site = NonNullableResponseData<"site", "get">;
 type Sites = NonNullableResponseData<"site", "list">;
 
 type Settings = NonNullableResponseData<"settings", "get">;
+
+type ApplicationPassword = NonNullableResponseData<
+  "applicationPasswords",
+  "get"
+>;
+type ApplicationPasswords = NonNullableResponseData<
+  "applicationPasswords",
+  "list"
+>;
 
 // type RoleEditableBlogs = NonNullable<
 //   Awaited<ReturnType<Actions["user"]["getRoleEditableBlogs"]>>["data"]

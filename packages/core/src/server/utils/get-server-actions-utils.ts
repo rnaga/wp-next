@@ -1,5 +1,8 @@
+import * as actioneAdminUser from "../actions/admin-user";
+import * as actionApplicationPasswords from "../actions/application-passwords";
 import * as actionsBlog from "../actions/blog";
 import * as actionsComment from "../actions/comment";
+import * as actionsMedia from "../actions/media";
 import * as actionsMeta from "../actions/meta";
 import * as actionsOptions from "../actions/options";
 import { requestResetKey } from "../actions/password/request-reset-key";
@@ -9,8 +12,6 @@ import * as actionsRoles from "../actions/roles";
 import * as actionsSite from "../actions/site";
 import * as actionsTerm from "../actions/term";
 import * as actionsUser from "../actions/user";
-import * as actionsMedia from "../actions/media";
-import * as actioneAdminUser from "../actions/admin-user";
 
 import type * as types from "../../types";
 
@@ -55,6 +56,7 @@ export const getServerActionsUtils = () => {
   };
 
   const actions = {
+    applicationPasswords: actionApplicationPasswords,
     adminUser: actioneAdminUser,
     site: actionsSite,
     user: actionsUser,

@@ -8,12 +8,13 @@ import { Tabs } from "@rnaga/wp-next-ui/Tabs";
 
 import { useAdminNavigation } from "../../../../hooks/use-admin-navigation";
 import { useWPAdmin } from "../../../../wp-admin";
+import { ApplicationPasswords } from "./ApplicationPasswords";
 import { Profile } from "./Profile";
 import { Roles } from "./Roles/";
 
-export const Edit = (props?: { userId?: number }) => {
-  const { overlay } = useWPAdmin();
+export const Edit = (props?: { userId?: number; isProfile?: boolean }) => {
   const { user } = useUser();
+  const { site } = useWPAdmin();
   const { searchParams, refreshValue } = useAdminNavigation();
   const { actions, safeParse } = useServerActions();
 
@@ -49,15 +50,30 @@ export const Edit = (props?: { userId?: number }) => {
     [user?.role.capabilities]
   );
 
+  const canManageApplicationPasswords = useMemo(
+    () =>
+      props?.isProfile === true &&
+      (user?.role.capabilities.has("edit_users") ||
+        (site.isMultiSite && user?.role.names.has("superadmin")) ||
+        (!site.isMultiSite && user?.role.names.has("administrator"))),
+    [user?.role.capabilities, props?.isProfile]
+  );
+
   if (canEditUser === undefined) {
     return null;
   }
 
-  console.log("user.role.capabilities", user?.role.capabilities);
-
   const tabItems = [
     ...(canEditUser
       ? [{ label: "Profile", content: <Profile userId={userId} /> }]
+      : []),
+    ...(canManageApplicationPasswords
+      ? [
+          {
+            label: "Application Passwords",
+            content: <ApplicationPasswords key={`ap-${refreshContent}`} />,
+          },
+        ]
       : []),
     ...(canUpdateRole
       ? [
