@@ -23,7 +23,7 @@ export const Categories = () => {
 
   const handleNewCategoryCreated = (term: { term_id: number }) => {
     setFormData({
-      post_categeory: [...(formData.post_categeory ?? []), term.term_id],
+      post_category: [...(formData.post_category ?? []), term.term_id],
     });
     setKey(Math.random());
   };
@@ -33,9 +33,9 @@ export const Categories = () => {
       <FormControl id="categories" sx={{ width: "100%" }}>
         <SelectWPCategories
           size="medium"
-          value={formData.post_categeory?.join(",") ?? ""}
+          value={formData.post_category?.join(",") ?? ""}
           onChange={(categories) =>
-            setFormData({ post_categeory: categories.map(Number) })
+            setFormData({ post_category: categories.map(Number) })
           }
         />
       </FormControl>
