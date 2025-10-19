@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, useTransition } from "react";
 
-import { useWPAdmin } from "@/client/wp-admin";
 import { Box } from "@mui/material";
 import { useServerActions, useUser } from "@rnaga/wp-next-core/client/hooks";
 import { Button } from "@rnaga/wp-next-ui/Button";
@@ -8,6 +7,7 @@ import { ActionTd, Table, Td, Th, THead, Tr } from "@rnaga/wp-next-ui/list";
 import { Loading } from "@rnaga/wp-next-ui/Loading";
 import { Typography } from "@rnaga/wp-next-ui/Typography";
 
+import { useWPAdmin } from "../../../../../wp-admin";
 import { ActionLink } from "./ActionLink";
 import { Create } from "./Create";
 
