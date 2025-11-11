@@ -90,7 +90,11 @@ export const InputMultiple = (props: {
         }}
         sx={sxSelectAutocomplete({
           size: size ?? "small",
-          sx: { zIndex: 9999, ...slotSxProps?.input },
+          sx: {
+            zIndex: 9999,
+            height: size == "medium" ? 32 : 24,
+            ...slotSxProps?.input,
+          },
           ...sx,
         })}
         renderInput={(params) => (
