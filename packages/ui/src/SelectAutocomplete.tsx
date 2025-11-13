@@ -52,7 +52,7 @@ const sxSelectAutocomplete = (props: {
     },
     "& .MuiInputBase-input": {
       cursor: "pointer",
-      height: size == "medium" ? 24 : 12,
+      height: size == "medium" ? 24 : 16,
     },
     "& .MuiOutlinedInput-notchedOutline": {
       border: "none",

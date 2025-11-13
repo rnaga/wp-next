@@ -13,7 +13,8 @@ export const Button = (
     color?: "info" | "success" | "warning" | "error" | "primary" | "secondary";
   } & Omit<Parameters<typeof MuiButton>[0], "children" | "size">
 ) => {
-  const { children, size, component, bold, loading, color, ...rest } = props;
+  const { children, size, component, bold, loading, color, disabled, ...rest } =
+    props;
   const { wpTheme } = useWPTheme();
   return (
     <MuiButton
@@ -22,7 +23,7 @@ export const Button = (
       variant="contained"
       size="small"
       disableElevation
-      disabled={loading}
+      disabled={loading || disabled === true}
       sx={{
         textTransform: "none",
         fontSize: size === "large" ? 16 : size === "medium" ? 14 : 12,
