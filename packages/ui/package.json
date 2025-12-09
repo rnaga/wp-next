@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-ui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
     "release-old": "node ../../scripts/release.mjs",
@@ -26,8 +26,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rnaga/wp-next.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }

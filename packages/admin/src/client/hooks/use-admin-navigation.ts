@@ -1,4 +1,5 @@
 import queryString from "querystring";
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 import { useNavigation } from "@rnaga/wp-next-core/client/hooks/use-navigation";
 
@@ -24,6 +25,8 @@ export const useAdminNavigation = <Params = Record<string, any>>() => {
     createQueryObject,
     createQueryString,
   } = useNavigation<Params>();
+
+  const typedRouter: AppRouterInstance = router;
 
   const {
     site: { basePath, blogBasePath },
@@ -100,7 +103,7 @@ export const useAdminNavigation = <Params = Record<string, any>>() => {
     blogBasePath,
     searchParams,
     navigationStatus,
-    router,
+    router: typedRouter,
     currentPath,
     resolvePath,
     gotoPath,

@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Core functionality for WP Next",
   "scripts": {
     "test": "jest",
@@ -18,9 +18,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rnaga/wp-next.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "@rnaga/wp-node": "^1.0",

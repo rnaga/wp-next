@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-rte",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Rich Text Editor components for WP Next",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
@@ -53,9 +53,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rnaga/wp-next.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   },
   "bugs": {
     "url": "https://github.com/rnaga/wp-next/issues"

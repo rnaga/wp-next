@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-admin",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "Admin interface for WP Next",
   "author": "Ryohei Nagatsuka",
@@ -57,8 +57,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rnaga/wp-next.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }

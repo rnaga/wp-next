@@ -28,9 +28,6 @@
     "type": "git",
     "url": "https://github.com/rnaga/wp-next.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "overrides": {
     "@tinymce/tinymce-react": {
       "react": "$react",
