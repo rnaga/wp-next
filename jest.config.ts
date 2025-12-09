@@ -12,6 +12,7 @@ import type { Config } from "jest";
 // });
 
 const config: Config = {
+  testEnvironment: "node",
   moduleNameMapper: {
     "^@rnaga/wp-next-admin/(.*)$": "<rootDir>/packages/admin/src/$1",
     "^@rnaga/wp-next-core/(.*)$": "<rootDir>/packages/core/src/$1",
@@ -20,6 +21,7 @@ const config: Config = {
     "^_wp/(.*)$": "<rootDir>/test/_wp/$1",
     "^@/test/(.*)$": "<rootDir>/test/$1",
     "^next/navigation": "<rootDir>/test/mocks/empty.ts",
+    "^@lexical/react/LexicalHistoryPlugin$": "<rootDir>/test/mocks/@lexical/react/LexicalHistoryPlugin.ts",
   },
   // exclude dist folders to avoid collision error - jest-haste-map: Haste module naming collision
   modulePathIgnorePatterns: [
@@ -28,13 +30,22 @@ const config: Config = {
     "<rootDir>/packages/core/dist",
   ],
 
+  setupFiles: ["<rootDir>/test/jest.setup.ts"],
   setupFilesAfterEnv: ["<rootDir>/test/bootstrap.ts"],
-  //setupFiles: ["./test-next/jest.setup.ts"],
   coverageProvider: "v8",
   testMatch: ["**/?(*.)+(spec|test).+(ts|tsx|js)"],
   transform: {
-    "^.+\\.(ts|tsx)$": ["ts-jest", { tsconfig: "test/tsconfig.json" }],
+    "^.+\\.(ts|tsx)$": [
+      "ts-jest",
+      {
+        tsconfig: "test/tsconfig.jest.json",
+        useESM: false,
+      },
+    ],
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!(lexical|@lexical)/)",
+  ],
 
   // testEnvironment: "jsdom",
 };
