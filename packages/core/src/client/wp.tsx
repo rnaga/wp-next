@@ -1,3 +1,4 @@
+"use client";
 import { hooks } from "_wp/hooks/client";
 import { createContext, useContext, useRef } from "react";
 
