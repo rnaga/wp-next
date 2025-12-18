@@ -19,7 +19,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Box, Divider, SxProps } from "@mui/material";
+import { Box, IconButton, SxProps } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Typography } from "./Typography";
 import { Background } from "./Background";
 import { Portal } from "./portal";
@@ -46,6 +47,7 @@ export const DraggableBox = (props: {
   slotSxProps?: SlotSxProps;
   zIndexLayer?: number; // Optional zIndex layer for the box
   placement?: "target" | "left";
+  resizable?: boolean; // Optional flag to enable resizing
 }) => {
   // Destructure props
   const {
@@ -61,6 +63,7 @@ export const DraggableBox = (props: {
     offset: initialOffset = {},
     zIndexLayer = 0,
     placement = "left",
+    resizable = false,
   } = props;
 
   // Provide default offset values for the box
@@ -77,6 +80,15 @@ export const DraggableBox = (props: {
 
   // Stores the mouse down offset within the box
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  // State to store the current size of the draggable box
+  const [boxSize, setBoxSize] = useState({ width: 0, height: 0 });
+
+  // Determines if the box is currently being resized and from which direction
+  const [isResizing, setIsResizing] = useState<string | null>(null);
+
+  // Stores the initial mouse position when resizing starts
+  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
   /**
    * Ensures the new position is within the browser window bounds.
@@ -97,40 +109,58 @@ export const DraggableBox = (props: {
 
   /**
    * Callback ref to get the DOM element for the draggable box.
-   * Requires a targetRef to position the box relative to another element.
+   * Positions the box relative to a target element if provided, or centers it on screen.
    */
   const callbackRef = useCallback(
     (ref: HTMLElement | undefined) => {
-      if (!ref || !targetRef?.current) return;
+      if (!ref) return;
       boxRef.current = ref;
       if (selfRef) {
         // If a selfRef is provided, assign the boxRef to it
         selfRef.current = ref;
       }
 
-      // Calculate the referenced element’s position
-      const rect = targetRef.current.getBoundingClientRect();
       const boxWidth = boxRef.current.offsetWidth || 0;
       const boxHeight = boxRef.current.offsetHeight || 0;
 
-      // Compute initial position based on target element
-      let newX = rect.left + left - boxWidth;
-      let newY = rect.bottom - boxHeight / 2 + top;
+      let newX: number;
+      let newY: number;
 
-      // if placemenet is "target", x and y are relative to the target element
-      if (placement === "target") {
-        newX = rect.left;
-        newY = rect.top;
+      if (targetRef?.current) {
+        // Calculate the referenced element's position
+        const rect = targetRef.current.getBoundingClientRect();
+
+        // Compute initial position based on target element
+        newX = rect.left + left - boxWidth;
+        newY = rect.bottom - boxHeight / 2 + top;
+
+        // if placement is "target", x and y are relative to the target element
+        if (placement === "target") {
+          newX = rect.left;
+          newY = rect.top;
+        }
+      } else {
+        // Center the box on screen if no targetRef is provided
+        newX = (window.innerWidth - boxWidth) / 2 + left;
+        newY = (window.innerHeight - boxHeight) / 2 + top;
       }
 
       // If the box goes off-screen at the bottom, adjust upward
       if (newY + boxHeight > window.innerHeight) {
         newY = window.innerHeight - boxHeight;
       }
+      // If the box goes off-screen at the right, adjust leftward
+      if (newX + boxWidth > window.innerWidth) {
+        newX = window.innerWidth - boxWidth;
+      }
+      // Ensure minimum position is not negative
+      newX = Math.max(0, newX);
+      newY = Math.max(0, newY);
+
       // Store the position state
       setPosition({ x: newX, y: newY });
     },
-    [targetRef, left, top]
+    [targetRef, left, top, placement, selfRef]
   );
 
   /**
@@ -150,26 +180,100 @@ export const DraggableBox = (props: {
    * Updates the box position while respecting window bounds.
    */
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !boxRef.current) return;
-    const { offsetWidth, offsetHeight } = boxRef.current;
-    const newPos = clampPosition(
-      e.clientX - offset.x,
-      e.clientY - offset.y,
-      offsetWidth,
-      offsetHeight
-    );
-    if (newPos) setPosition(newPos);
+    if (isDragging && boxRef.current) {
+      const { offsetWidth, offsetHeight } = boxRef.current;
+      const newPos = clampPosition(
+        e.clientX - offset.x,
+        e.clientY - offset.y,
+        offsetWidth,
+        offsetHeight
+      );
+      if (newPos) setPosition(newPos);
+    }
+
+    if (isResizing && boxRef.current) {
+      const deltaX = e.clientX - resizeStart.x;
+      const deltaY = e.clientY - resizeStart.y;
+
+      let newWidth = resizeStart.width;
+      let newHeight = resizeStart.height;
+
+      if (isResizing.includes("right")) {
+        newWidth = Math.max(300, resizeStart.width + deltaX);
+      }
+      if (isResizing.includes("left")) {
+        newWidth = Math.max(300, resizeStart.width - deltaX);
+      }
+      if (isResizing.includes("bottom")) {
+        newHeight = Math.max(200, resizeStart.height + deltaY);
+      }
+      if (isResizing.includes("top")) {
+        newHeight = Math.max(200, resizeStart.height - deltaY);
+      }
+
+      setBoxSize({ width: newWidth, height: newHeight });
+    }
   };
 
   // Called when the mouse is released. Ends the dragging session.
-  const handleMouseUp = () => setIsDragging(false);
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    setIsResizing(null);
+  };
 
   /**
-   * Subscribes to mousemove and mouseup while dragging; unsubscribes otherwise.
+   * Called when the user presses the mouse button on a resize handle.
+   * Captures the initial state for resizing.
+   */
+  const handleResizeMouseDown = useCallback(
+    (e: React.MouseEvent, direction: string) => {
+      e.stopPropagation();
+      setIsResizing(direction);
+      const rect = boxRef.current?.getBoundingClientRect();
+      if (rect) {
+        setResizeStart({
+          x: e.clientX,
+          y: e.clientY,
+          width: rect.width,
+          height: rect.height,
+        });
+      }
+    },
+    []
+  );
+
+  /**
+   * Handles mouse wheel events on resize handles to adjust size.
+   */
+  const handleResizeWheel = useCallback(
+    (e: React.WheelEvent, direction: string) => {
+      e.preventDefault();
+      if (!boxRef.current) return;
+
+      const rect = boxRef.current.getBoundingClientRect();
+      const delta = e.deltaY > 0 ? -10 : 10;
+
+      let newWidth = boxSize.width || rect.width;
+      let newHeight = boxSize.height || rect.height;
+
+      if (direction.includes("right") || direction.includes("left")) {
+        newWidth = Math.max(300, newWidth + delta);
+      }
+      if (direction.includes("bottom") || direction.includes("top")) {
+        newHeight = Math.max(200, newHeight + delta);
+      }
+
+      setBoxSize({ width: newWidth, height: newHeight });
+    },
+    [boxSize.width, boxSize.height]
+  );
+
+  /**
+   * Subscribes to mousemove and mouseup while dragging or resizing; unsubscribes otherwise.
    * This ensures we only respond to these events when necessary.
    */
   useEffect(() => {
-    if (isDragging) {
+    if (isDragging || isResizing) {
       window.addEventListener("mousemove", handleMouseMove);
       window.addEventListener("mouseup", handleMouseUp);
     } else {
@@ -180,7 +284,7 @@ export const DraggableBox = (props: {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, offset]);
+  }, [isDragging, isResizing, offset, resizeStart]);
 
   /**
    * Observes changes to the box size and repositions if part of the box
@@ -226,6 +330,8 @@ export const DraggableBox = (props: {
             top: position.y,
             userSelect: "none",
             minWidth: 300,
+            width: boxSize.width || "auto",
+            height: boxSize.height || "auto",
             zIndex: 1000 + zIndexLayer,
             bgcolor: "background.paper",
             borderRadius: 2,
@@ -238,6 +344,9 @@ export const DraggableBox = (props: {
             sx={{
               height: 30,
               cursor: "move",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               ...slotSxProps?.header,
             }}
             onMouseDown={handleMouseDown}
@@ -246,15 +355,129 @@ export const DraggableBox = (props: {
               size={size}
               sx={{
                 p: 0.5,
+                flexGrow: 1,
                 ...slotSxProps?.title,
               }}
               bold
             >
               {title}
             </Typography>
+            <IconButton
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation();
+                onClose();
+              }}
+              onMouseDown={(e) => {
+                e.stopPropagation();
+              }}
+              sx={{
+                padding: 0.5,
+                "&:hover": {
+                  bgcolor: "action.hover",
+                },
+              }}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
           </Box>
           {/* Main content area */}
           <Box>{children}</Box>
+
+          {/* Resize handles - only render if resizable is true */}
+          {resizable && (
+            <>
+              {/* Right edge */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: 8,
+                  cursor: "ew-resize",
+                  "&:hover": {
+                    bgcolor: "primary.main",
+                    opacity: 0.3,
+                  },
+                }}
+                onMouseDown={(e) => handleResizeMouseDown(e, "right")}
+                onWheel={(e) => handleResizeWheel(e, "right")}
+              />
+
+              {/* Bottom edge */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: 8,
+                  cursor: "ns-resize",
+                  "&:hover": {
+                    bgcolor: "primary.main",
+                    opacity: 0.3,
+                  },
+                }}
+                onMouseDown={(e) => handleResizeMouseDown(e, "bottom")}
+                onWheel={(e) => handleResizeWheel(e, "bottom")}
+              />
+
+              {/* Bottom-right corner */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  right: 0,
+                  width: 16,
+                  height: 16,
+                  cursor: "nwse-resize",
+                  "&:hover": {
+                    bgcolor: "primary.main",
+                    opacity: 0.3,
+                  },
+                }}
+                onMouseDown={(e) => handleResizeMouseDown(e, "bottom-right")}
+                onWheel={(e) => handleResizeWheel(e, "bottom-right")}
+              />
+
+              {/* Left edge */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: 8,
+                  cursor: "ew-resize",
+                  "&:hover": {
+                    bgcolor: "primary.main",
+                    opacity: 0.3,
+                  },
+                }}
+                onMouseDown={(e) => handleResizeMouseDown(e, "left")}
+                onWheel={(e) => handleResizeWheel(e, "left")}
+              />
+
+              {/* Top edge */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 8,
+                  cursor: "ns-resize",
+                  "&:hover": {
+                    bgcolor: "primary.main",
+                    opacity: 0.3,
+                  },
+                }}
+                onMouseDown={(e) => handleResizeMouseDown(e, "top")}
+                onWheel={(e) => handleResizeWheel(e, "top")}
+              />
+            </>
+          )}
         </Box>
       </Portal>
     </>
