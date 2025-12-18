@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { useTheme } from "@mui/material";
 import {
   MenuButtonBold,
@@ -14,9 +15,10 @@ import {
 
 export default function LightEditorMenuControls(props?: {
   menuSize?: "small" | "medium" | "large";
+  additionalMenuItems?: ReactNode;
 }) {
   const theme = useTheme();
-  const { menuSize = "medium" } = props || {};
+  const { menuSize = "medium", additionalMenuItems } = props || {};
 
   const sizeMap = {
     small: { fontSize: "0.875rem", iconSize: "1rem", height: "28px" },
@@ -78,7 +80,12 @@ export default function LightEditorMenuControls(props?: {
 
       <MenuButtonUndo />
       <MenuButtonRedo />
-      <MenuDivider />
+      {additionalMenuItems && (
+        <>
+          <MenuDivider />
+          {additionalMenuItems}
+        </>
+      )}
     </MenuControlsContainer>
   );
 }

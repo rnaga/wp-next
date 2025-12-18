@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-rte",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Rich Text Editor components for WP Next",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",

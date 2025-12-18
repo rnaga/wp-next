@@ -10,7 +10,7 @@
  * - size: Sets the Typography size ("small" | "medium").
  * - targetRef: Reference to an element whose relative position determines the box's initial placement.
  * - sx: Style overrides for the outer Box wrapping the content.
- * - slotSxProps: Style overrides for the header and title.
+ * - slotSxProps: Style overrides for the header, title, and border (width, color).
  */
 import React, {
   RefObject,
@@ -29,6 +29,10 @@ import { Portal } from "./portal";
 type SlotSxProps = {
   header?: SxProps;
   title?: SxProps;
+  border?: {
+    width?: number; // Border width in pixels (default: 1)
+    color?: string; // Border color (default: theme divider color)
+  };
 };
 
 export const DraggableBox = (props: {
@@ -88,7 +92,12 @@ export const DraggableBox = (props: {
   const [isResizing, setIsResizing] = useState<string | null>(null);
 
   // Stores the initial mouse position when resizing starts
-  const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [resizeStart, setResizeStart] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
 
   /**
    * Ensures the new position is within the browser window bounds.
@@ -334,8 +343,11 @@ export const DraggableBox = (props: {
             height: boxSize.height || "auto",
             zIndex: 1000 + zIndexLayer,
             bgcolor: "background.paper",
-            borderRadius: 2,
+            borderRadius: 1,
             p: 1,
+            border: `${slotSxProps?.border?.width ?? 1}px solid`,
+            borderColor: slotSxProps?.border?.color ?? "grey.500",
+            transform: "translateZ(0)",
             ...sx,
           }}
         >

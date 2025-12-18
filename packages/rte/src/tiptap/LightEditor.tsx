@@ -3,7 +3,7 @@ import { Box, Button, Stack, SxProps, Typography } from "@mui/material";
 import type { EditorOptions } from "@tiptap/core";
 import { type Editor } from "@tiptap/core";
 import { Transaction } from "@tiptap/pm/state";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   LinkBubbleMenu,
   MenuButton,
@@ -24,8 +24,9 @@ export function LightEditor(props: {
   onUpdate?: (editor: Editor, transaction: Transaction) => void;
   onEditorReady?: (editor: Editor) => void;
   sx?: SxProps;
+  renderControls?: () => ReactNode;
 }) {
-  const { defaultContent, minHeight, maxHeight, fontSize, menuSize, onUpdate, onEditorReady } = props;
+  const { defaultContent, minHeight, maxHeight, fontSize, menuSize, onUpdate, onEditorReady, renderControls } = props;
   const extensions = useExtensions({
     placeholder: "Start typing your content here...",
   });
@@ -39,7 +40,10 @@ export function LightEditor(props: {
       // Only update if the content is different from what's currently in the editor
       const currentContent = editor.getHTML();
       if (currentContent !== defaultContent) {
-        editor.commands.setContent(defaultContent ?? "", { emitUpdate: false });
+        // Use queueMicrotask to defer the update and avoid flushSync warning
+        queueMicrotask(() => {
+          editor.commands.setContent(defaultContent ?? "", { emitUpdate: false });
+        });
         lastDefaultContentRef.current = defaultContent;
       }
     }
@@ -59,7 +63,7 @@ export function LightEditor(props: {
         onUpdate={(e) => {
           onUpdate?.(e.editor, e.transaction);
         }}
-        renderControls={() => <LightEditorMenuControls menuSize={menuSize} />}
+        renderControls={renderControls || (() => <LightEditorMenuControls menuSize={menuSize} />)}
         RichTextFieldProps={{
           variant: "outlined",
         }}
