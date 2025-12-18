@@ -12,10 +12,46 @@ import {
   MenuSelectHeading,
 } from "mui-tiptap";
 
-export default function LightEditorMenuControls() {
+export default function LightEditorMenuControls(props?: {
+  menuSize?: "small" | "medium" | "large";
+}) {
   const theme = useTheme();
+  const { menuSize = "medium" } = props || {};
+
+  const sizeMap = {
+    small: { fontSize: "0.875rem", iconSize: "1rem", height: "28px" },
+    medium: { fontSize: "1rem", iconSize: "1.25rem", height: "32px" },
+    large: { fontSize: "1.125rem", iconSize: "1.5rem", height: "40px" },
+  };
+
+  const size = sizeMap[menuSize];
+
   return (
-    <MenuControlsContainer>
+    <MenuControlsContainer
+      sx={{
+        fontSize: size.fontSize,
+        "& .MuiToggleButton-root": {
+          fontSize: size.iconSize,
+          height: size.height,
+          minWidth: size.height,
+          padding: "4px 8px",
+        },
+        "& .MuiSvgIcon-root": {
+          fontSize: size.iconSize,
+        },
+        "& .MuiSelect-select": {
+          fontSize: size.fontSize,
+          height: size.height,
+          minHeight: size.height,
+          padding: "4px 8px",
+        },
+        "& .MuiInputBase-root": {
+          fontSize: size.fontSize,
+          height: size.height,
+          minHeight: size.height,
+        },
+      }}
+    >
       <MenuSelectHeading />
 
       <MenuButtonBold />

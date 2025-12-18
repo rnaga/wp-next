@@ -1,5 +1,5 @@
 import { Lock, LockOpen, TextFields } from "@mui/icons-material";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, SxProps, Typography } from "@mui/material";
 import type { EditorOptions } from "@tiptap/core";
 import { type Editor } from "@tiptap/core";
 import { Transaction } from "@tiptap/pm/state";
@@ -19,9 +19,12 @@ export function LightEditor(props: {
   defaultContent?: string;
   minHeight?: number;
   maxHeight?: number;
+  fontSize?: number | string;
+  menuSize?: "small" | "medium" | "large";
   onUpdate?: (editor: Editor, transaction: Transaction) => void;
+  sx?: SxProps;
 }) {
-  const { defaultContent, minHeight, maxHeight, onUpdate } = props;
+  const { defaultContent, minHeight, maxHeight, fontSize, menuSize, onUpdate } = props;
   const extensions = useExtensions({
     placeholder: "Start typing your content here...",
   });
@@ -30,6 +33,7 @@ export function LightEditor(props: {
   return (
     <>
       <RichTextEditor
+        key={defaultContent}
         ref={rteRef}
         extensions={extensions}
         content={defaultContent ?? ""}
@@ -38,7 +42,7 @@ export function LightEditor(props: {
         onUpdate={(e) => {
           onUpdate?.(e.editor, e.transaction);
         }}
-        renderControls={() => <LightEditorMenuControls />}
+        renderControls={() => <LightEditorMenuControls menuSize={menuSize} />}
         RichTextFieldProps={{
           variant: "outlined",
         }}
@@ -50,6 +54,19 @@ export function LightEditor(props: {
             border: "none",
           },
           padding: "0 !important",
+          ...(fontSize && {
+            fontSize: typeof fontSize === "number" ? `${fontSize}px` : fontSize,
+            "& .ProseMirror": {
+              fontSize: typeof fontSize === "number" ? `${fontSize}px` : fontSize,
+            },
+            "& .ProseMirror p": {
+              fontSize: typeof fontSize === "number" ? `${fontSize}px` : fontSize,
+            },
+            "& .MuiTiptap-RichTextContent": {
+              fontSize: typeof fontSize === "number" ? `${fontSize}px` : fontSize,
+            },
+          }),
+          ...props.sx,
         }}
       >
         {() => (
