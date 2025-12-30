@@ -29,6 +29,7 @@ import { Portal } from "./portal";
 type SlotSxProps = {
   header?: SxProps;
   title?: SxProps;
+  content?: SxProps;
   border?: {
     width?: number; // Border width in pixels (default: 1)
     color?: string; // Border color (default: theme divider color)
@@ -52,6 +53,7 @@ export const DraggableBox = (props: {
   zIndexLayer?: number; // Optional zIndex layer for the box
   placement?: "target" | "left";
   resizable?: boolean; // Optional flag to enable resizing
+  onResize?: (width: number, height: number, event?: Event) => void; // Callback when box size changes
 }) => {
   // Destructure props
   const {
@@ -68,6 +70,7 @@ export const DraggableBox = (props: {
     zIndexLayer = 0,
     placement = "left",
     resizable = false,
+    onResize,
   } = props;
 
   // Provide default offset values for the box
@@ -98,6 +101,17 @@ export const DraggableBox = (props: {
     width: 0,
     height: 0,
   });
+
+  /**
+   * Updates the box size and triggers the onResize callback.
+   */
+  const updateBoxSize = useCallback(
+    (width: number, height: number, event?: Event) => {
+      setBoxSize({ width, height });
+      onResize?.(width, height, event);
+    },
+    [onResize]
+  );
 
   /**
    * Ensures the new position is within the browser window bounds.
@@ -220,7 +234,7 @@ export const DraggableBox = (props: {
         newHeight = Math.max(200, resizeStart.height - deltaY);
       }
 
-      setBoxSize({ width: newWidth, height: newHeight });
+      updateBoxSize(newWidth, newHeight, e);
     }
   };
 
@@ -272,9 +286,9 @@ export const DraggableBox = (props: {
         newHeight = Math.max(200, newHeight + delta);
       }
 
-      setBoxSize({ width: newWidth, height: newHeight });
+      updateBoxSize(newWidth, newHeight, e.nativeEvent);
     },
-    [boxSize.width, boxSize.height]
+    [boxSize.width, boxSize.height, updateBoxSize]
   );
 
   /**
@@ -293,7 +307,7 @@ export const DraggableBox = (props: {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, isResizing, offset, resizeStart]);
+  }, [isDragging, isResizing, offset, resizeStart, updateBoxSize]);
 
   /**
    * Observes changes to the box size and repositions if part of the box
@@ -394,7 +408,13 @@ export const DraggableBox = (props: {
             </IconButton>
           </Box>
           {/* Main content area */}
-          <Box>{children}</Box>
+          <Box
+            sx={{
+              ...slotSxProps?.content,
+            }}
+          >
+            {children}
+          </Box>
 
           {/* Resize handles - only render if resizable is true */}
           {resizable && (

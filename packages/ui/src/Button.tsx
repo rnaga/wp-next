@@ -11,10 +11,20 @@ export const Button = (
     bold?: boolean;
     loading?: boolean;
     color?: "info" | "success" | "warning" | "error" | "primary" | "secondary";
-  } & Omit<Parameters<typeof MuiButton>[0], "children" | "size">
+    endIcon?: React.ReactNode;
+  } & Omit<Parameters<typeof MuiButton>[0], "children" | "size" | "endIcon">
 ) => {
-  const { children, size, component, bold, loading, color, disabled, ...rest } =
-    props;
+  const {
+    children,
+    size,
+    component,
+    bold,
+    loading,
+    color,
+    disabled,
+    endIcon,
+    ...rest
+  } = props;
   const { wpTheme } = useWPTheme();
   return (
     <MuiButton
@@ -31,7 +41,7 @@ export const Button = (
         ...(color ? { backgroundColor: wpTheme.colors[color] } : {}),
         ...rest.sx,
       }}
-      endIcon={loading ? <CircularProgress size={20} /> : null}
+      endIcon={loading ? <CircularProgress size={20} /> : endIcon}
     >
       {children}
     </MuiButton>
