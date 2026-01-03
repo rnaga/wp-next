@@ -3,8 +3,6 @@ import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
 import { WPProvider } from "@rnaga/wp-next-core/client/wp";
-import { FormDataProvider } from "@rnaga/wp-next-ui/FormDataProvider";
-import ThemeRegistry from "@rnaga/wp-next-ui/ThemeRegistry";
 
 import { WPAdminProvider } from "../wp-admin";
 import { initialState } from "../wp-admin/initial-global-state";
@@ -27,15 +25,13 @@ export const RootLayout = (props: {
   return (
     <SessionProvider session={session}>
       <WPProvider initialState={initialState} user={user}>
-        <ThemeRegistry>
-          <WPAdminProvider
-            site={site}
-            adminUser={adminUser}
-            defaultMenuSegment={defaultMenuSegment}
-          >
-            <FormDataProvider>{children}</FormDataProvider>
-          </WPAdminProvider>
-        </ThemeRegistry>
+        <WPAdminProvider
+          site={site}
+          adminUser={adminUser}
+          defaultMenuSegment={defaultMenuSegment}
+        >
+          {children}
+        </WPAdminProvider>
       </WPProvider>
     </SessionProvider>
   );

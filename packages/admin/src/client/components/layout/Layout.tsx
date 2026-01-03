@@ -14,7 +14,8 @@ import { Main } from "./Main";
 import { Overlay } from "./Overlay";
 import { Sidebar } from "./sidebar";
 import { Title } from "./Title";
-import { useWPTheme } from "@rnaga/wp-next-ui/ThemeRegistry";
+import ThemeRegistry, { useWPTheme } from "@rnaga/wp-next-ui/ThemeRegistry";
+import { FormDataProvider } from "@rnaga/wp-next-ui/FormDataProvider";
 
 export const Layout = () => {
   const wpAdmin = useWPAdmin();
@@ -67,48 +68,50 @@ export const Layout = () => {
   }, [pathname]);
 
   return (
-    <>
-      <Overlay />
-      <Box
-        key={layoutKeys.header}
-        component="header"
-        sx={{
-          position: "fixed",
-          zIndex: 2,
-          display: "block",
-          width: "100%",
-          height: 50,
-        }}
-      >
-        <Header />
-      </Box>
-      <Box key={layoutKeys.sidebar}>
-        <Sidebar />
-      </Box>
-      <Box
-        key={layoutKeys.main}
-        className="MainContainer"
-        sx={{
-          display: "flex",
-          ml: `${sidebar.state.marginLeft}px`,
-          pt: 5,
-          height: "100vh",
-        }}
-      >
+    <ThemeRegistry>
+      <FormDataProvider>
+        <Overlay />
         <Box
+          key={layoutKeys.header}
+          component="header"
           sx={{
-            p: 3,
-            zIndex: 0,
+            position: "fixed",
+            zIndex: 2,
+            display: "block",
             width: "100%",
+            height: 50,
           }}
         >
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Title />
-            <Main />
-          </ErrorBoundary>
+          <Header />
         </Box>
-      </Box>
-    </>
+        <Box key={layoutKeys.sidebar}>
+          <Sidebar />
+        </Box>
+        <Box
+          key={layoutKeys.main}
+          className="MainContainer"
+          sx={{
+            display: "flex",
+            ml: `${sidebar.state.marginLeft}px`,
+            pt: 5,
+            height: "100vh",
+          }}
+        >
+          <Box
+            sx={{
+              p: 3,
+              zIndex: 0,
+              width: "100%",
+            }}
+          >
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Title />
+              <Main />
+            </ErrorBoundary>
+          </Box>
+        </Box>
+      </FormDataProvider>
+    </ThemeRegistry>
   );
 };
 
