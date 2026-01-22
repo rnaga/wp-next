@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
     "release-old": "node ../../scripts/release.mjs",

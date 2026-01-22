@@ -1,7 +1,7 @@
 "use server";
 
-import { createResponsePayload, handleResponse } from "./response";
 import { WP } from "../wp";
+import { createResponsePayload, handleResponse } from "./response";
 
 import type * as wpTypes from "@rnaga/wp-node/types";
 
@@ -49,6 +49,15 @@ export const get = async (
   return await handleResponse(wp, wpCrud.meta.get(...args));
 };
 
+export const list = async (
+  ...args: wpTypes.crud.CrudParameters<"meta", "list">
+) => {
+  const wp = await WP();
+
+  const wpCrud = wp.utils.crud;
+  return await handleResponse(wp, wpCrud.meta.list(...args));
+};
+
 export const update = async (
   ...args: wpTypes.crud.CrudParameters<"meta", "update">
 ) => {
@@ -78,6 +87,37 @@ export const update = async (
 
   const wpCrud = wp.utils.crud;
   return await handleResponse(wp, wpCrud.meta.update(...args));
+};
+
+export const create = async (
+  ...args: wpTypes.crud.CrudParameters<"meta", "create">
+) => {
+  const wp = await WP();
+  const [type, objectId, keyValue] = args;
+
+  if (isPublicMetaKeys(type, Object.keys(keyValue))) {
+    const user = wp.current.user;
+    if (!user || !(await user.can(`edit_${type}`, objectId))) {
+      return createResponsePayload({
+        success: false,
+        error: "Not permitted",
+        data: undefined,
+      });
+    }
+
+    for (const [key, value] of Object.entries(keyValue)) {
+      await wp.utils.trx.meta.upsert(type, objectId, key, value);
+    }
+
+    return createResponsePayload({
+      success: true,
+      error: undefined,
+      data: true,
+    });
+  }
+
+  const wpCrud = wp.utils.crud;
+  return await handleResponse(wp, wpCrud.meta.create(...args));
 };
 
 export const del = async (

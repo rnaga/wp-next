@@ -46,6 +46,10 @@ type ListContextType<T = string> = {
   onEdit?: (index: number) => void;
   itemEventHandlers?: ListItemEventHandlers<T>;
   getItemSx?: (item: ListItemType<T>, index: number) => SxProps;
+  getItemDataAttributes?: (
+    item: ListItemType<T>,
+    index: number
+  ) => Record<string, string | number>;
   slotSxProps?: {
     listItem?: SxProps;
   };
@@ -72,6 +76,7 @@ export const ListItem = (props: {
     onEdit,
     itemEventHandlers,
     getItemSx,
+    getItemDataAttributes,
     slotSxProps,
     editable,
   } = useContext(ListContext);
@@ -102,6 +107,11 @@ export const ListItem = (props: {
     ...sx,
   } as SxProps;
 
+  const itemDataAttributes = {
+    ...(dataAttributes || {}),
+    ...(getItemDataAttributes ? getItemDataAttributes(item, index) : {}),
+  };
+
   return (
     <MuiListItem
       ref={ref}
@@ -114,7 +124,7 @@ export const ListItem = (props: {
       onDoubleClick={handleEvent(itemEventHandlers?.onDoubleClick)}
       onContextMenu={handleEvent(itemEventHandlers?.onContextMenu)}
       onMouseOver={handleEvent(itemEventHandlers?.onMouseOver)}
-      {...(dataAttributes || {})}
+      {...itemDataAttributes}
       sx={{
         position: "relative",
         "&:hover": {
@@ -196,6 +206,10 @@ export type ListBaseProps<T = string> = {
   onMouseDown?: (item: ListItemType<T>, event: React.MouseEvent) => void;
   itemEventHandlers?: ListItemEventHandlers<T>;
   getItemSx?: (item: ListItemType<T>, index: number) => SxProps;
+  getItemDataAttributes?: (
+    item: ListItemType<T>,
+    index: number
+  ) => Record<string, string | number>;
   dataAttributes?: Record<string, string | number>;
   slotSxProps?: {
     listItem?: SxProps;
@@ -214,6 +228,7 @@ export const ListBase = <T extends any = string>(props: ListBaseProps<T>) => {
     onMouseDown,
     itemEventHandlers,
     getItemSx,
+    getItemDataAttributes,
     dataAttributes,
     slotSxProps,
     editable = false,
@@ -261,6 +276,7 @@ export const ListBase = <T extends any = string>(props: ListBaseProps<T>) => {
         onEdit,
         itemEventHandlers: mergedEventHandlers as any,
         getItemSx: getItemSx as any,
+        getItemDataAttributes: getItemDataAttributes as any,
         slotSxProps,
         editable,
       }}

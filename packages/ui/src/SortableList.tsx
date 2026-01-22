@@ -1,4 +1,4 @@
-import { Box, SxProps } from "@mui/material";
+import { SxProps } from "@mui/material";
 import { ListItemType } from "./ListBase";
 import { useMouseMove } from "./hooks/use-mouse-move";
 import {
@@ -58,6 +58,12 @@ export const SortableList = <T extends any = string>(props: {
     x: number;
     y: number;
   }>({ x: 0, y: 0 });
+  const itemRefs = useRef<Map<number, HTMLElement>>(new Map());
+  const draggedItemRef = useRef<{ index: number; element: HTMLElement } | null>(
+    null
+  );
+  const itemsRef = useRef(items);
+  itemsRef.current = items;
 
   const findItem = (index: number): SortableListItemType<T> | undefined => {
     return items.find((item) => item.index === index);
@@ -65,16 +71,17 @@ export const SortableList = <T extends any = string>(props: {
 
   const swapItems = (_e: MouseEvent, fromIndex: number, toIndex: number) => {
     console.log("Swapping items", fromIndex, toIndex);
+    const currentItems = itemsRef.current;
     if (
       fromIndex < 0 ||
       toIndex < 0 ||
-      fromIndex >= items.length ||
-      toIndex >= items.length
+      fromIndex >= currentItems.length ||
+      toIndex >= currentItems.length
     ) {
       return;
     }
 
-    const newItems = [...items];
+    const newItems = [...currentItems];
     const temp = newItems[fromIndex];
 
     newItems[fromIndex] = newItems[toIndex];
@@ -87,6 +94,112 @@ export const SortableList = <T extends any = string>(props: {
 
     onChange?.(newItems);
   };
+
+  const handleDeltaChange = (
+    e: MouseEvent,
+    delta: { x: number; y: number }
+  ) => {
+    const dragged = draggedItemRef.current;
+    if (!dragged) return;
+
+    const { element, index } = dragged;
+    const rect = element.getBoundingClientRect();
+    if (!rect) return;
+
+    let newY: number;
+    let newX: number;
+    const transformValues: string[] = [];
+
+    if (["horizontal", "horizontal-fit", "grid"].includes(displayType)) {
+      newX = refPos.current.x + delta.x;
+      transformValues.push(`translateX(${newX}px)`);
+      refPos.current.x = newX;
+    }
+
+    if (displayType === "vertical" || displayType === "grid") {
+      newY = refPos.current.y + delta.y;
+      transformValues.push(`translateY(${newY}px)`);
+      refPos.current.y = newY;
+    }
+
+    element.style.transform = transformValues.join(" ");
+
+    const elementsAtPoint = document.elementsFromPoint(e.clientX, e.clientY);
+
+    let foundTarget: HTMLElement | null = null;
+    for (const el of elementsAtPoint) {
+      // Find the sortable item container (could be the element itself or an ancestor)
+      const sortableItem = (el as HTMLElement).closest(
+        "[data-sortable-item-index]"
+      ) as HTMLElement | null;
+      if (!sortableItem) continue;
+
+      const itemIndex = sortableItem.getAttribute("data-sortable-item-index");
+      if (!itemIndex || itemIndex === String(index)) continue;
+
+      const itemIndexNumber = parseInt(itemIndex);
+      if (itemIndexNumber < 0 || itemIndexNumber >= itemsRef.current.length)
+        continue;
+
+      foundTarget = sortableItem;
+      break;
+    }
+
+    if (targetRef.current && targetRef.current !== foundTarget) {
+      targetRef.current.style.removeProperty("border");
+    }
+
+    if (foundTarget && foundTarget !== targetRef.current) {
+      foundTarget.style.border = "1px solid red";
+    }
+
+    targetRef.current = foundTarget;
+  };
+
+  const handleMouseDown = (e: MouseEvent) => {
+    const dragged = draggedItemRef.current;
+    if (!dragged) return;
+
+    const { element, index } = dragged;
+    console.log("Mouse down on item", index);
+    const rect = element.getBoundingClientRect();
+    if (rect) {
+      refPos.current.y = e.clientY - rect.top - rect.height / 2;
+      refPos.current.x = 0;
+      element.style.zIndex = "100000";
+      element.style.transform = `translate(${refPos.current.x}px, ${refPos.current.y}px)`;
+    }
+  };
+
+  const handleMouseUp = (e: MouseEvent) => {
+    const dragged = draggedItemRef.current;
+    if (!dragged) return;
+
+    const { element, index } = dragged;
+    refPos.current.y = 0;
+    refPos.current.x = 0;
+    element.style.removeProperty("transform");
+    element.style.removeProperty("z-index");
+
+    if (targetRef.current) {
+      const toItemIndex = targetRef.current.getAttribute(
+        "data-sortable-item-index"
+      );
+      swapItems(e, index, toItemIndex ? parseInt(toItemIndex) : -1);
+      targetRef.current?.style.removeProperty("border");
+      targetRef.current = null;
+    }
+
+    draggedItemRef.current = null;
+  };
+
+  const { initMouseMove } = useMouseMove({
+    onDeltaChange: handleDeltaChange,
+    onMouseUp: handleMouseUp,
+    onMouseDown: handleMouseDown,
+    cursor: "grabbing",
+    threshold: 1,
+  });
 
   useEffect(() => {
     const initialItems = props.enum.map((item, index) => ({
@@ -117,109 +230,24 @@ export const SortableList = <T extends any = string>(props: {
     };
   }
 
-  const renderSortableItem = (item: SortableListItemType<T>) => {
-    return (
-      <Box
-        ref={item.ref as RefObject<HTMLDivElement>}
-        onMouseDown={initMouseMoveForItem(item)}
-        data-sortable-item-index={item.index}
-        sx={{
-          cursor: "move",
-        }}
-      >
-        {renderItem ? renderItem(item) : item.label}
-      </Box>
-    );
+  const handleItemMouseDown = (
+    item: SortableListItemType<T>,
+    e: React.MouseEvent
+  ) => {
+    // Find the MuiListItem parent element
+    const listItemElement = (e.target as HTMLElement).closest(
+      "[data-sortable-item-index]"
+    ) as HTMLElement | null;
+
+    if (listItemElement) {
+      itemRefs.current.set(item.index, listItemElement);
+      draggedItemRef.current = { index: item.index, element: listItemElement };
+      initMouseMove(listItemElement)(e);
+    }
   };
 
-  const initMouseMoveForItem = (item: SortableListItemType<T>) => {
-    const ref = item.ref;
-    if (!ref) return () => {};
-
-    const handleDeltaChange = (
-      e: MouseEvent,
-      delta: { x: number; y: number }
-    ) => {
-      const rect = ref.current?.getBoundingClientRect();
-      if (!rect) return;
-
-      let newY: number;
-      let newX: number;
-      const transformValues: string[] = [];
-
-      if (["horizontal", "horizontal-fit", "grid"].includes(displayType)) {
-        newX = refPos.current.x + delta.x;
-        transformValues.push(`translateX(${newX}px)`);
-        refPos.current.x = newX;
-      }
-
-      if (displayType === "vertical" || displayType === "grid") {
-        newY = refPos.current.y + delta.y;
-        transformValues.push(`translateY(${newY}px)`);
-        refPos.current.y = newY;
-      }
-
-      (ref.current as HTMLElement).style.transform = transformValues.join(" ");
-
-      const elementsAtPoint = document.elementsFromPoint(e.clientX, e.clientY);
-
-      for (const element of elementsAtPoint) {
-        const itemIndex = element.getAttribute("data-sortable-item-index");
-
-        if (!itemIndex || itemIndex === String(item.index)) {
-          if (targetRef.current) {
-            targetRef.current.style.removeProperty("border");
-            targetRef.current = null;
-          }
-          continue;
-        }
-
-        const itemIndexNumber = parseInt(itemIndex);
-        if (itemIndexNumber < 0 || itemIndexNumber >= items.length) continue;
-
-        if (targetRef.current) {
-          targetRef.current.style.removeProperty("border");
-        }
-
-        targetRef.current = element as HTMLElement;
-        targetRef.current.style.border = "1px solid red";
-        break;
-      }
-    };
-
-    const handleMouseDown = (e: MouseEvent) => {
-      const rect = ref.current?.getBoundingClientRect();
-      if (rect) {
-        refPos.current.y = e.clientY - rect.top - rect.height / 2;
-        refPos.current.x = 0;
-        (ref.current as HTMLElement).style.zIndex = "100000";
-        (ref.current as HTMLElement).style.transform = `translate(${refPos.current.x}px, ${refPos.current.y}px)`;
-      }
-    };
-
-    const handleMouseUp = (e: MouseEvent) => {
-      refPos.current.y = 0;
-      refPos.current.x = 0;
-      (ref.current as HTMLElement)?.style.removeProperty("transform");
-      (ref.current as HTMLElement)?.style.removeProperty("z-index");
-
-      if (targetRef.current) {
-        const toItemIndex = targetRef.current.getAttribute("data-sortable-item-index");
-        swapItems(e, item.index, toItemIndex ? parseInt(toItemIndex) : -1);
-        targetRef.current?.style.removeProperty("border");
-        targetRef.current = null;
-      }
-    };
-
-    const { initMouseMove } = useMouseMove({
-      onDeltaChange: handleDeltaChange,
-      onMouseUp: handleMouseUp,
-      onMouseDown: handleMouseDown,
-      cursor: "grabbing",
-      threshold: 1,
-    });
-
-    return initMouseMove(ref);
+  const renderSortableItem = (item: SortableListItemType<T>) => {
+    return renderItem ? renderItem(item) : item.label;
   };
 
   return (
@@ -241,6 +269,15 @@ export const SortableList = <T extends any = string>(props: {
         renderItem={renderSortableItem as any}
         onDelete={onDelete}
         onEdit={onEdit}
+        onMouseDown={handleItemMouseDown as any}
+        getItemDataAttributes={(item) => ({
+          "data-sortable-item-index": item.index,
+        })}
+        slotSxProps={{
+          listItem: {
+            cursor: "move",
+          },
+        }}
       />
     </SortableContext.Provider>
   );

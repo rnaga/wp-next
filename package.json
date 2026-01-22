@@ -6,7 +6,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "build:core": "cd scripts && node build-core.mjs"
+    "build:core": "cd scripts && node build-core.mjs",
+    "sync-wp-node": "rsync -avz ../wp-node/packages/core/dist/ ./node_modules/\\@rnaga/wp-node/"
   },
   "devDependencies": {
     "@lexical/headless": "^0.38.2",
@@ -18,6 +19,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "lexical": "^0.38.2",
     "next-router-mock": "^0.9.13",
+    "prettier": "^3.7.4",
     "react": "^19",
     "react-dom": "^19",
     "react-test-renderer": "^19",

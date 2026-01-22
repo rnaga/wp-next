@@ -15,6 +15,7 @@ export const Input = (
     clearable?: boolean;
     readOnly?: boolean;
     removeBorderOnFocus?: boolean;
+    isEmpty?: boolean;
   } & Omit<
     Parameters<typeof MuiInput>[0],
     "onChange" | "value" | "onBlur" | "size" | "readOnly"
@@ -33,6 +34,7 @@ export const Input = (
     removeBorderOnFocus = false,
     multiline,
     value: _value,
+    isEmpty,
     ...rest
   } = props;
 
@@ -62,6 +64,12 @@ export const Input = (
     setValue(_value);
   }, [_value]);
 
+  useEffect(() => {
+    if (isEmpty === true) {
+      setValue("");
+    }
+  }, [isEmpty]);
+
   return (
     <MuiInput
       disableUnderline
@@ -75,10 +83,10 @@ export const Input = (
         height: multiline
           ? "auto"
           : size === "large"
-          ? 36
-          : size == "medium"
-          ? 32
-          : 24,
+            ? 36
+            : size == "medium"
+              ? 32
+              : 24,
         px: 1,
         fontSize: size === "large" ? 16 : size == "medium" ? 14 : 12,
         border:
