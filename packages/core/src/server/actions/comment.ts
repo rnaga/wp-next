@@ -3,6 +3,7 @@ import { handleResponse } from "./response";
 import { WP } from "../wp";
 
 import type * as wpTypes from "@rnaga/wp-node/types";
+import type * as types from "../../types";
 
 export const create = async (
   ...args: wpTypes.crud.CrudParameters<"comment", "create">
@@ -44,15 +45,17 @@ export const del = async (
   return await handleResponse(wp, wpCrud.comment.delete(...args));
 };
 
-export const list = async (
-  ...args: wpTypes.crud.CrudParameters<"comment", "list">
+export const list = async <T extends types.actions.ViewContext>(
+  args: wpTypes.crud.CrudParameters<"comment", "list">[0],
+  options?: {
+    context: T;
+  }
 ) => {
   const wp = await WP();
   const wpCrud = wp.utils.crud;
 
-  const [queryParams, options] = args;
   return await handleResponse(
     wp,
-    wpCrud.comment.list(queryParams, { ...options, limitChildren: 10 })
+    wpCrud.comment.list(args, { ...options, limitChildren: 10 })
   );
 };

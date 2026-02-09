@@ -1,4 +1,4 @@
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { Input } from "./Input";
 import { Box, SxProps } from "@mui/material";
 
@@ -107,20 +107,20 @@ const hslToRgb = (
     hp < 1
       ? [c, x, 0]
       : hp < 2
-      ? [x, c, 0]
-      : hp < 3
-      ? [0, c, x]
-      : hp < 4
-      ? [0, x, c]
-      : hp < 5
-      ? [x, 0, c]
-      : [c, 0, x];
+        ? [x, c, 0]
+        : hp < 3
+          ? [0, c, x]
+          : hp < 4
+            ? [0, x, c]
+            : hp < 5
+              ? [x, 0, c]
+              : [c, 0, x];
 
   const m = l - c / 2;
   return [r1 + m, g1 + m, b1 + m].map((v) => Math.round(v * 255)) as [
     number,
     number,
-    number
+    number,
   ];
 };
 
@@ -137,20 +137,20 @@ const hsvToRgb = (
     hp < 1
       ? [c, x, 0]
       : hp < 2
-      ? [x, c, 0]
-      : hp < 3
-      ? [0, c, x]
-      : hp < 4
-      ? [0, x, c]
-      : hp < 5
-      ? [x, 0, c]
-      : [c, 0, x];
+        ? [x, c, 0]
+        : hp < 3
+          ? [0, c, x]
+          : hp < 4
+            ? [0, x, c]
+            : hp < 5
+              ? [x, 0, c]
+              : [c, 0, x];
 
   const m = v - c;
   return [r1 + m, g1 + m, b1 + m].map((v) => Math.round(v * 255)) as [
     number,
     number,
-    number
+    number,
   ];
 };
 
@@ -182,6 +182,10 @@ export const InputColor = (
     setValue(value);
     onBlur(value);
   };
+
+  useEffect(() => {
+    setValue(`${props.value ?? ""}`);
+  }, [props.value]);
 
   return (
     <Box sx={{ display: "flex", gap: 1, alignItems: "center", ...sx }}>
