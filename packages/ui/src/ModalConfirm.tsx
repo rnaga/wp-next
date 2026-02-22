@@ -26,7 +26,6 @@ export const ModalConfirm = (props: {
   const [open, setOpen] = useState(props.open);
 
   useEffect(() => {
-    console.log("changing open state to", props.open);
     if (props.open !== open) {
       setOpen(props.open);
     }
@@ -36,7 +35,6 @@ export const ModalConfirm = (props: {
     <Modal
       open={open}
       onClose={() => {
-        console.log("ConfirmModal onClose called, but no action taken");
         setOpen(false);
         onClose?.();
       }}

@@ -373,6 +373,8 @@ export const DraggableBox = (props: {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              backgroundColor: "#dedede",
+              mb: 1,
               ...slotSxProps?.header,
             }}
             onMouseDown={handleMouseDown}
@@ -380,7 +382,7 @@ export const DraggableBox = (props: {
             <Typography
               size={size}
               sx={{
-                p: 0.5,
+                p: 1,
                 flexGrow: 1,
                 ...slotSxProps?.title,
               }}

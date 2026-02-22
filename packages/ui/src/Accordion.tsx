@@ -13,6 +13,9 @@ export const Accordion = (props: Parameters<typeof MuiAccordion>[0]) => {
       sx={{
         backgroundColor: "transparent",
         my: 0,
+        "& .MuiAccordionDetails-root": {
+          px: 0.5,
+        },
         ...props.sx,
       }}
       {...props}

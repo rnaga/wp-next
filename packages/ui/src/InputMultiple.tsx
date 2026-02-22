@@ -93,6 +93,12 @@ export const InputMultiple = (props: {
           sx: {
             zIndex: 9999,
             minHeight: size == "medium" ? 32 : 24,
+            "& .MuiInputBase-input": {
+              cursor: "text",
+            },
+            "& .MuiAutocomplete-input": {
+              cursor: "text",
+            },
             ...slotSxProps?.input,
           },
           ...sx,

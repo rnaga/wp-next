@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Close } from "@mui/icons-material";
 import {
   Box,
+  CircularProgress,
   IconButton,
   Modal as MuiModal,
   SxProps,
@@ -45,9 +46,14 @@ export const ModalContent = (
   props: {
     sx?: SxProps;
     children: React.ReactNode;
-  } & Omit<Parameters<typeof Box>[0], "children" | "sx">
+    hideCloseButton?: boolean;
+    loading?: boolean;
+  } & Omit<
+    Parameters<typeof Box>[0],
+    "children" | "sx" | "hideCloseButton" | "loading"
+  >
 ) => {
-  const { sx, ...rest } = props;
+  const { sx, hideCloseButton, loading, ...rest } = props;
   const { setOpen, onClose } = useContext(Context);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const { wpTheme } = useWPTheme();
@@ -87,27 +93,42 @@ export const ModalContent = (
           position: "relative",
         }}
       >
-        <IconButton
-          size="small"
-          onClick={(e) => {
-            setOpen(false);
-            onClose();
-          }}
-          sx={{
-            position: "absolute",
-            top: isFullscreen ? -25 : -25,
-            right: isFullscreen ? -10 : -10,
-            zIndex: 1,
-            bgcolor: wpTheme.background.color,
-            border: "none",
-            ":hover": {
-              bgcolor: wpTheme.background.hoverColor,
-            },
-          }}
-        >
-          <Close fontSize="small" />
-        </IconButton>
-        {props.children}
+        {!hideCloseButton && (
+          <IconButton
+            size="small"
+            onClick={(e) => {
+              setOpen(false);
+              onClose();
+            }}
+            sx={{
+              position: "absolute",
+              top: isFullscreen ? -25 : -25,
+              right: isFullscreen ? -10 : -10,
+              zIndex: 1,
+              bgcolor: wpTheme.background.color,
+              border: "none",
+              ":hover": {
+                bgcolor: wpTheme.background.hoverColor,
+              },
+            }}
+          >
+            <Close fontSize="small" />
+          </IconButton>
+        )}
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: 200,
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          props.children
+        )}
       </Box>
     </Box>
   );

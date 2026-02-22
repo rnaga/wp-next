@@ -267,7 +267,7 @@ export const ListBase = <T extends any = string>(props: ListBaseProps<T>) => {
   };
 
   return (
-    <ListContext.Provider
+    <ListContext
       value={{
         items: listItems as ListItemType<any>[],
         displayType,
@@ -293,6 +293,6 @@ export const ListBase = <T extends any = string>(props: ListBaseProps<T>) => {
           />
         ))}
       </MuiList>
-    </ListContext.Provider>
+    </ListContext>
   );
 };

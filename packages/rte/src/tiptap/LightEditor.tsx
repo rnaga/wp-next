@@ -15,6 +15,38 @@ import LightEditorMenuControls from "./LightEditorMenuControls";
 import useExtensions from "./use-extensions";
 import { MediaBubbleMenu } from "./MediaBubbleMenu";
 
+/**
+ * Strips wrapping `<p>` tag when the entire content is a single paragraph.
+ *
+ * TipTap/ProseMirror always wraps text in a `<p>` block node by design.
+ * Use this to get clean HTML output without the outer `<p>` wrapper.
+ *
+ * Only strips when content is a single paragraph — multi-paragraph content
+ * (e.g. `<p>first</p><p>second</p>`) is returned as-is.
+ *
+ * @example
+ * ```ts
+ * import { stripParagraphWrap } from "@rnaga/wp-next-rte/tiptap/LightEditor";
+ *
+ * // In LightEditor's onUpdate callback:
+ * onUpdate={(editor) => {
+ *   const html = stripParagraphWrap(editor.getHTML());
+ *   // "<p>Hello <strong>world</strong></p>" → "Hello <strong>world</strong>"
+ *   // "<p>first</p><p>second</p>" → "<p>first</p><p>second</p>" (unchanged)
+ * }}
+ * ```
+ */
+export function stripParagraphWrap(html: string): string {
+  if (
+    html.startsWith("<p>") &&
+    html.endsWith("</p>") &&
+    html.indexOf("<p>", 1) === -1
+  ) {
+    return html.slice(3, -4);
+  }
+  return html;
+}
+
 export function LightEditor(props: {
   defaultContent?: string;
   minHeight?: number;
@@ -37,15 +69,16 @@ export function LightEditor(props: {
   useEffect(() => {
     const editor = rteRef.current?.editor;
     if (editor && defaultContent !== lastDefaultContentRef.current) {
-      // Only update if the content is different from what's currently in the editor
-      const currentContent = editor.getHTML();
-      if (currentContent !== defaultContent) {
+      // Normalize both sides so that stripped "<p>" content matches the editor's wrapped output
+      const currentContent = stripParagraphWrap(editor.getHTML());
+      const incoming = stripParagraphWrap(defaultContent ?? "");
+      if (currentContent !== incoming) {
         // Use queueMicrotask to defer the update and avoid flushSync warning
         queueMicrotask(() => {
           editor.commands.setContent(defaultContent ?? "", { emitUpdate: false });
         });
-        lastDefaultContentRef.current = defaultContent;
       }
+      lastDefaultContentRef.current = defaultContent;
     }
   }, [defaultContent]);
 
