@@ -380,7 +380,7 @@ export const DraggableBox = (props: {
             onMouseDown={handleMouseDown}
           >
             <Typography
-              size={size}
+              size={size ?? "medium"}
               sx={{
                 p: 1,
                 flexGrow: 1,

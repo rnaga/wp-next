@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-cli",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "A command-line interface for managing WP Next projects",
   "bin": {
     "wp-next": "./index.js"
@@ -20,10 +20,10 @@
   "author": "Ryohei Nagatsuka",
   "license": "MIT",
   "dependencies": {
-    "@rnaga/wp-next-admin": "^1.0",
-    "@rnaga/wp-next-core": "^1.0",
-    "@rnaga/wp-node": "^1.0",
-    "@rnaga/wp-node-cli": "^1.0"
+    "@rnaga/wp-next-admin": "^1",
+    "@rnaga/wp-next-core": "^1",
+    "@rnaga/wp-node": "^1",
+    "@rnaga/wp-node-cli": "^1"
   },
   "repository": {
     "type": "git",
