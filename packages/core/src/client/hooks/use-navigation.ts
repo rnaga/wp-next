@@ -1,3 +1,5 @@
+"use client";
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const useNavigation = <Params = Record<string, any>>() => {

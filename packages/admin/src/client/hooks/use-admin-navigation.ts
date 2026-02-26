@@ -1,3 +1,5 @@
+"use client";
+
 import queryString from "querystring";
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 

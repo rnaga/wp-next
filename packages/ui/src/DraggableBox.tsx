@@ -373,7 +373,6 @@ export const DraggableBox = (props: {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: "#dedede",
               mb: 1,
               ...slotSxProps?.header,
             }}
