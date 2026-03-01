@@ -5,7 +5,7 @@ export interface AdminPageSegmentMap {
 }
 
 type AdminPageSegment<
-  K extends keyof AdminPageSegmentMap = keyof AdminPageSegmentMap
+  K extends keyof AdminPageSegmentMap = keyof AdminPageSegmentMap,
 > = AdminPageSegmentMap[K] extends true ? keyof AdminPageSegmentMap : never;
 
 export type AdminMenu = AdminMenuComponent | AdminOnclick;
@@ -37,3 +37,9 @@ export interface AdminOnclick {
 }
 
 export type AdminMenus = Map<keyof AdminPageSegment, AdminMenu[]>;
+
+export type AdminBarMenus = Array<{
+  component: React.ReactNode;
+  roles?: string[];
+  onClick?: () => void;
+}>;

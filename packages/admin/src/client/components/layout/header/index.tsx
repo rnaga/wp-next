@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import BookIcon from "@mui/icons-material/Book";
 import HomeIcon from "@mui/icons-material/Home";
@@ -10,6 +10,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ViewSidebarIcon from "@mui/icons-material/ViewSidebar";
 import WebIcon from "@mui/icons-material/Web";
 import { Box, IconButton, MenuItem, MenuList } from "@mui/material";
+import { useWP } from "@rnaga/wp-next-core/client/wp";
 import { PopperMenu } from "@rnaga/wp-next-ui/PopperMenu";
 import { useWPTheme } from "@rnaga/wp-next-ui/ThemeRegistry";
 import { Typography } from "@rnaga/wp-next-ui/Typography";
@@ -19,6 +20,8 @@ import { useAdminNavigation } from "../../../hooks/use-admin-navigation";
 import { useAdminUser } from "../../../hooks/use-admin-user";
 import { useWPAdmin } from "../../../wp-admin";
 import { Profile } from "./Profile";
+
+import type * as types from "../../../../types";
 
 const HomeMenuItems = () => {
   const menuItems: React.ReactNode[] = [];
@@ -192,6 +195,10 @@ export const Header = () => {
   } = useWPAdmin();
   const { user } = useAdminUser();
   const { wpRawTheme } = useWPTheme();
+  const wpAdmin = useWPAdmin();
+  const adminNavigation = useAdminNavigation();
+
+  const { wpHooks } = useWP();
 
   const homeButtonRef = useRef<HTMLAnchorElement>(null);
   const [openHomeMenu, setOpenHomeMenu] = useState(false);
@@ -199,9 +206,41 @@ export const Header = () => {
   const manageSiteButtonRef = useRef<HTMLAnchorElement>(null);
   const [openManageSiteMenu, setOpenManageSiteMenu] = useState(false);
 
+  const [customMenuComponents, setCustomMenuComponents] = useState<
+    React.ReactNode[]
+  >([]);
+
   const profileKey = useMemo(() => {
     return `profile-${currentSite.settings.timezone}-${user?.ID}`;
   }, [currentSite.settings.timezone, user]);
+
+  useEffect(() => {
+    const newCustomMenus = wpHooks.filter.apply("next_admin_bar_menu", [], {
+      wpAdmin,
+      navigation: adminNavigation,
+      wpRawTheme,
+    });
+
+    const newCustomMenuComponents: React.ReactNode[] = [];
+
+    for (const menu of newCustomMenus) {
+      // Check if the menu has role restriction.
+      // If not, show the menu. If yes, check if the user has the capability.
+      if (
+        !menu.roles ||
+        menu.roles.length === 0 ||
+        menu.roles.some((role) => user?.role.names.has(role))
+      ) {
+        newCustomMenuComponents.push(
+        <React.Fragment key={newCustomMenuComponents.length}>
+          {menu.component}
+        </React.Fragment>
+      );
+      }
+    }
+
+    setCustomMenuComponents(newCustomMenuComponents);
+  }, [wpAdmin.site.blogId, user?.ID]);
 
   return (
     <Box
@@ -360,6 +399,8 @@ export const Header = () => {
             </PopperMenu>
           </Box>
         )}
+
+        {customMenuComponents.length > 0 && <Box>{customMenuComponents}</Box>}
       </Box>
 
       <Profile key={profileKey} />

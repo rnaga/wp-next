@@ -1,11 +1,16 @@
-import type { AdminMenu, AdminPageSegment } from "../client/menus";
+import type {
+  AdminBarMenus,
+  AdminMenu,
+  AdminPageSegment,
+} from "../client/menus";
 import type { WPAdmin } from "../client";
 
 import { experimental_extendTheme as materialExtendTheme } from "@mui/material/styles";
 import { Context } from "@rnaga/wp-node/core/context";
 
 import { useAdminNavigation } from "../../client/hooks/use-admin-navigation";
-import type { WpTheme } from "../client";
+
+import type { WPTheme } from "@rnaga/wp-next-ui/types";
 
 export {};
 
@@ -27,6 +32,15 @@ declare module "@rnaga/wp-next-core/types/hooks/filters.d" {
         navigation: AdminNavigation;
       }
     ) => AdminMenu[];
+
+    next_admin_bar_menu: (
+      menus: AdminBarMenus,
+      params: {
+        wpAdmin: WPAdmin;
+        navigation: AdminNavigation;
+        wpRawTheme: WPTheme;
+      }
+    ) => AdminBarMenus;
 
     next_admin_preload_modal: (
       components: React.ReactNode[],
