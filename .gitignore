@@ -77,3 +77,6 @@ out/**/*
 
 # exclude vscode settings
 .vscode/
+
+# ignore .claude paths for now
+.claude/
