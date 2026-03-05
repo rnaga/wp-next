@@ -40,7 +40,11 @@ export const SortableList = <T extends any = string>(props: {
   renderItem?: (item: SortableListItemType<T>) => JSX.Element;
   onDelete?: (index: number) => void;
   onEdit?: (index: number) => void;
-  onChange?: (items: SortableListItemType<T>[]) => void;
+  onChange?: (
+    items: SortableListItemType<T>[],
+    fromIndex: number,
+    toIndex: number
+  ) => void;
 }) => {
   const {
     size = "small",
@@ -70,7 +74,6 @@ export const SortableList = <T extends any = string>(props: {
   };
 
   const swapItems = (_e: MouseEvent, fromIndex: number, toIndex: number) => {
-    console.log("Swapping items", fromIndex, toIndex);
     const currentItems = itemsRef.current;
     if (
       fromIndex < 0 ||
@@ -92,7 +95,7 @@ export const SortableList = <T extends any = string>(props: {
 
     setItems(newItems);
 
-    onChange?.(newItems);
+    onChange?.(newItems, fromIndex, toIndex);
   };
 
   const handleDeltaChange = (
@@ -161,7 +164,6 @@ export const SortableList = <T extends any = string>(props: {
     if (!dragged) return;
 
     const { element, index } = dragged;
-    console.log("Mouse down on item", index);
     const rect = element.getBoundingClientRect();
     if (rect) {
       refPos.current.y = e.clientY - rect.top - rect.height / 2;
