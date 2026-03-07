@@ -6,9 +6,12 @@ import {
   JSX,
   RefObject,
   useEffect,
+  useId,
+  useMemo,
   useRef,
   useState,
 } from "react";
+import { Box } from "@mui/material";
 import { ListBase } from "./ListBase";
 
 export type SortableListItemType<T = string> = ListItemType<T>;
@@ -37,6 +40,13 @@ export const SortableList = <T extends any = string>(props: {
     label?: SxProps;
   };
   displayType: DisplayType;
+  /**
+   * Unique ID for this list. Used as a `data-drop-target-id` on the wrapper Box
+   * so that items dragged from another SortableList can be dropped here via
+   * the dragging list's `onDropToTarget` callback.
+   * Also used to prevent cross-list item swapping.
+   */
+  dropZoneId?: string;
   renderItem?: (item: SortableListItemType<T>) => JSX.Element;
   onDelete?: (index: number) => void;
   onEdit?: (index: number) => void;
@@ -45,6 +55,11 @@ export const SortableList = <T extends any = string>(props: {
     fromIndex: number,
     toIndex: number
   ) => void;
+  onDrop?: (item: SortableListItemType<T>) => void;
+  onDropToTarget?: (item: SortableListItemType<T>, targetId: string) => void;
+  onDropTargetEnter?: (targetId: string) => void;
+  onDropTargetLeave?: (targetId: string) => void;
+  cursor?: { idle?: string; dragging?: string };
 }) => {
   const {
     size = "small",
@@ -53,11 +68,22 @@ export const SortableList = <T extends any = string>(props: {
     onDelete,
     onChange,
     onEdit,
+    onDrop,
+    onDropToTarget,
+    onDropTargetEnter,
+    onDropTargetLeave,
+    cursor,
+    dropZoneId,
   } = props;
+
+  // Stable unique ID for this list instance (used to tag items)
+  const generatedId = useId();
+  const listId = dropZoneId ?? generatedId;
 
   const [items, setItems] = useState<SortableListItemType<T>[]>([]);
 
   const targetRef = useRef<HTMLElement | null>(null);
+  const dropTargetRef = useRef<HTMLElement | null>(null);
   const refPos = useRef<{
     x: number;
     y: number;
@@ -137,12 +163,20 @@ export const SortableList = <T extends any = string>(props: {
       ) as HTMLElement | null;
       if (!sortableItem) continue;
 
+      // Only accept items that belong to THIS list (same listId)
+      if (sortableItem.getAttribute("data-sortable-list-id") !== listId) {
+        continue;
+      }
+
       const itemIndex = sortableItem.getAttribute("data-sortable-item-index");
-      if (!itemIndex || itemIndex === String(index)) continue;
+      if (!itemIndex || itemIndex === String(index)) {
+        continue;
+      }
 
       const itemIndexNumber = parseInt(itemIndex);
-      if (itemIndexNumber < 0 || itemIndexNumber >= itemsRef.current.length)
+      if (itemIndexNumber < 0 || itemIndexNumber >= itemsRef.current.length) {
         continue;
+      }
 
       foundTarget = sortableItem;
       break;
@@ -157,6 +191,51 @@ export const SortableList = <T extends any = string>(props: {
     }
 
     targetRef.current = foundTarget;
+
+    // Check for external drop targets: both explicit [data-drop-target-id] elements
+    // and foreign SortableList drop zones ([data-sortable-drop-zone-id] that differ from this list)
+    {
+      let foundDropTarget: HTMLElement | null = null;
+      if (!foundTarget) {
+        for (const el of elementsAtPoint) {
+          // Look for explicit external drop targets (e.g. collection headers)
+          const explicitTarget = (el as HTMLElement).closest(
+            "[data-drop-target-id]"
+          ) as HTMLElement | null;
+          if (explicitTarget) {
+            foundDropTarget = explicitTarget;
+            break;
+          }
+
+          // Look for foreign SortableList drop zones (different list ID)
+          const dropZone = (el as HTMLElement).closest(
+            "[data-sortable-drop-zone-id]"
+          ) as HTMLElement | null;
+          if (
+            dropZone &&
+            dropZone.getAttribute("data-sortable-drop-zone-id") !== listId
+          ) {
+            foundDropTarget = dropZone;
+            break;
+          }
+        }
+      }
+
+      if (dropTargetRef.current && dropTargetRef.current !== foundDropTarget) {
+        const leavingId =
+          dropTargetRef.current.getAttribute("data-drop-target-id") ??
+          dropTargetRef.current.getAttribute("data-sortable-drop-zone-id");
+        if (leavingId) onDropTargetLeave?.(leavingId);
+      }
+
+      if (foundDropTarget && foundDropTarget !== dropTargetRef.current) {
+        const enteringId =
+          foundDropTarget.getAttribute("data-drop-target-id") ??
+          foundDropTarget.getAttribute("data-sortable-drop-zone-id");
+        if (enteringId) onDropTargetEnter?.(enteringId);
+      }
+      dropTargetRef.current = foundDropTarget;
+    }
   };
 
   const handleMouseDown = (e: MouseEvent) => {
@@ -188,8 +267,25 @@ export const SortableList = <T extends any = string>(props: {
         "data-sortable-item-index"
       );
       swapItems(e, index, toItemIndex ? parseInt(toItemIndex) : -1);
-      targetRef.current?.style.removeProperty("border");
+      targetRef.current.style.removeProperty("border");
       targetRef.current = null;
+    } else if (dropTargetRef.current) {
+      // Dropped onto an external drop target or foreign SortableList drop zone
+      const targetId =
+        dropTargetRef.current.getAttribute("data-drop-target-id") ??
+        dropTargetRef.current.getAttribute("data-sortable-drop-zone-id");
+      const droppedItem = itemsRef.current.find((i) => i.index === index);
+      if (droppedItem && targetId) {
+        onDropToTarget?.(droppedItem, targetId);
+      }
+      onDropTargetLeave?.(targetId ?? "");
+      dropTargetRef.current = null;
+    } else {
+      // Dropped outside any list or target — fire onDrop
+      const droppedItem = itemsRef.current.find((i) => i.index === index);
+      if (droppedItem) {
+        onDrop?.(droppedItem);
+      }
     }
 
     draggedItemRef.current = null;
@@ -199,7 +295,7 @@ export const SortableList = <T extends any = string>(props: {
     onDeltaChange: handleDeltaChange,
     onMouseUp: handleMouseUp,
     onMouseDown: handleMouseDown,
-    cursor: "grabbing",
+    cursor: cursor?.dragging ?? "grabbing",
     threshold: 1,
   });
 
@@ -213,24 +309,22 @@ export const SortableList = <T extends any = string>(props: {
     setItems(initialItems);
   }, [props.enum]);
 
-  let sx: SxProps = {};
-  if (props.displayType === "horizontal") {
-    sx = {
-      display: "flex",
-      flexDirection: "row",
-    };
-  } else if (props.displayType === "horizontal-fit") {
-    sx = {
-      display: "flex",
-      flexDirection: "row",
-    };
-  } else if (props.displayType === "grid") {
-    sx = {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-      gap: 1,
-    };
-  }
+  const sx = useMemo<SxProps>(() => {
+    if (
+      props.displayType === "horizontal" ||
+      props.displayType === "horizontal-fit"
+    ) {
+      return { display: "flex", flexDirection: "row" };
+    }
+    if (props.displayType === "grid") {
+      return {
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+        gap: 1,
+      };
+    }
+    return {};
+  }, [props.displayType]);
 
   const handleItemMouseDown = (
     item: SortableListItemType<T>,
@@ -248,10 +342,6 @@ export const SortableList = <T extends any = string>(props: {
     }
   };
 
-  const renderSortableItem = (item: SortableListItemType<T>) => {
-    return renderItem ? renderItem(item) : item.label;
-  };
-
   return (
     <SortableContext.Provider
       value={{
@@ -263,24 +353,29 @@ export const SortableList = <T extends any = string>(props: {
         displayType,
       }}
     >
-      <ListBase
-        items={items}
-        size={size}
-        sx={{ ...sx, ...props.sx }}
-        displayType={displayType}
-        renderItem={renderSortableItem as any}
-        onDelete={onDelete}
-        onEdit={onEdit}
-        onMouseDown={handleItemMouseDown as any}
-        getItemDataAttributes={(item) => ({
-          "data-sortable-item-index": item.index,
-        })}
-        slotSxProps={{
-          listItem: {
-            cursor: "move",
-          },
-        }}
-      />
+      <Box data-sortable-drop-zone-id={listId}>
+        <ListBase
+          items={items}
+          size={size}
+          sx={{ ...sx, ...props.sx }}
+          displayType={displayType}
+          renderItem={(item) =>
+            renderItem ? renderItem(item) : <>{item.label}</>
+          }
+          onDelete={onDelete}
+          onEdit={onEdit}
+          onMouseDown={handleItemMouseDown as any}
+          getItemDataAttributes={(item) => ({
+            "data-sortable-item-index": item.index,
+            "data-sortable-list-id": listId,
+          })}
+          slotSxProps={{
+            listItem: {
+              cursor: cursor?.idle ?? "move",
+            },
+          }}
+        />
+      </Box>
     </SortableContext.Provider>
   );
 };
