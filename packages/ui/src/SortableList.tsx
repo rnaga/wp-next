@@ -238,18 +238,14 @@ export const SortableList = <T extends any = string>(props: {
     }
   };
 
-  const handleMouseDown = (e: MouseEvent) => {
+  const handleMouseDown = (_e: MouseEvent) => {
     const dragged = draggedItemRef.current;
     if (!dragged) return;
 
-    const { element, index } = dragged;
-    const rect = element.getBoundingClientRect();
-    if (rect) {
-      refPos.current.y = e.clientY - rect.top - rect.height / 2;
-      refPos.current.x = 0;
-      element.style.zIndex = "100000";
-      element.style.transform = `translate(${refPos.current.x}px, ${refPos.current.y}px)`;
-    }
+    const { element } = dragged;
+    refPos.current.y = 0;
+    refPos.current.x = 0;
+    element.style.zIndex = "100000";
   };
 
   const handleMouseUp = (e: MouseEvent) => {
@@ -281,10 +277,25 @@ export const SortableList = <T extends any = string>(props: {
       onDropTargetLeave?.(targetId ?? "");
       dropTargetRef.current = null;
     } else {
-      // Dropped outside any list or target — fire onDrop
-      const droppedItem = itemsRef.current.find((i) => i.index === index);
-      if (droppedItem) {
-        onDrop?.(droppedItem);
+      // Check if the drop point is still within this list's own drop zone.
+      // If so, the item was dropped on empty space inside the same list — no-op.
+      const elementsAtPoint = document.elementsFromPoint(e.clientX, e.clientY);
+      const isInsideOwnDropZone = elementsAtPoint.some((el) => {
+        const dropZone = (el as HTMLElement).closest(
+          "[data-sortable-drop-zone-id]"
+        ) as HTMLElement | null;
+        return (
+          dropZone &&
+          dropZone.getAttribute("data-sortable-drop-zone-id") === listId
+        );
+      });
+
+      if (!isInsideOwnDropZone) {
+        // Dropped outside any list or target — fire onDrop
+        const droppedItem = itemsRef.current.find((i) => i.index === index);
+        if (droppedItem) {
+          onDrop?.(droppedItem);
+        }
       }
     }
 
