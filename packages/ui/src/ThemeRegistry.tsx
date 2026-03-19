@@ -4,9 +4,6 @@ import * as React from "react";
 import {
   ThemeProvider as MuiThemeProvider,
   createTheme as createMuiTheme,
-  Experimental_CssVarsProvider as MaterialCssVarsProvider,
-  extendTheme as materialExtendTheme,
-  THEME_ID as MATERIAL_THEME_ID,
   useColorScheme as useMaterialColorScheme,
   useTheme,
 } from "@mui/material/styles";
@@ -55,15 +52,11 @@ export default function ThemeRegistry({
   const wpTheme = themes.wp;
 
   return (
-    <MaterialCssVarsProvider
-      theme={{ [MATERIAL_THEME_ID]: muiThemeWithOverrides }}
-    >
-      <MuiThemeProvider theme={muiThemeWithOverrides}>
-        <WPThemeContext value={wpTheme}>
-          <CssBaseline />
-          {children}
-        </WPThemeContext>
-      </MuiThemeProvider>
-    </MaterialCssVarsProvider>
+    <MuiThemeProvider theme={muiThemeWithOverrides}>
+      <WPThemeContext value={wpTheme}>
+        <CssBaseline />
+        {children}
+      </WPThemeContext>
+    </MuiThemeProvider>
   );
 }
