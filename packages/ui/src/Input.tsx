@@ -8,6 +8,8 @@ export const Input = (
     onChange?: (value: string, e?: React.ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (value: string) => void;
     onClear?: () => void | Promise<void>;
+    onError?: (message: string | null) => void;
+    validate?: string | ((value: string) => boolean);
     canClear?: boolean;
     value?: string | number;
     size?: "small" | "medium" | "large";
@@ -25,6 +27,8 @@ export const Input = (
     onChange,
     onBlur,
     onClear,
+    onError,
+    validate,
     canClear,
     size,
     disableBorder,
@@ -41,9 +45,20 @@ export const Input = (
   const [value, setValue] = useState<string | number | undefined>(_value ?? "");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setValue(value);
-    onChange && onChange(value);
+    const newValue = e.target.value;
+    if (validate) {
+      const isValid =
+        typeof validate === "string"
+          ? new RegExp(validate).test(newValue)
+          : validate(newValue);
+      if (!isValid) {
+        onError?.("Invalid value");
+        return;
+      }
+      onError?.(null);
+    }
+    setValue(newValue);
+    onChange && onChange(newValue);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
