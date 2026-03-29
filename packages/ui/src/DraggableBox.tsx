@@ -9,6 +9,7 @@
  * - title: Optional title to display in the header.
  * - size: Sets the Typography size ("small" | "medium").
  * - targetRef: Reference to an element whose relative position determines the box's initial placement.
+ * - portalTarget: Optional element to attach the Portal to (default: document.body).
  * - sx: Style overrides for the outer Box wrapping the content.
  * - slotSxProps: Style overrides for the header, title, and border (width, color).
  */
@@ -47,6 +48,7 @@ export const DraggableBox = (props: {
   title?: string;
   size?: "small" | "medium";
   targetRef?: RefObject<HTMLElement | null>;
+  portalTarget?: HTMLElement | null;
   ref?: RefObject<HTMLElement | null>;
   sx?: SxProps;
   slotSxProps?: SlotSxProps;
@@ -59,6 +61,7 @@ export const DraggableBox = (props: {
   const {
     children,
     targetRef,
+    portalTarget,
     ref: selfRef,
     title,
     size,
@@ -340,10 +343,9 @@ export const DraggableBox = (props: {
 
   return (
     <>
-      {/* Background overlay, higher stacking context than normal content */}
-      <Background zIndex={999 + zIndexLayer} onClose={onClose} />
-      {/* Portal to render the box outside of the normal hierarchy */}
-      <Portal>
+      {/* Portal to render the box and backdrop outside of the normal hierarchy */}
+      <Portal target={portalTarget}>
+        <Background zIndex={999 + zIndexLayer} onClose={onClose} />
         <Box
           // Attach our callback ref
           ref={callbackRef}

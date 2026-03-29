@@ -48,6 +48,7 @@ export const SortableList = <T extends any = string>(props: {
    */
   dropZoneId?: string;
   renderItem?: (item: SortableListItemType<T>) => JSX.Element;
+  getItemSx?: (item: SortableListItemType<T>) => SxProps;
   onDelete?: (index: number) => void;
   onEdit?: (index: number) => void;
   onChange?: (
@@ -65,6 +66,7 @@ export const SortableList = <T extends any = string>(props: {
     size = "small",
     displayType = "vertical",
     renderItem,
+    getItemSx,
     onDelete,
     onChange,
     onEdit,
@@ -376,6 +378,7 @@ export const SortableList = <T extends any = string>(props: {
           onDelete={onDelete}
           onEdit={onEdit}
           onMouseDown={handleItemMouseDown as any}
+          getItemSx={getItemSx as any}
           getItemDataAttributes={(item) => ({
             "data-sortable-item-index": item.index,
             "data-sortable-list-id": listId,
