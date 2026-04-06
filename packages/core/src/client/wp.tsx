@@ -8,6 +8,7 @@ import { useGlobalRef } from "./wp/use-global-ref";
 import { useGlobalState } from "./wp/use-global-state";
 import { useLocalSettingsState } from "./wp/use-local-settings";
 import { useViewport } from "./wp/use-viewport";
+import { configureLogging } from "./utils/logger";
 
 import type * as types from "../types";
 import type * as wpTypes from "@rnaga/wp-node/types";
@@ -34,8 +35,20 @@ export const WPProvider = (props: {
   children: React.ReactNode;
   user?: types.User;
   initialState?: Partial<types.client.GlobalState>;
+  // Logging config sourced from server-side env vars and forwarded here so
+  // that client utilities can read it without touching the server directly.
+  logging?: {
+    // Whether logging is enabled at all. Defaults to false.
+    enabled?: boolean;
+    // Minimum log level to emit. Defaults to "error" (most restrictive).
+    level?: "debug" | "info" | "warn" | "error";
+  };
 }) => {
-  const { children, user, initialState } = props;
+  const { children, user, initialState, logging } = props;
+
+  // Apply server-provided logging config to the module-level store so that
+  // isLoggingEnabled / appLog work outside of React component trees.
+  configureLogging(logging?.enabled ?? false, logging?.level ?? "error");
 
   // Initialize global state and references
   const globalState = useGlobalState({

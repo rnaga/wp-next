@@ -2,10 +2,11 @@
 
 import { z } from "zod";
 
+import { logger } from "../../utils/logger";
 import { WP } from "../../wp";
 
 export const checkResetKey = async (resetKey: string, userLogin: string) => {
-  console.log(`resetKey: ${resetKey} userLogin: ${userLogin}`);
+  logger.log(`resetKey: ${resetKey} userLogin: ${userLogin}`);
   const parsed = z
     .object({
       resetKey: z.string().trim().min(1),

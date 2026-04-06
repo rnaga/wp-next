@@ -117,7 +117,6 @@ export const Delete = () => {
   };
 
   const handleChangeRadio = (v: string) => {
-    console.log(v);
     setFormData({ deleteAll: v === "delete" });
   };
 

@@ -1,9 +1,9 @@
+import ExifReader from "exifreader";
+import pathToFfmpeg from "ffmpeg-static";
+import ffmpeg from "fluent-ffmpeg";
 import mime from "mime-types";
 
-import ffmpeg from "fluent-ffmpeg";
-import ExifReader from "exifreader";
-
-import pathToFfmpeg from "ffmpeg-static";
+import { logger } from "./logger";
 
 if (pathToFfmpeg) {
   ffmpeg.setFfmpegPath(pathToFfmpeg);
@@ -92,7 +92,7 @@ export async function getStreamMetadata(
     (stream) => stream.codec_type == type
   )[0];
 
-  console.log(metadata);
+  logger.log(metadata);
   return {
     bitrate: metadata?.format?.bit_rate, //stream?.bit_rate,
     length: stream?.duration_ts,
@@ -128,7 +128,7 @@ export async function getImageMetadata(filePath: string) {
       orientation: tags?.["Orientation"]?.description,
     };
 
-    console.log("metadata", metadata);
+    logger.log("metadata", metadata);
 
     return filter(metadata) as Partial<Record<keyof typeof metadata, any>> & {
       width: number;

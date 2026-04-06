@@ -35,7 +35,6 @@ export const Edit = (props?: { userId?: number; isProfile?: boolean }) => {
         .can("edit_user", userId as number)
         .then(safeParse);
       if (!response.success) {
-        console.info(response.error);
         setCanEditUser(false);
         return;
       }

@@ -1,6 +1,8 @@
-import { isPromise } from "../utils";
-
 import { Context as WPContext } from "@rnaga/wp-node/core/context";
+
+import { isPromise } from "../utils";
+import { logger } from "../utils/logger";
+
 import type * as types from "../../types";
 
 export const handleResponse = async <Data, Info>(
@@ -17,7 +19,7 @@ export const handleResponse = async <Data, Info>(
       info,
     });
   } catch (e: any) {
-    console.error(e);
+    logger.error(e);
     const error = wp.utils.crud.parseError(e);
     return createResponsePayload({
       success: false,

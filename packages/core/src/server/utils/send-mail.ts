@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { logger } from "./logger";
 
 export const sendMail = async (
   subject: string,
@@ -24,7 +25,7 @@ export const sendMail = async (
     if (e) {
       throw e;
     } else {
-      console.log(`Email Sent - ${JSON.stringify(info, null, 2)}`);
+      logger.log(`Email Sent - ${JSON.stringify(info, null, 2)}`);
       return true;
     }
   });

@@ -18,13 +18,24 @@ export const RootLayout = (props: {
   adminUser: types.client.AdminUser;
   defaultMenuSegment: types.client.AdminPageSegment;
   session: Session;
+  logging?: {
+    enabled?: boolean;
+    level?: "debug" | "info" | "warn" | "error";
+  };
 }) => {
-  const { site, user, adminUser, children, session, defaultMenuSegment } =
-    props;
+  const {
+    site,
+    user,
+    adminUser,
+    children,
+    session,
+    defaultMenuSegment,
+    logging,
+  } = props;
 
   return (
     <SessionProvider session={session}>
-      <WPProvider initialState={initialState} user={user}>
+      <WPProvider initialState={initialState} user={user} logging={logging}>
         <WPAdminProvider
           site={site}
           adminUser={adminUser}

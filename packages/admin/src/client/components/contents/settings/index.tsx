@@ -156,7 +156,6 @@ export const Settings = () => {
               value={1}
               name="comment_registration"
               defaultChecked={options.comment_registration == "1"}
-              onChange={(e) => console.log(e.target.checked)}
               label="Users must be registered and logged in to comment"
             />
             <Checkbox

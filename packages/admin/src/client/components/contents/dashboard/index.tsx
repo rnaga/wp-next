@@ -86,8 +86,6 @@ export const Dashboard = () => {
   }, [refreshValue().content]);
 
   const handleSubmit = async (data: typeof formData) => {
-    console.log(formData);
-
     formData.post_author = user?.ID;
     formData.post_title = data.post_title;
     formData.post_content = data.post_content;
@@ -265,13 +263,6 @@ export const Dashboard = () => {
                       <Typography size="medium">Content</Typography>
                     </FormLabel>
                     <LightEditor
-                      //editorKey="post-draft"
-                      //initialValue=""
-                      // minHeight={200}
-                      // onChange={(content) => {
-                      //   console.log(content);
-                      //   setFormData({ post_content: content });
-                      // }}
                       minHeight={200}
                       onUpdate={(editor, transaction) => {
                         setFormData({ post_content: editor.getHTML() });

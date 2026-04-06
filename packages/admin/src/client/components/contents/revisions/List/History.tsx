@@ -22,7 +22,6 @@ export const History = (props: {
   }, []);
 
   const handleClick = (revision: SelectedRevision) => {
-    console.log("revision.target?.ID", revision.target?.ID, selectedId);
     setSelectedId(revision.target?.ID);
     onClick(revision);
   };

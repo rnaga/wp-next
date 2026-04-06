@@ -1,7 +1,9 @@
 export const isEmailEnabled = (): boolean => {
-  return (
+  return !!(
     process.env.ENABLE_GMAIL === "true" &&
+    process.env.GMAIL_USER &&
     process.env.GMAIL_USER.length > 0 &&
+    process.env.GMAIL_PASSWORD &&
     process.env.GMAIL_PASSWORD.length > 0
   );
 };

@@ -1,9 +1,11 @@
 "use server";
-import { createResponsePayload } from "./response";
-import { WP } from "../wp";
 import * as wpTypes from "@rnaga/wp-node/types";
-import { update as postUpdate } from "./post";
+
+import { logger } from "../utils/logger";
+import { WP } from "../wp";
 import { update as metaUpdate } from "./meta";
+import { update as postUpdate } from "./post";
+import { createResponsePayload } from "./response";
 
 export const update = async (
   postId: number,
@@ -41,7 +43,6 @@ export const upload = async (formData: FormData) => {
       if (!file) {
         break;
       }
-      // console.log(`file_${i}`, file);
 
       const result = await wp.hooks.filter.asyncApply(
         "next_core_media_uploaded",
@@ -84,7 +85,7 @@ export const upload = async (formData: FormData) => {
       data,
     });
   } catch (e) {
-    console.log(e);
+    logger.error(e);
     return createResponsePayload({
       success: false,
       error: `${e}`,

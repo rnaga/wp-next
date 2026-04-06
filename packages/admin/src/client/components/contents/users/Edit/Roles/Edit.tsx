@@ -80,7 +80,6 @@ export const Edit = (props: {
         onChange={(items) => {
           const newRoleNames = items.map((item) => item.id);
           setValues(newRoleNames);
-          console.log("onChange", items);
         }}
         slotSxProps={{
           input: { minWidth: "300px", minHeight: "28px" },

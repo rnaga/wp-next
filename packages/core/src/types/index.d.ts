@@ -26,3 +26,4 @@ export * as client from "./client";
 export { User } from "./client";
 export * from "./media";
 export * as auth from "./auth";
+export * from "./logging";

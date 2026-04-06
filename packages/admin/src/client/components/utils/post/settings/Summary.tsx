@@ -65,7 +65,6 @@ export const Summary = () => {
           ]}
           value={formData?.post_status ?? "publish"}
           onChange={(value) => {
-            console.log("Selected weight:", value);
             setFormData({ post_status: value });
           }}
         />

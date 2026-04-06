@@ -77,7 +77,6 @@ export const Edit = () => {
 
       const newAttributes: typeof attributes = [];
       Object.entries(formData).forEach(([key, value]) => {
-        console.log(key, value);
         if (validAttributeKeys.includes(key) && value === 1) {
           newAttributes.push(key);
         }

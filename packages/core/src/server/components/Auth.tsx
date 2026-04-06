@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { checkResetKey } from "../actions/password";
 import { activate, canSignup } from "../actions/user-self-registration";
 import { googleRecaptcha, isEmailEnabled } from "../utils";
+import { logger } from "../utils/logger";
 import { getWPSession, WP } from "../wp";
 
 /**
@@ -32,7 +33,7 @@ export const Auth = async (props: types.auth.AuthProps) => {
       const { key: resetKey, user_login: userLoginReset } =
         await props.searchParams;
 
-      console.info("Loading password reset key - ", resetKey, userLoginReset);
+      logger.info("Loading password reset key - ", resetKey, userLoginReset);
       const resultReset = await checkResetKey(resetKey, userLoginReset);
 
       return (

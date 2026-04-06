@@ -1,5 +1,7 @@
 import Script from "next/script";
 
+import { logger } from "./logger";
+
 interface RecaptchaResponse {
   success: boolean;
   challenge_ts?: string; // timestamp of the challenge load (ISO format)
@@ -14,7 +16,7 @@ const getSiteKey = () => process.env.GOOGLE_RECAPTCHA_SITEKEY;
 // React Component to load the Google reCAPTCHA script
 const RecaptchaScript = () => {
   const googleRecaptchaSiteKey = getSiteKey();
-  console.log("googleRecaptchaSiteKey", googleRecaptchaSiteKey);
+  logger.log("googleRecaptchaSiteKey", googleRecaptchaSiteKey);
 
   if (!googleRecaptchaSiteKey) {
     return null;
@@ -35,7 +37,7 @@ const verifyToken = async (token?: string) => {
   }
 
   if (!process.env.GOOGLE_RECAPTCHA_SECRET) {
-    console.error("GOOGLE_SECRET_KEY is not defined");
+    logger.error("GOOGLE_SECRET_KEY is not defined");
     return false;
   }
 
@@ -52,12 +54,12 @@ const verifyToken = async (token?: string) => {
     });
 
     if (!response.ok) {
-      console.error("Failed to verify reCAPTCHA token:", response.statusText);
+      logger.error("Failed to verify reCAPTCHA token:", response.statusText);
       return false;
     }
 
     const responseJson = (await response.json()) as RecaptchaResponse;
-    console.info("google recaptcha response responseJson", responseJson);
+    logger.info("google recaptcha response responseJson", responseJson);
 
     return !!(
       responseJson.success &&
@@ -65,7 +67,7 @@ const verifyToken = async (token?: string) => {
       responseJson.score > 0.5
     );
   } catch (error) {
-    console.error("Failed to verify reCAPTCHA token:", error);
+    logger.error("Failed to verify reCAPTCHA token:", error);
     return false;
   }
 };

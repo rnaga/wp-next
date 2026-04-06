@@ -71,7 +71,6 @@ export const Edit = () => {
   }, [siteId]);
 
   const handleFormMetaChange = (key: string, value: any) => {
-    console.log("handleFormMetaChange", key, value);
     setFormData({
       ...formData,
       meta_input: {
@@ -82,7 +81,6 @@ export const Edit = () => {
   };
 
   const handleSubmit = async (data: typeof formData) => {
-    console.log("data", data);
     const result = await execute(actions.site.update(siteId, data)).then(
       safeParse
     );
@@ -118,9 +116,7 @@ export const Edit = () => {
       : [false, "Value can only contain lowercase letters (a-z) and numbers"];
   };
 
-  useEffect(() => {
-    console.log("Edit useEffect", formData);
-  }, [formData]);
+  useEffect(() => {}, [formData]);
 
   if (!site) {
     return null;
@@ -181,7 +177,6 @@ export const Edit = () => {
               size="medium"
               defaultChecked={site.site_meta.add_new_users == "1"}
               onChange={(e: any) => {
-                console.log(e.target.checked);
                 handleFormMetaChange("add_new_users", e.target.checked ? 1 : 0);
               }}
               label="Allow administrators to add new users"
@@ -225,7 +220,6 @@ export const Edit = () => {
               <InputMultiple
                 size="medium"
                 onChange={(value) => {
-                  console.log("value", value);
                   handleFormMetaChange("limited_email_domains", value);
                 }}
                 value={formData.meta_input?.["limited_email_domains"] || []}

@@ -1,9 +1,14 @@
 import { redirect } from "next/navigation";
 import * as React from "react";
 
-import { WrapperRootLayout as ClientRootLayout } from "../../client/components/WrapperRootLayout";
-import * as actionsAdminUser from "@rnaga/wp-next-core/server/actions/admin-user";
 import { AuthError } from "@rnaga/wp-next-core/client/components/auth";
+import * as actionsAdminUser from "@rnaga/wp-next-core/server/actions/admin-user";
+import {
+  getLoggingConfig,
+  logger,
+} from "@rnaga/wp-next-core/server/utils/logger";
+
+import { WrapperRootLayout as ClientRootLayout } from "../../client/components/WrapperRootLayout";
 import { WPAdmin } from "../wp-admin";
 
 export const RootLayout = async (props: { children: React.ReactNode }) => {
@@ -23,7 +28,7 @@ export const RootLayout = async (props: { children: React.ReactNode }) => {
   const blogName = (await wp.options.get<string>("blogname")) ?? "";
 
   if (!wp.current.user || !wp.current.user.props) {
-    console.info(
+    logger.info(
       "User not found. If this occurs even after a successful login,",
       "check if all the necessary hooks are installed and activated.",
       "Specifically, check if NextCoreInit is properly added by getAdminHooks()."
@@ -37,7 +42,7 @@ export const RootLayout = async (props: { children: React.ReactNode }) => {
   }
 
   if (!process.env.BASE_URL) {
-    console.info(
+    logger.info(
       "Base URL not found. Check if the environment variable BASE_URL is set."
     );
     return (
@@ -103,6 +108,7 @@ export const RootLayout = async (props: { children: React.ReactNode }) => {
       }}
       adminUser={currentAdminUser}
       session={session}
+      logging={getLoggingConfig()}
     >
       {children}
     </ClientRootLayout>

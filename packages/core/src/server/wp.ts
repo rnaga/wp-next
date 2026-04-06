@@ -15,6 +15,7 @@ import { User } from "@rnaga/wp-node/core/user";
 import * as wpVal from "@rnaga/wp-node/validators";
 
 import { jwtSessionMaxAge } from "./utils/jwt-session-maxage";
+import { logger } from "./utils/logger";
 
 const getWPContext = async (env?: string) => {
   Application.registerHooks(hooks);
@@ -87,13 +88,13 @@ const getAuthProviders = () => {
       const wpUser = await authenticate(username, password);
 
       if (!wpUser) {
-        console.log(
+        logger.log(
           `Invalid User - username: ${username} password: ${password}`
         );
         return null;
       }
 
-      console.log("authorize", {
+      logger.log("authorize", {
         id: `${wpUser.ID}`,
       });
       return {
@@ -123,7 +124,7 @@ export const authOptions: AuthOptions = {
   providers: getAuthProviders(),
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log(
+      logger.log(
         `signIn: ${JSON.stringify(user)}`,
         "account",
         account,
@@ -149,16 +150,16 @@ export const authOptions: AuthOptions = {
           const result =
             await wp.utils.crud.userSelfRegistration.registerWithoutActivation({
               email,
-              name: userName,
+              name: userName || undefined,
             });
 
           verified = result.data.user_id > 0;
-          console.log(
+          logger.log(
             "user newly registered through registerWithoutActivation",
             JSON.stringify(result, null, 2)
           );
         } catch (e) {
-          console.error(
+          logger.error(
             "Error registering user through registerWithoutActivation",
             e
           );
@@ -170,7 +171,7 @@ export const authOptions: AuthOptions = {
     },
     async redirect({ baseUrl }) {
       if (process.env.WPAUTH_BASE_PATH === undefined) {
-        console.error(
+        logger.error(
           "WPAUTH_BASE_PATH is not defined. Make sure to define it in Environment Variables (e.g. .env.local)"
         );
       }
@@ -185,7 +186,7 @@ export const authOptions: AuthOptions = {
       // const { name: userLogin, email } = session?.user;
       const { wp_user } = token;
       if (!token.email || !wp_user || !wp_user.ID || !wp_user.user_login) {
-        console.error("No user data in the token.");
+        logger.error("No user data in the token.");
         return undefined;
       }
 
@@ -210,6 +211,12 @@ export const authOptions: AuthOptions = {
         const userId = account.provider === "credentials" ? user.id : undefined;
         const email = user.email;
 
+        if (!userId && !email) {
+          throw new Error(
+            "Neither user ID nor email is found in the user object returned from NextAuth provider."
+          );
+        }
+
         const wp = await getWPContext();
 
         // Get user data from the database based on the user login or email.
@@ -217,17 +224,16 @@ export const authOptions: AuthOptions = {
           if (userId) {
             query.where("ID", userId);
           } else {
-            query.where("user_email", email);
+            query.where("user_email", email!);
           }
           query.builder.first();
         }, wpVal.database.wpUsers);
 
-        // Return emtpy token if user not found.
+        // Throw if user not found — returning undefined would violate the JWT callback return type.
         if (!wpUser) {
-          console.error(
+          throw new Error(
             "Unset JWT since Neither user ID nor email is found in the database."
           );
-          return undefined;
         }
 
         token = {
