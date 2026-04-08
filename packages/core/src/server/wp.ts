@@ -17,12 +17,44 @@ import * as wpVal from "@rnaga/wp-node/validators";
 import { jwtSessionMaxAge } from "./utils/jwt-session-maxage";
 import { logger } from "./utils/logger";
 
-const getWPContext = async (env?: string) => {
+/**
+ * Returns a bare WP application context without running the `next_core_init`
+ * hook. Because it never calls Next.js dynamic APIs (`headers()`,
+ * `getServerSession()`), it carries no session — meaning no authentication or
+ * authorization checks are performed. It is therefore safe to use in contexts
+ * where those APIs are forbidden, but must never be used to gate access to
+ * protected resources.
+ *
+ * Use this instead of `WP()` when:
+ * - You are inside an `unstable_cache` scope (Next.js forbids dynamic API
+ *   calls there and will throw at runtime)
+ * - You are inside a NextAuth JWT or session callback, which runs outside the
+ *   normal request lifecycle
+ * - You only need raw database/application access and have already verified
+ *   the caller's identity through other means
+ */
+export const getWPContext = async (env?: string) => {
   Application.registerHooks(hooks);
   env = env ?? process.env.WP_ENV ?? "default";
   return await Application.getContext(env);
 };
 
+/**
+ * Returns a fully initialized WP application context for use in standard
+ * Next.js server-side code (Server Components, Route Handlers, Server
+ * Actions). Fires the `next_core_init` filter hook, which resolves the
+ * current session via `getServerSession()` and calls `wp.current.assumeUser()`
+ * to set the caller's identity on the context. This is what enables WP
+ * capability checks (authorization) to work correctly — without it, the
+ * context has no user identity and all capability checks behave as if the
+ * caller is anonymous.
+ *
+ * Use this whenever the caller's identity matters (i.e. any code path that
+ * reads or writes data subject to per-user permissions).
+ *
+ * Do NOT call this inside `unstable_cache` callbacks or NextAuth JWT/session
+ * callbacks — use `getWPContext()` there instead.
+ */
 export async function WP(env?: string) {
   const wp = await getWPContext(env);
 
