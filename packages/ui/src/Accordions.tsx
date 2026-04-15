@@ -23,6 +23,7 @@ export const Accordions = (
     slotProps?: {
       summary?: Parameters<typeof MuiAccodionSummary>[0];
       title?: Parameters<typeof Typography>[0];
+      details?: Parameters<typeof AccordionDetails>[0];
     };
     size?: "small" | "medium";
   } & Omit<
@@ -49,6 +50,7 @@ export const Accordions = (
 
   const { sx: summarySx, ...summarySlotProps } = slotProps?.summary || {};
   const { sx: titleSx, ...titleSlotProps } = slotProps?.title || {};
+  const { sx: detailsSx, ...detailsSlotProps } = slotProps?.details || {};
 
   return items.map((item, index) => {
     return (
@@ -99,7 +101,9 @@ export const Accordions = (
             {item.title}
           </Typography>
         </MuiAccodionSummary>
-        <AccordionDetails>{item.content}</AccordionDetails>
+        <AccordionDetails sx={{ ...detailsSx }} {...detailsSlotProps}>
+          {item.content}
+        </AccordionDetails>
       </Accordion>
     );
   });
