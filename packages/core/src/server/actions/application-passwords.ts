@@ -16,7 +16,7 @@ export const create = async (
     info,
   } = await wpCrud.applicationPasswords.create(...args);
 
-  item.password = undefined;
+  item.password = "***";
 
   return await handleResponse(wp, { data: { password, item }, info });
 };
@@ -31,7 +31,7 @@ export const get = async (
     ...args
   );
 
-  password.password = undefined;
+  password.password = "***";
 
   return await handleResponse(wp, { data: password, info });
 };
@@ -47,7 +47,7 @@ export const list = async (
   );
 
   passwords.forEach((p) => {
-    p.password = undefined;
+    p.password = "***";
   });
 
   return await handleResponse(wp, { data: passwords, info });
