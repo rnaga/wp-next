@@ -1,0 +1,8 @@
+{
+  "staticAssetsPath": "public",
+  "multisite": {
+    "enabled": true,
+    "defaultBlogId": 1,
+    "defaultSiteId": 1
+  }
+}

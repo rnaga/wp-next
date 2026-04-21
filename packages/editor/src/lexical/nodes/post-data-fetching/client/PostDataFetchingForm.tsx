@@ -1,0 +1,106 @@
+import { useCallback, useMemo } from "react";
+
+import { Checkmarks, CheckmarksItem } from "@rnaga/wp-next-ui/Checkmarks";
+import { SelectWPPost } from "@rnaga/wp-next-ui/SelectWPPost";
+import { Typography } from "@rnaga/wp-next-ui/Typography";
+
+import { FormControl } from "../../../../client/forms/components";
+import { useDataFetchingForm } from "../../data-fetching/client/DataFetchingForm";
+import {
+  ALLOWED_QUERY_PASSTHROUGH_KEYS,
+  PostDataFetchingNode,
+} from "../PostDataFetchingNode";
+import { Select } from "@rnaga/wp-next-ui/Select";
+
+import type * as wpTypes from "@rnaga/wp-node/types";
+import { SelectFreeSoloAutocomplete } from "@rnaga/wp-next-ui/SelectFreeSoloAutocomplete";
+
+export const PostDataFetchingForm = () => {
+  const { currentNode, query, updateQuery, updateAllowedQueryPassthroughKeys } =
+    useDataFetchingForm<PostDataFetchingNode>();
+
+  const postType = useMemo(() => {
+    return (
+      currentNode?.getQuery().postType ??
+      query?.postType ??
+      ("post" as wpTypes.PostType)
+    );
+  }, [currentNode, query]);
+
+  const postId = useMemo(() => {
+    return currentNode?.getQuery().ID ?? query?.ID;
+  }, [currentNode, query]);
+
+  const allowedQueryKeys = useMemo(() => {
+    return currentNode?.__allowedQueryPassthroughKeys ?? [];
+  }, [currentNode]);
+
+  const checkmarkItems: CheckmarksItem[] = useMemo(
+    () =>
+      ALLOWED_QUERY_PASSTHROUGH_KEYS.map((key) => ({
+        label: key,
+        value: key,
+      })),
+    []
+  );
+
+  const handleAllowedKeysChange = (values: string[]) => {
+    updateAllowedQueryPassthroughKeys(currentNode, values);
+  };
+
+  const handlePostTypeChange = (value: string) => {
+    updateQuery("postType", value as wpTypes.PostType);
+  };
+
+  return useCallback(
+    () => (
+      <>
+        <FormControl label="Post Type">
+          <SelectFreeSoloAutocomplete
+            size="medium"
+            value={postType}
+            items={[
+              { label: "post", value: "post" },
+              { label: "page", value: "page" },
+              { label: "attachment", value: "attachment" },
+            ]}
+            onChange={handlePostTypeChange}
+          />
+        </FormControl>
+
+        <FormControl label="Post">
+          <SelectWPPost
+            key={"post-select-" + postType}
+            size="medium"
+            postOptions={{
+              postTypes: [query?.postType ?? "post"],
+            }}
+            onChange={(post) => {
+              updateQuery({
+                ID: post?.ID,
+              });
+            }}
+            defaultValue={postId}
+          />
+        </FormControl>
+        <FormControl label="Allowed Query Passthrough Keys">
+          <Checkmarks
+            items={checkmarkItems}
+            values={allowedQueryKeys}
+            onChange={handleAllowedKeysChange}
+            size="medium"
+            label="Select query keys"
+            sx={{ width: "100%" }}
+          />
+          <Typography
+            size="small"
+            sx={{ mt: 0.5, opacity: 0.7, fontStyle: "italic" }}
+          >
+            Select which query parameters can be passed through from the URL.
+          </Typography>
+        </FormControl>
+      </>
+    ),
+    [postId, query?.postType]
+  )();
+};

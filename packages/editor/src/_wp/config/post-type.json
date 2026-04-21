@@ -1,0 +1,113 @@
+{
+  "next-template": {
+    "public": true,
+    "capabilityType": "post",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "trackbacks",
+      "custom-fields",
+      "comments",
+      "revisions",
+      "post-formats"
+    ],
+    "deleteWithUser": true,
+    "mapMetaCap": true,
+    "showInRest": true
+  },
+  "next-template-col": {
+    "public": true,
+    "capabilityType": "post",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "trackbacks",
+      "custom-fields",
+      "comments",
+      "revisions",
+      "post-formats"
+    ],
+    "deleteWithUser": true,
+    "mapMetaCap": true,
+    "showInRest": true
+  },
+  "next-custom-code": {
+    "public": true,
+    "capabilityType": "post",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "trackbacks",
+      "custom-fields",
+      "comments",
+      "revisions",
+      "post-formats"
+    ],
+    "deleteWithUser": true,
+    "mapMetaCap": true,
+    "showInRest": true
+  },
+  "next-font-family": {
+    "public": true,
+    "capabilityType": "post",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "trackbacks",
+      "custom-fields",
+      "revisions",
+      "post-formats"
+    ],
+    "deleteWithUser": true,
+    "mapMetaCap": true,
+    "showInRest": true
+  },
+  "next-font-face": {
+    "public": true,
+    "capabilityType": "post",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "trackbacks",
+      "custom-fields",
+      "revisions",
+      "post-formats"
+    ],
+    "deleteWithUser": true,
+    "mapMetaCap": true,
+    "showInRest": true
+  },
+  "next-css-variables": {
+    "public": true,
+    "capabilityType": "post",
+    "supports": [
+      "title",
+      "editor",
+      "author",
+      "thumbnail",
+      "excerpt",
+      "trackbacks",
+      "custom-fields",
+      "revisions",
+      "post-formats"
+    ],
+    "deleteWithUser": true,
+    "mapMetaCap": true,
+    "showInRest": true
+  }
+}

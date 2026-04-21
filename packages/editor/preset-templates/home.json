@@ -1,0 +1,1990 @@
+{
+  "root": {
+    "children": [
+      {
+        "type": "googlefont",
+        "version": 1,
+        "fonts": {
+          "Roboto": {
+            "fontStyle": ["normal"]
+          },
+          "Open Sans": {
+            "fontStyle": ["normal"]
+          },
+          "Inter": {
+            "fontStyle": ["normal"]
+          }
+        }
+      },
+      {
+        "type": "customfonts-data",
+        "name": "name-55",
+        "ID": 80480,
+        "allowedQueryPassthroughKeys": [],
+        "version": 1
+      },
+      {
+        "type": "cssvariables-data",
+        "name": "name-50",
+        "ID": 40072,
+        "allowedQueryPassthroughKeys": [],
+        "version": 1
+      },
+      {
+        "type": "animation",
+        "version": 1,
+        "__presets": [],
+        "__customKeyframes": {}
+      },
+      {
+        "type": "custom-code",
+        "version": 1,
+        "__slugs": {
+          "header": [],
+          "footer": []
+        }
+      },
+      {
+        "type": "cache",
+        "version": 1
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "version": 1,
+                "type": "widget",
+                "format": "start",
+                "__css": {
+                  "__className": "p70bcuv",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "paddingTop": "0px",
+                      "paddingBottom": "0px",
+                      "paddingLeft": "0px",
+                      "paddingRight": "0px",
+                      "marginTop": "0px",
+                      "marginBottom": "0px",
+                      "marginLeft": "0px",
+                      "marginRight": "0px",
+                      "__position": {
+                        "position": "sticky",
+                        "inset": "0px auto auto"
+                      }
+                    },
+                    "mobile": {
+                      "__layout": {
+                        "alignItems": "center",
+                        "gridAutoFlow": "row",
+                        "justifyContent": "end"
+                      },
+                      "__position": {}
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_9ridyg",
+                  "__stylesEditor": {
+                    "backgroundColor": "none"
+                  }
+                },
+                "__dynamicAttributes": {
+                  "__rules": []
+                },
+                "slug": "header",
+                "widgetVariantValues": {
+                  "hide-title": true
+                }
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "template-text",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pherolabel",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "display": "inline-block",
+                              "fontSize": "16px",
+                              "fontWeight": "700",
+                              "letterSpacing": "0.2em",
+                              "color": "#7dd3fc",
+                              "textTransform": "uppercase",
+                              "marginBottom": "20px"
+                            },
+                            "mobile": {
+                              "fontSize": "14px",
+                              "color": "#7dd3fc"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_n1lsa",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "WELCOME",
+                        "__settings": {},
+                        "__elementType": "span"
+                      },
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "heading",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pherohead",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "fontSize": "60px",
+                              "fontWeight": "800",
+                              "color": "#ffffff",
+                              "marginBottom": "24px",
+                              "marginTop": "0px",
+                              "lineHeight": "1.1",
+                              "letterSpacing": "-0.02em",
+                              "whiteSpace": "nowrap",
+                              "paddingTop": "20px",
+                              "paddingBottom": "20px",
+                              "paddingLeft": "20px",
+                              "paddingRight": "20px"
+                            },
+                            "tablet": {
+                              "fontSize": "44px"
+                            },
+                            "mobile": {
+                              "fontSize": "22px",
+                              "letterSpacing": "-0.01em",
+                              "lineHeight": "1.1",
+                              "color": "#ffffff",
+                              "textWrap": "wrap",
+                              "textAlign": "center",
+                              "paddingLeft": "0px",
+                              "paddingRight": "0px",
+                              "__animation": []
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_oj26ux",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "Welcome to My WordPress Site",
+                        "__settings": {},
+                        "__elementType": "h1",
+                        "__level": "h1"
+                      },
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "template-text",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pherosub",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "fontSize": "19px",
+                              "color": "#bfdbfe",
+                              "marginBottom": "40px",
+                              "marginTop": "0px",
+                              "lineHeight": "1.7",
+                              "fontWeight": "400"
+                            },
+                            "mobile": {
+                              "fontSize": "14px",
+                              "lineHeight": "1.7",
+                              "color": "#bfdbfe"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_g2nfag",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "This is an example page. It stays in one place and shows up in your site navigation. Most people start with an About page that introduces them to potential site visitors.",
+                        "__settings": {},
+                        "__elementType": "div"
+                      },
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "button-link",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pherobtnpri",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "paddingTop": "14px",
+                                  "paddingBottom": "14px",
+                                  "paddingLeft": "28px",
+                                  "paddingRight": "28px",
+                                  "fontSize": "15px",
+                                  "fontWeight": "600",
+                                  "color": "#0f172a",
+                                  "cursor": "pointer",
+                                  "whiteSpace": "nowrap",
+                                  "__backgroundGlobal": {
+                                    "$backgroundColor": "#ffffff"
+                                  },
+                                  "background": ["#ffffff"],
+                                  "__borderRadius": {
+                                    "$type": "all",
+                                    "$all": "8px"
+                                  },
+                                  "borderRadius": "8px",
+                                  "__border": {
+                                    "$type": "all",
+                                    "$all": {
+                                      "$width": "0px",
+                                      "$style": "none",
+                                      "$color": "transparent"
+                                    }
+                                  },
+                                  "__boxShadow": [
+                                    {
+                                      "position": "outset",
+                                      "offsetX": "0px",
+                                      "offsetY": "4px",
+                                      "blurRadius": "16px",
+                                      "size": "0px",
+                                      "color": "rgba(0,0,0,0.25)"
+                                    }
+                                  ],
+                                  "boxShadow": [
+                                    "0px 4px 16px 0px rgba(0,0,0,0.25)"
+                                  ]
+                                },
+                                "mobile": {
+                                  "fontSize": "16px",
+                                  "color": "#0f172a"
+                                }
+                              },
+                              "__stylesStates": {
+                                "hover": {
+                                  "desktop": {
+                                    "__backgroundGlobal": {
+                                      "$backgroundColor": "#e0f2fe"
+                                    },
+                                    "background": ["#e0f2fe"]
+                                  }
+                                }
+                              },
+                              "__classNameEditor": "__editor_ewpm3b",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "",
+                            "__settings": {},
+                            "__elementType": "div",
+                            "__href": "#content",
+                            "__target": "_self",
+                            "__label": "Explore the Template"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "button-link",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pherobtnscnd",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "paddingTop": "14px",
+                                  "paddingBottom": "14px",
+                                  "paddingLeft": "28px",
+                                  "paddingRight": "28px",
+                                  "fontSize": "15px",
+                                  "fontWeight": "600",
+                                  "color": "#e0f2fe",
+                                  "cursor": "pointer",
+                                  "whiteSpace": "nowrap",
+                                  "__backgroundGlobal": {
+                                    "$backgroundColor": "rgba(255,255,255,0.1)"
+                                  },
+                                  "background": ["rgba(255,255,255,0.1)"],
+                                  "__borderRadius": {
+                                    "$type": "all",
+                                    "$all": "8px"
+                                  },
+                                  "borderRadius": "8px",
+                                  "__border": {
+                                    "$type": "all",
+                                    "$all": {
+                                      "$width": "1px",
+                                      "$style": "solid",
+                                      "$color": "rgba(255,255,255,0.25)"
+                                    }
+                                  },
+                                  "border": "1px solid rgba(255,255,255,0.25)"
+                                },
+                                "mobile": {
+                                  "fontSize": "16px",
+                                  "color": "#e0f2fe"
+                                }
+                              },
+                              "__stylesStates": {
+                                "hover": {
+                                  "desktop": {
+                                    "__backgroundGlobal": {
+                                      "$backgroundColor": "rgba(255,255,255,0.18)"
+                                    },
+                                    "background": ["rgba(255,255,255,0.18)"]
+                                  }
+                                }
+                              },
+                              "__classNameEditor": "__editor_5d7h6h",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "",
+                            "__settings": {},
+                            "__elementType": "div",
+                            "__href": "#tips",
+                            "__target": "_self",
+                            "__label": "Getting Started"
+                          }
+                        ],
+                        "direction": null,
+                        "format": "",
+                        "indent": 0,
+                        "type": "wrapper",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pherobtnrow",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "__layout": {
+                                "display": "flex",
+                                "justifyContent": "center",
+                                "alignItems": "center",
+                                "columnGap": "16px"
+                              }
+                            },
+                            "mobile": {
+                              "__layout": {
+                                "flexDirection": "column",
+                                "rowGap": "12px"
+                              }
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_njd21r",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        }
+                      }
+                    ],
+                    "direction": null,
+                    "format": "",
+                    "indent": 0,
+                    "type": "wrapper",
+                    "version": 1,
+                    "__css": {
+                      "__className": "pheroinner",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "maxWidth": "960px",
+                          "marginLeft": "auto",
+                          "marginRight": "auto"
+                        },
+                        "mobile": {}
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_8cps1d",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    }
+                  }
+                ],
+                "direction": null,
+                "format": "",
+                "indent": 0,
+                "type": "wrapper",
+                "version": 1,
+                "__css": {
+                  "__className": "pherosect",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "paddingTop": "120px",
+                      "paddingBottom": "120px",
+                      "paddingLeft": "40px",
+                      "paddingRight": "40px",
+                      "textAlign": "center",
+                      "__background": [
+                        {
+                          "$type": "linear-gradient",
+                          "degrees": 135,
+                          "values": [
+                            "#0f172a 0%",
+                            "#1e3a5f 50%",
+                            "#0f4c81 100%"
+                          ]
+                        }
+                      ],
+                      "background": [
+                        "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f4c81 100%)"
+                      ]
+                    },
+                    "tablet": {
+                      "paddingTop": "80px",
+                      "paddingBottom": "80px"
+                    },
+                    "mobile": {
+                      "paddingTop": "48px",
+                      "paddingBottom": "56px",
+                      "paddingLeft": "20px",
+                      "paddingRight": "20px",
+                      "marginTop": "0px",
+                      "textAlign": "center",
+                      "textWrap": "wrap",
+                      "height": "auto"
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_51csa",
+                  "__stylesEditor": {
+                    "backgroundColor": "none"
+                  }
+                },
+                "__attributes": {},
+                "__dynamicAttributes": {
+                  "__rules": []
+                }
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "template-text",
+                        "version": 1,
+                        "__css": {
+                          "__className": "paboutlabel",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "display": "block",
+                              "width": "100%",
+                              "fontSize": "11px",
+                              "fontWeight": "700",
+                              "letterSpacing": "0.15em",
+                              "color": "#0ea5e9",
+                              "textTransform": "uppercase",
+                              "marginTop": "0px",
+                              "marginBottom": "12px"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_aevpxf",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "ABOUT THIS TEMPLATE",
+                        "__settings": {},
+                        "__elementType": "span"
+                      },
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "heading",
+                        "version": 1,
+                        "__css": {
+                          "__className": "paboutt",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "fontSize": "38px",
+                              "fontWeight": "800",
+                              "color": "#0f172a",
+                              "marginBottom": "20px",
+                              "marginTop": "0px",
+                              "lineHeight": "1.15",
+                              "letterSpacing": "-0.02em",
+                              "paddingTop": "20px",
+                              "paddingBottom": "20px",
+                              "paddingLeft": "20px",
+                              "paddingRight": "20px"
+                            },
+                            "tablet": {
+                              "fontSize": "30px"
+                            },
+                            "mobile": {
+                              "fontSize": "26px"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_l9juu",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "Build Beautiful Pages with Confidence",
+                        "__settings": {},
+                        "__elementType": "h2",
+                        "__level": "h2"
+                      },
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "template-text",
+                        "version": 1,
+                        "__css": {
+                          "__className": "paboutp1",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "width": "100%",
+                              "fontSize": "17px",
+                              "color": "#475569",
+                              "marginTop": "0px",
+                              "marginBottom": "20px",
+                              "lineHeight": "1.8"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_fcuol",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "This sample page demonstrates how the Lexical-based page editor works. Just like WordPress gives you a starter page when you create a new site, this template shows a typical content layout you can customize to suit your needs.",
+                        "__settings": {},
+                        "__elementType": "div"
+                      },
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "template-text",
+                        "version": 1,
+                        "__css": {
+                          "__className": "paboutp2",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "width": "100%",
+                              "fontSize": "17px",
+                              "color": "#475569",
+                              "marginTop": "0px",
+                              "marginBottom": "0px",
+                              "lineHeight": "1.8"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_dmmop7",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "Click any element in the canvas to select it. The right-hand panel lets you adjust styles, spacing, typography, and layout properties in real time.",
+                        "__settings": {},
+                        "__elementType": "div"
+                      }
+                    ],
+                    "direction": null,
+                    "format": "",
+                    "indent": 0,
+                    "type": "wrapper",
+                    "version": 1,
+                    "__css": {
+                      "__className": "paboutwrap",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "width": "100%",
+                          "marginBottom": "72px"
+                        }
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_bq1qz",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    }
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "template-text",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat1icon",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "display": "inline-flex",
+                                  "fontSize": "24px",
+                                  "marginBottom": "20px",
+                                  "color": "#0ea5e9"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_lc1qg9",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "⬡",
+                            "__settings": {},
+                            "__elementType": "span"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "heading",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat1h",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "fontSize": "18px",
+                                  "fontWeight": "700",
+                                  "color": "#0f172a",
+                                  "marginBottom": "10px",
+                                  "marginTop": "0px",
+                                  "lineHeight": "1.3",
+                                  "letterSpacing": "-0.01em",
+                                  "paddingTop": "20px",
+                                  "paddingBottom": "20px",
+                                  "paddingLeft": "20px",
+                                  "paddingRight": "20px"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_xcha7pd",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "Sections & Wrappers",
+                            "__settings": {},
+                            "__elementType": "h3",
+                            "__level": "h3"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "template-text",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat1p",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "fontSize": "14px",
+                                  "color": "#64748b",
+                                  "lineHeight": "1.7",
+                                  "marginBottom": "0px",
+                                  "marginTop": "0px"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_z77aza",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "Group content into sections and nest wrappers to build any layout structure you need.",
+                            "__settings": {},
+                            "__elementType": "div"
+                          }
+                        ],
+                        "direction": null,
+                        "format": "",
+                        "indent": 0,
+                        "type": "wrapper",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pfeatcell1",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "paddingTop": "36px",
+                              "paddingBottom": "36px",
+                              "paddingLeft": "32px",
+                              "paddingRight": "32px",
+                              "__backgroundGlobal": {
+                                "$backgroundColor": "#ffffff"
+                              },
+                              "background": ["#ffffff"],
+                              "__borderRadius": {
+                                "$type": "all",
+                                "$all": "16px"
+                              },
+                              "borderRadius": "16px",
+                              "__border": {
+                                "$type": "all",
+                                "$all": {
+                                  "$width": "1px",
+                                  "$style": "solid",
+                                  "$color": "#e2e8f0"
+                                }
+                              },
+                              "border": "1px solid #e2e8f0",
+                              "__boxShadow": [
+                                {
+                                  "position": "outset",
+                                  "offsetX": "0px",
+                                  "offsetY": "2px",
+                                  "blurRadius": "12px",
+                                  "size": "0px",
+                                  "color": "rgba(15,23,42,0.06)"
+                                }
+                              ],
+                              "boxShadow": [
+                                "0px 2px 12px 0px rgba(15,23,42,0.06)"
+                              ]
+                            }
+                          },
+                          "__stylesStates": {
+                            "hover": {
+                              "desktop": {
+                                "__boxShadow": [
+                                  {
+                                    "position": "outset",
+                                    "offsetX": "0px",
+                                    "offsetY": "8px",
+                                    "blurRadius": "32px",
+                                    "size": "0px",
+                                    "color": "rgba(15,23,42,0.12)"
+                                  }
+                                ],
+                                "boxShadow": [
+                                  "0px 8px 32px 0px rgba(15,23,42,0.12)"
+                                ]
+                              }
+                            }
+                          },
+                          "__classNameEditor": "__editor_dejyn8",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        }
+                      },
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "template-text",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat2icon",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "display": "inline-flex",
+                                  "fontSize": "24px",
+                                  "marginBottom": "20px",
+                                  "color": "#8b5cf6"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_wbf9lr",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "⊞",
+                            "__settings": {},
+                            "__elementType": "span"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "heading",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat2h",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "fontSize": "18px",
+                                  "fontWeight": "700",
+                                  "color": "#0f172a",
+                                  "marginBottom": "10px",
+                                  "marginTop": "0px",
+                                  "lineHeight": "1.3",
+                                  "letterSpacing": "-0.01em",
+                                  "paddingTop": "20px",
+                                  "paddingBottom": "20px",
+                                  "paddingLeft": "20px",
+                                  "paddingRight": "20px"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_6q083v",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "Grid Layouts",
+                            "__settings": {},
+                            "__elementType": "h3",
+                            "__level": "h3"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "template-text",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat2p",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "fontSize": "14px",
+                                  "color": "#64748b",
+                                  "lineHeight": "1.7",
+                                  "marginBottom": "0px",
+                                  "marginTop": "0px"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_z1tqa",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "Place content side-by-side with responsive CSS grid cells that adapt to tablet and mobile.",
+                            "__settings": {},
+                            "__elementType": "div"
+                          }
+                        ],
+                        "direction": null,
+                        "format": "",
+                        "indent": 0,
+                        "type": "wrapper",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pfeatcell2",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "paddingTop": "36px",
+                              "paddingBottom": "36px",
+                              "paddingLeft": "32px",
+                              "paddingRight": "32px",
+                              "__backgroundGlobal": {
+                                "$backgroundColor": "#ffffff"
+                              },
+                              "background": ["#ffffff"],
+                              "__borderRadius": {
+                                "$type": "all",
+                                "$all": "16px"
+                              },
+                              "borderRadius": "16px",
+                              "__border": {
+                                "$type": "all",
+                                "$all": {
+                                  "$width": "1px",
+                                  "$style": "solid",
+                                  "$color": "#e2e8f0"
+                                }
+                              },
+                              "border": "1px solid #e2e8f0",
+                              "__boxShadow": [
+                                {
+                                  "position": "outset",
+                                  "offsetX": "0px",
+                                  "offsetY": "2px",
+                                  "blurRadius": "12px",
+                                  "size": "0px",
+                                  "color": "rgba(15,23,42,0.06)"
+                                }
+                              ],
+                              "boxShadow": [
+                                "0px 2px 12px 0px rgba(15,23,42,0.06)"
+                              ]
+                            }
+                          },
+                          "__stylesStates": {
+                            "hover": {
+                              "desktop": {
+                                "__boxShadow": [
+                                  {
+                                    "position": "outset",
+                                    "offsetX": "0px",
+                                    "offsetY": "8px",
+                                    "blurRadius": "32px",
+                                    "size": "0px",
+                                    "color": "rgba(15,23,42,0.12)"
+                                  }
+                                ],
+                                "boxShadow": [
+                                  "0px 8px 32px 0px rgba(15,23,42,0.12)"
+                                ]
+                              }
+                            }
+                          },
+                          "__classNameEditor": "__editor_ttwy7i",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        }
+                      },
+                      {
+                        "children": [
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "template-text",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat3icon",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "display": "inline-flex",
+                                  "fontSize": "24px",
+                                  "marginBottom": "20px",
+                                  "color": "#10b981"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_vgxa98",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "◈",
+                            "__settings": {},
+                            "__elementType": "span"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "heading",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat3h",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "fontSize": "18px",
+                                  "fontWeight": "700",
+                                  "color": "#0f172a",
+                                  "marginBottom": "10px",
+                                  "marginTop": "0px",
+                                  "lineHeight": "1.3",
+                                  "letterSpacing": "-0.01em",
+                                  "paddingTop": "20px",
+                                  "paddingBottom": "20px",
+                                  "paddingLeft": "20px",
+                                  "paddingRight": "20px"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_76yke9",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "Dynamic Content",
+                            "__settings": {},
+                            "__elementType": "h3",
+                            "__level": "h3"
+                          },
+                          {
+                            "detail": 0,
+                            "format": 0,
+                            "mode": "normal",
+                            "style": "",
+                            "text": "",
+                            "type": "template-text",
+                            "version": 1,
+                            "__css": {
+                              "__className": "pfeat3p",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "fontSize": "14px",
+                                  "color": "#64748b",
+                                  "lineHeight": "1.7",
+                                  "marginBottom": "0px",
+                                  "marginTop": "0px"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_lu5kkw",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            },
+                            "__template": "Use ${...} template placeholders to pull in live WordPress post and site data at render time.",
+                            "__settings": {},
+                            "__elementType": "div"
+                          }
+                        ],
+                        "direction": null,
+                        "format": "",
+                        "indent": 0,
+                        "type": "wrapper",
+                        "version": 1,
+                        "__css": {
+                          "__className": "pfeatcell3",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "paddingTop": "36px",
+                              "paddingBottom": "36px",
+                              "paddingLeft": "32px",
+                              "paddingRight": "32px",
+                              "__backgroundGlobal": {
+                                "$backgroundColor": "#ffffff"
+                              },
+                              "background": ["#ffffff"],
+                              "__borderRadius": {
+                                "$type": "all",
+                                "$all": "16px"
+                              },
+                              "borderRadius": "16px",
+                              "__border": {
+                                "$type": "all",
+                                "$all": {
+                                  "$width": "1px",
+                                  "$style": "solid",
+                                  "$color": "#e2e8f0"
+                                }
+                              },
+                              "border": "1px solid #e2e8f0",
+                              "__boxShadow": [
+                                {
+                                  "position": "outset",
+                                  "offsetX": "0px",
+                                  "offsetY": "2px",
+                                  "blurRadius": "12px",
+                                  "size": "0px",
+                                  "color": "rgba(15,23,42,0.06)"
+                                }
+                              ],
+                              "boxShadow": [
+                                "0px 2px 12px 0px rgba(15,23,42,0.06)"
+                              ]
+                            }
+                          },
+                          "__stylesStates": {
+                            "hover": {
+                              "desktop": {
+                                "__boxShadow": [
+                                  {
+                                    "position": "outset",
+                                    "offsetX": "0px",
+                                    "offsetY": "8px",
+                                    "blurRadius": "32px",
+                                    "size": "0px",
+                                    "color": "rgba(15,23,42,0.12)"
+                                  }
+                                ],
+                                "boxShadow": [
+                                  "0px 8px 32px 0px rgba(15,23,42,0.12)"
+                                ]
+                              }
+                            }
+                          },
+                          "__classNameEditor": "__editor_ti23la",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        }
+                      }
+                    ],
+                    "direction": null,
+                    "format": "",
+                    "indent": 0,
+                    "type": "wrapper",
+                    "version": 1,
+                    "__css": {
+                      "__className": "pfeaturegrid",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "__layout": {
+                            "display": "grid",
+                            "gridTemplateColumns": "1fr 1fr 1fr",
+                            "columnGap": "28px",
+                            "rowGap": "28px"
+                          },
+                          "marginBottom": "80px"
+                        },
+                        "tablet": {
+                          "__layout": {
+                            "display": "grid",
+                            "gridTemplateColumns": "1fr 1fr"
+                          }
+                        },
+                        "mobile": {
+                          "__layout": {
+                            "display": "grid",
+                            "gridTemplateColumns": "1fr"
+                          }
+                        }
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_5jjc8n",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    }
+                  },
+                  {
+                    "children": [
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "template-text",
+                        "version": 1,
+                        "__css": {
+                          "__className": "ptipslabel",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "display": "inline-block",
+                              "fontSize": "11px",
+                              "fontWeight": "700",
+                              "letterSpacing": "0.15em",
+                              "color": "#0ea5e9",
+                              "textTransform": "uppercase",
+                              "marginBottom": "12px"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_f1zzp",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "QUICK START",
+                        "__settings": {},
+                        "__elementType": "span"
+                      },
+                      {
+                        "detail": 0,
+                        "format": 0,
+                        "mode": "normal",
+                        "style": "",
+                        "text": "",
+                        "type": "heading",
+                        "version": 1,
+                        "__css": {
+                          "__className": "ptipshd",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "fontSize": "26px",
+                              "fontWeight": "800",
+                              "color": "#0f172a",
+                              "marginBottom": "28px",
+                              "marginTop": "0px",
+                              "lineHeight": "1.2",
+                              "letterSpacing": "-0.02em",
+                              "paddingTop": "20px",
+                              "paddingBottom": "20px",
+                              "paddingLeft": "20px",
+                              "paddingRight": "20px"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_f4ye78",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__template": "Tips for Getting Started",
+                        "__settings": {},
+                        "__elementType": "h3",
+                        "__level": "h3"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "detail": 0,
+                                "format": 0,
+                                "mode": "normal",
+                                "style": "",
+                                "text": "",
+                                "type": "template-text",
+                                "version": 1,
+                                "__css": {
+                                  "__className": "ptipsli1t",
+                                  "__externalClassNames": "",
+                                  "__styles": {},
+                                  "__stylesStates": {},
+                                  "__classNameEditor": "__editor_qr1u5",
+                                  "__stylesEditor": {
+                                    "backgroundColor": "none"
+                                  }
+                                },
+                                "__attributes": {},
+                                "__dynamicAttributes": {
+                                  "__rules": []
+                                },
+                                "__template": "Click any element in the editor canvas to select it and view its style options.",
+                                "__settings": {},
+                                "__elementType": "span"
+                              }
+                            ],
+                            "direction": null,
+                            "format": "",
+                            "indent": 0,
+                            "type": "list-item",
+                            "version": 1,
+                            "__css": {
+                              "__className": "ptipsli1",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "marginBottom": "16px",
+                                  "paddingLeft": "28px",
+                                  "paddingTop": "4px",
+                                  "paddingBottom": "4px",
+                                  "fontSize": "15px",
+                                  "lineHeight": "1.65",
+                                  "color": "#334155",
+                                  "__border": {
+                                    "$type": "individual",
+                                    "$left": {
+                                      "$width": "3px",
+                                      "$style": "solid",
+                                      "$color": "#0ea5e9"
+                                    }
+                                  },
+                                  "borderLeft": "3px solid #0ea5e9"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_iwhaer",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            }
+                          },
+                          {
+                            "children": [
+                              {
+                                "detail": 0,
+                                "format": 0,
+                                "mode": "normal",
+                                "style": "",
+                                "text": "",
+                                "type": "template-text",
+                                "version": 1,
+                                "__css": {
+                                  "__className": "ptipsli2t",
+                                  "__externalClassNames": "",
+                                  "__styles": {},
+                                  "__stylesStates": {},
+                                  "__classNameEditor": "__editor_vm4cw",
+                                  "__stylesEditor": {
+                                    "backgroundColor": "none"
+                                  }
+                                },
+                                "__attributes": {},
+                                "__dynamicAttributes": {
+                                  "__rules": []
+                                },
+                                "__template": "Use the right panel to adjust typography, spacing, backgrounds, and borders.",
+                                "__settings": {},
+                                "__elementType": "span"
+                              }
+                            ],
+                            "direction": null,
+                            "format": "",
+                            "indent": 0,
+                            "type": "list-item",
+                            "version": 1,
+                            "__css": {
+                              "__className": "ptipsli2",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "marginBottom": "16px",
+                                  "paddingLeft": "28px",
+                                  "paddingTop": "4px",
+                                  "paddingBottom": "4px",
+                                  "fontSize": "15px",
+                                  "lineHeight": "1.65",
+                                  "color": "#334155",
+                                  "__border": {
+                                    "$type": "individual",
+                                    "$left": {
+                                      "$width": "3px",
+                                      "$style": "solid",
+                                      "$color": "#8b5cf6"
+                                    }
+                                  },
+                                  "borderLeft": "3px solid #8b5cf6"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_kceue8",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            }
+                          },
+                          {
+                            "children": [
+                              {
+                                "detail": 0,
+                                "format": 0,
+                                "mode": "normal",
+                                "style": "",
+                                "text": "",
+                                "type": "template-text",
+                                "version": 1,
+                                "__css": {
+                                  "__className": "ptipsli4t",
+                                  "__externalClassNames": "",
+                                  "__styles": {},
+                                  "__stylesStates": {},
+                                  "__classNameEditor": "__editor_m709dg",
+                                  "__stylesEditor": {
+                                    "backgroundColor": "none"
+                                  }
+                                },
+                                "__attributes": {},
+                                "__dynamicAttributes": {
+                                  "__rules": []
+                                },
+                                "__template": "Use ${post.post_title} and similar placeholders to display dynamic WordPress data.",
+                                "__settings": {},
+                                "__elementType": "span"
+                              }
+                            ],
+                            "direction": null,
+                            "format": "",
+                            "indent": 0,
+                            "type": "list-item",
+                            "version": 1,
+                            "__css": {
+                              "__className": "ptipsli4",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "paddingLeft": "28px",
+                                  "paddingTop": "4px",
+                                  "paddingBottom": "4px",
+                                  "fontSize": "15px",
+                                  "lineHeight": "1.65",
+                                  "color": "#334155",
+                                  "__border": {
+                                    "$type": "individual",
+                                    "$left": {
+                                      "$width": "3px",
+                                      "$style": "solid",
+                                      "$color": "#f59e0b"
+                                    }
+                                  },
+                                  "borderLeft": "3px solid #f59e0b"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_1ojwm",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            }
+                          },
+                          {
+                            "children": [
+                              {
+                                "detail": 0,
+                                "format": 0,
+                                "mode": "normal",
+                                "style": "",
+                                "text": "",
+                                "type": "template-text",
+                                "version": 1,
+                                "__css": {
+                                  "__className": "ptipsli3t",
+                                  "__externalClassNames": "",
+                                  "__styles": {},
+                                  "__stylesStates": {},
+                                  "__classNameEditor": "__editor_phg2xh",
+                                  "__stylesEditor": {
+                                    "backgroundColor": "none"
+                                  }
+                                },
+                                "__attributes": {},
+                                "__dynamicAttributes": {
+                                  "__rules": []
+                                },
+                                "__template": "Switch between desktop, tablet, and mobile views to test responsive layouts.",
+                                "__settings": {},
+                                "__elementType": "span"
+                              }
+                            ],
+                            "direction": null,
+                            "format": "",
+                            "indent": 0,
+                            "type": "list-item",
+                            "version": 1,
+                            "__css": {
+                              "__className": "ptipsli3",
+                              "__externalClassNames": "",
+                              "__styles": {
+                                "desktop": {
+                                  "marginBottom": "16px",
+                                  "paddingLeft": "28px",
+                                  "paddingTop": "4px",
+                                  "paddingBottom": "4px",
+                                  "fontSize": "15px",
+                                  "lineHeight": "1.65",
+                                  "color": "#334155",
+                                  "__border": {
+                                    "$type": "individual",
+                                    "$left": {
+                                      "$width": "3px",
+                                      "$style": "solid",
+                                      "$color": "#10b981"
+                                    }
+                                  },
+                                  "borderLeft": "3px solid #10b981"
+                                }
+                              },
+                              "__stylesStates": {},
+                              "__classNameEditor": "__editor_58mdu",
+                              "__stylesEditor": {
+                                "backgroundColor": "none"
+                              }
+                            },
+                            "__attributes": {},
+                            "__dynamicAttributes": {
+                              "__rules": []
+                            }
+                          }
+                        ],
+                        "direction": null,
+                        "format": "",
+                        "indent": 0,
+                        "type": "list",
+                        "version": 1,
+                        "__css": {
+                          "__className": "ptipslist",
+                          "__externalClassNames": "",
+                          "__styles": {
+                            "desktop": {
+                              "paddingLeft": "0px",
+                              "margin": "0px",
+                              "listStyle": "none"
+                            }
+                          },
+                          "__stylesStates": {},
+                          "__classNameEditor": "__editor_gv0i8",
+                          "__stylesEditor": {
+                            "backgroundColor": "none"
+                          }
+                        },
+                        "__attributes": {},
+                        "__dynamicAttributes": {
+                          "__rules": []
+                        },
+                        "__listType": "ul",
+                        "__withBullets": false
+                      }
+                    ],
+                    "direction": null,
+                    "format": "",
+                    "indent": 0,
+                    "type": "wrapper",
+                    "version": 1,
+                    "__css": {
+                      "__className": "ptipssect",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "paddingTop": "52px",
+                          "paddingBottom": "52px",
+                          "paddingLeft": "56px",
+                          "paddingRight": "56px",
+                          "__background": [
+                            {
+                              "$type": "linear-gradient",
+                              "degrees": 135,
+                              "values": ["#eff6ff 0%", "#f0fdf4 100%"]
+                            }
+                          ],
+                          "background": [
+                            "linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%)"
+                          ],
+                          "__borderRadius": {
+                            "$type": "all",
+                            "$all": "20px"
+                          },
+                          "borderRadius": "20px",
+                          "__border": {
+                            "$type": "all",
+                            "$all": {
+                              "$width": "1px",
+                              "$style": "solid",
+                              "$color": "#dbeafe"
+                            }
+                          },
+                          "border": "1px solid #dbeafe"
+                        },
+                        "mobile": {
+                          "paddingLeft": "24px",
+                          "paddingRight": "24px",
+                          "paddingTop": "36px",
+                          "paddingBottom": "36px"
+                        }
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_h7nlw",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {
+                      "id": "tips"
+                    },
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    }
+                  }
+                ],
+                "direction": null,
+                "format": "",
+                "indent": 0,
+                "type": "wrapper",
+                "version": 1,
+                "__css": {
+                  "__className": "pcontainer",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "maxWidth": "1040px",
+                      "marginLeft": "auto",
+                      "marginRight": "auto",
+                      "paddingTop": "88px",
+                      "paddingBottom": "88px",
+                      "paddingLeft": "32px",
+                      "paddingRight": "32px"
+                    },
+                    "tablet": {
+                      "paddingTop": "64px",
+                      "paddingBottom": "64px",
+                      "paddingLeft": "24px",
+                      "paddingRight": "24px"
+                    },
+                    "mobile": {
+                      "paddingTop": "48px",
+                      "paddingBottom": "48px",
+                      "paddingLeft": "16px",
+                      "paddingRight": "16px",
+                      "textWrap": "wrap"
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_3agi5",
+                  "__stylesEditor": {
+                    "backgroundColor": "none"
+                  }
+                },
+                "__attributes": {
+                  "id": "content"
+                },
+                "__dynamicAttributes": {
+                  "__rules": []
+                }
+              },
+              {
+                "children": [
+                  {
+                    "detail": 0,
+                    "format": 0,
+                    "mode": "normal",
+                    "style": "",
+                    "text": "",
+                    "type": "template-text",
+                    "version": 1,
+                    "__css": {
+                      "__className": "pfootersite",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "fontSize": "15px",
+                          "fontWeight": "700",
+                          "color": "#f1f5f9",
+                          "letterSpacing": "-0.01em"
+                        }
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_lqu5ie",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    },
+                    "__template": "My WordPress Site",
+                    "__settings": {},
+                    "__elementType": "span"
+                  },
+                  {
+                    "detail": 0,
+                    "format": 0,
+                    "mode": "normal",
+                    "style": "",
+                    "text": "",
+                    "type": "template-text",
+                    "version": 1,
+                    "__css": {
+                      "__className": "pfooterp",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "fontSize": "13px",
+                          "color": "#64748b",
+                          "marginTop": "0px",
+                          "marginBottom": "0px",
+                          "lineHeight": "1.6"
+                        }
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_978ytn",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    },
+                    "__template": "Proudly powered by WP-Next · Built with WP-Next Page Editor",
+                    "__settings": {},
+                    "__elementType": "div"
+                  }
+                ],
+                "direction": null,
+                "format": "",
+                "indent": 0,
+                "type": "wrapper",
+                "version": 1,
+                "__css": {
+                  "__className": "pfooter",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "paddingTop": "56px",
+                      "paddingBottom": "56px",
+                      "paddingLeft": "32px",
+                      "paddingRight": "32px",
+                      "__layout": {
+                        "display": "flex",
+                        "flexDirection": "column",
+                        "alignItems": "center",
+                        "rowGap": "12px"
+                      },
+                      "__backgroundGlobal": {
+                        "$backgroundColor": "#0f172a"
+                      },
+                      "background": ["#0f172a"],
+                      "__border": {
+                        "$type": "individual",
+                        "$top": {
+                          "$width": "1px",
+                          "$style": "solid",
+                          "$color": "#1e293b"
+                        }
+                      },
+                      "borderTop": "1px solid #1e293b"
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_b04fpo",
+                  "__stylesEditor": {
+                    "backgroundColor": "none"
+                  }
+                },
+                "__attributes": {},
+                "__dynamicAttributes": {
+                  "__rules": []
+                }
+              }
+            ],
+            "direction": null,
+            "format": "",
+            "indent": 0,
+            "type": "wrapper",
+            "version": 1,
+            "__css": {
+              "__className": "pmainwrp",
+              "__externalClassNames": "main-wrapper",
+              "__styles": {
+                "desktop": {
+                  "__font": {
+                    "$type": "google",
+                    "$slug": "inter",
+                    "fontFamily": "Inter"
+                  },
+                  "fontSize": "16px",
+                  "color": "#1e293b",
+                  "lineHeight": "1.75",
+                  "__backgroundGlobal": {
+                    "$backgroundColor": "#f8fafc"
+                  },
+                  "background": ["#f8fafc"]
+                },
+                "mobile": {
+                  "__position": {
+                    "position": "sticky",
+                    "inset": "0px auto auto"
+                  }
+                }
+              },
+              "__stylesStates": {},
+              "__classNameEditor": "__editor_o8j2k",
+              "__stylesEditor": {
+                "backgroundColor": "none"
+              }
+            },
+            "__attributes": {},
+            "__dynamicAttributes": {
+              "__rules": []
+            }
+          }
+        ],
+        "direction": null,
+        "format": "",
+        "indent": 0,
+        "type": "body",
+        "version": 1,
+        "__css": {
+          "__className": "pnezwq7",
+          "__externalClassNames": "",
+          "__styles": {
+            "desktop": {
+              "marginTop": "0px",
+              "marginBottom": "0px",
+              "marginLeft": "0px",
+              "marginRight": "0px"
+            }
+          },
+          "__stylesStates": {},
+          "__classNameEditor": "__editor_2o2myq",
+          "__stylesEditor": {
+            "backgroundColor": "none"
+          }
+        },
+        "__attributes": {},
+        "__dynamicAttributes": {
+          "__rules": []
+        }
+      }
+    ],
+    "direction": null,
+    "format": "",
+    "indent": 0,
+    "type": "root",
+    "version": 1
+  }
+}

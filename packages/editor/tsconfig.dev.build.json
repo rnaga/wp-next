@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@rnaga/wp-next-core/*": ["../core/dist/*"],
+      "@rnaga/wp-next-admin/*": ["../admin/dist/*"],
+      "@rnaga/wp-next-editor/*": ["./src/*"],
+      "@rnaga/wp-next-ui/*": ["../ui/dist/*"],
+      "@rnaga/wp-next-rte/*": ["../rte/dist/*"],
+      "_wp/*": ["./src/_wp/*"]
+    }
+  }
+}

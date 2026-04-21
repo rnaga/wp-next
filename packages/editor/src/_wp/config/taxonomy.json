@@ -1,0 +1,24 @@
+{
+  "custom-code": {
+    "objectType": "next-template",
+    "hierarchical": false,
+    "showUi": true,
+    "capabilities": {
+      "manage_terms": "manage_terms",
+      "assign_terms": "assign_terms",
+      "edit_terms": "edit_terms",
+      "delete_terms": "delete_terms"
+    }
+  },
+  "page-slug-alias": {
+    "objectType": "next-template",
+    "hierarchical": false,
+    "showUi": true,
+    "capabilities": {
+      "manage_terms": "manage_terms",
+      "assign_terms": "assign_terms",
+      "edit_terms": "edit_terms",
+      "delete_terms": "delete_terms"
+    }
+  }
+}

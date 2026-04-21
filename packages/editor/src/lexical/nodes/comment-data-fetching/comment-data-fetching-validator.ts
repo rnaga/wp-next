@@ -1,0 +1,27 @@
+import { z } from "zod";
+
+export const commentDataFetchingValidator = z.object({
+  comment_ID: z.number(),
+  comment_post_ID: z.number(),
+  comment_author: z.string(),
+  comment_author_email: z.string(),
+  comment_date: z.string(),
+  comment_date_gmt: z.string(),
+  comment_content: z.string(),
+  comment_parent: z.number(),
+  comment_approved: z.string(),
+  comment_type: z.string(),
+  post_comment_count: z.number().optional(),
+  post_title: z.string().optional(),
+  post_type: z.string().optional(),
+  post_guid: z.string().optional(),
+  post_author: z.number().optional(),
+  post_status: z.string().optional(),
+  parent_comment_author: z.string().optional(),
+  parent_user_id: z.number().optional(),
+  parent_user_display_name: z.string().optional(),
+  user_id: z.number(),
+  user_display_name: z.string().optional(),
+  children: z.array(z.unknown()).optional(),
+  count_children: z.number(),
+});

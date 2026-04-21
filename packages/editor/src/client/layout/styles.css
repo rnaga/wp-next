@@ -1,0 +1,16 @@
+.content-editable {
+    /* border: 1px solid #dedede; */
+    background-color: #fefefe;
+    /* min-height: 90dvh; */
+    width: 98%;
+    padding: 0 5px;
+
+}
+
+.ltr {
+    margin: 0;
+}
+
+body {
+    margin: 0
+}

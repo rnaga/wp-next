@@ -3,32 +3,16 @@
 # dependencies
 /.pnp
 .pnp.js
+.yarn/install-state.gz
+
+node_modules/**
+/node_modules
 
 # exclude .npmrc
-**/.npmrc
-
-/node_modules
-packages/**/node_modules
-public/**/*
-packages/**/public
-packages/**/dist
-packages/**/.next
-
-google-client-secret.json
+/.npmrc
 
 # testing
 /coverage
-**/.env.test
-
-# exclude test folder 
-/test/
-
-# exclude "editor" folder
-# /packages/editor/
-
-# exclude "docker" folder
-/docker/
-
 
 # next.js
 /.next/
@@ -36,7 +20,6 @@ google-client-secret.json
 
 # production
 /build
-/public/files
 
 # misc
 .DS_Store
@@ -57,8 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-test-docker
-
 dist/**/*
 
 wpconfig/**/*
@@ -71,13 +52,10 @@ wp.settings.ts
 _wp/**/*
 
 dist
-public/**/*
+public
 
-out/**/*
+.claude/
 
-# exclude vscode settings
 .vscode/
 
-# ignore .claude paths for now
-.claude/settings.json
-.claude/settings.local.json
+get-refresh-token.mjs
