@@ -60,7 +60,7 @@ export const CommentModal = () => {
       onClose={() => commentModal.close()}
       sx={{ zIndex: 2 }}
     >
-      <ModalContent minWidth={"50%"}>
+      <ModalContent sx={{ minWidth: "50%" }}>
         <Typography size="large" bold>
           {isReply ? "Reply" : "Edit"}
         </Typography>

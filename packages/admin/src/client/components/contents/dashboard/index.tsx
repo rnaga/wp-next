@@ -279,7 +279,7 @@ export const Dashboard = () => {
                   {dashboard?.postDrafts.map((post) => (
                     <Tr key={`drafts-${post.ID}`}>
                       <Td>
-                        <Typography display="block">
+                        <Typography sx={{ display: "block" }}>
                           <PostEditLink post={post} />{" "}
                           {formatting.date(post.post_date, {
                             format: "MMM Do YY",

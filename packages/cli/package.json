@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-cli",
-  "version": "1.1.1",
+  "version": "1.1.18",
   "description": "A command-line interface for managing WP Next projects",
   "bin": {
     "wp-next": "./index.js"
@@ -9,9 +9,10 @@
     "wp-next": "node ./dist/index.js",
     "wp-next:dev": "ts-node ./src/index.ts",
     "build": "npm run sync-templates && node ../../scripts/build-cli.mjs",
-    "sync-templates": "node ./scripts/sync-templates.mjs",
-    "release-old": "node ../../scripts/release.mjs",
-    "release": "../../scripts/release.sh"
+    "sync-templates": "npm run sync-templates:admin && npm run sync-templates:editor",
+    "sync-templates:admin": "node ./scripts/sync-templates-admin.mjs",
+    "sync-templates:editor": "node ./scripts/sync-templates-editor.mjs",
+    "release": "../../scripts/release-gh.sh"
   },
   "keywords": [
     "wordpress",
@@ -22,11 +23,18 @@
   "dependencies": {
     "@rnaga/wp-next-admin": "^1",
     "@rnaga/wp-next-core": "^1",
+    "@rnaga/wp-next-editor": "*",
     "@rnaga/wp-node": "^1",
-    "@rnaga/wp-node-cli": "^1"
+    "@rnaga/wp-node-cli": "^1",
+    "commander": "^14.0.3",
+    "dotenv": "^16.0.0",
+    "enquirer": "^2.4.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rnaga/wp-next.git"
+  },
+  "devDependencies": {
+    "tsconfig-paths": "^4.2.0"
   }
 }

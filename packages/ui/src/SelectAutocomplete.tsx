@@ -167,7 +167,7 @@ const Wrapper = (props: {
   size?: "small" | "medium";
   children: React.ReactNode;
 }) => {
-  const [item, setItem] = useState<Item>();
+  const [item, setItem] = useState<Item>({ label: "", value: "" });
   const { slotSxProps, size } = props;
 
   return (

@@ -11,49 +11,50 @@ export const DateTimePicker = (props: {
 }) => {
   const { value, onChange, size } = props;
   const { wpTheme } = useWPTheme();
+
+  const fontSize = size === "large" ? 16 : size === "medium" ? 14 : 12;
+  const height = size === "large" ? 36 : size === "medium" ? 32 : 24;
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <MuiDateTimePicker
-        value={dayjs(value)}
+        /**
+         * Pass null for empty/invalid values — dayjs(undefined) returns "now"
+         * which misleads the picker when no date has been set.
+         */
+        value={value ? dayjs(value) : null}
         onChange={(newValue) => {
           onChange && onChange(newValue?.toDate() || "");
         }}
         slotProps={{
-          textField: {
-            size: "small",
-            slotProps: {
-              input: { disableUnderline: true, sx: { fontSize: 0.1 } },
-            },
-
+          /**
+           * In MUI X v9 the textField slot was removed; use field.sx instead.
+           * Targets MuiPickersOutlinedInput-root (replaces MuiOutlinedInput-root).
+           */
+          field: {
             sx: {
-              "& .MuiInputBase-input": {
-                py: 0.5,
-                px: 1,
+              fontSize,
+              height,
+              border: `1px solid ${wpTheme.border.color}`,
+              borderRadius: 1,
+              "& .MuiPickersOutlinedInput-root": {
+                height: "100%",
+                fontSize,
+                "& fieldset": { border: "none" },
+                "&.Mui-focused fieldset": { border: "none" },
+                "&:hover fieldset": { border: "none" },
               },
-              "& .MuiOutlinedInput-root": {
-                fontSize: size === "large" ? 16 : size === "medium" ? 14 : 12,
-                height: size === "large" ? 36 : size == "medium" ? 32 : 24,
-
-                border: `1px solid ${wpTheme.border.color}`,
-                "& fieldset": {
-                  border: "none",
-                },
-                "&.Mui-focused fieldset": {
-                  border: "none",
-                },
-                "&:hover fieldset": {
-                  border: "none",
-                },
+              "& .MuiPickersSectionList-root": {
+                py: 0,
+                px: 1,
               },
               "& .MuiSvgIcon-root": {
                 fontSize: size === "large" ? 26 : size === "medium" ? 22 : 18,
               },
             },
-          },
+          } as any,
         }}
-        sx={{
-          width: "100%",
-        }}
+        sx={{ width: "100%" }}
       />
     </LocalizationProvider>
   );

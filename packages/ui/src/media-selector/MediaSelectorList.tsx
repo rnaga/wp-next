@@ -73,7 +73,7 @@ export const MediaSelectorList = () => {
           </Box>
         ) : (
           posts?.map((post) => (
-            <Grid key={post.ID} size={{ xs: 1, sm: 4, md: 3, xl: 2 }} gap={0}>
+            <Grid key={post.ID} size={{ xs: 1, sm: 4, md: 3, xl: 2 }} sx={{ gap: 0 }}>
               <Box>
                 <CardImage
                   src={post.guid}

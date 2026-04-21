@@ -10,9 +10,22 @@
       "@/*": ["./src/*"],
       "@rnaga/wp-next-core/*": ["../core/dist/*"],
       "@rnaga/wp-next-admin/*": ["../admin/dist/*"],
+      "@rnaga/wp-next-editor/*": ["../editor/dist/*"],
       "_wp/*": ["./src/_wp/*"]
     }
   },
-  "include": ["src/index.ts"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+    "compilerOptions": {
+      "paths": {
+        "@/*": ["./src/*"],
+        "@rnaga/wp-next-core/*": ["../core/src/*"],
+        "@rnaga/wp-next-admin/*": ["../admin/src/*"],
+        "@rnaga/wp-next-editor/*": ["../editor/src/*"],
+        "_wp/*": ["./src/_wp/*"]
+      }
+    }
+  },
+  "include": ["src/**/*.ts"],
   "exclude": ["dist/**/*", "node_modules", "templates/**/*"]
 }

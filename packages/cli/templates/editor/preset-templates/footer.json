@@ -1,0 +1,195 @@
+{
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "",
+                "type": "template-text",
+                "version": 1,
+                "__css": {
+                  "__className": "p902tfh",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "__font": {
+                        "$type": "google",
+                        "$slug": "inter",
+                        "fontFamily": "Inter"
+                      },
+                      "fontSize": "14px",
+                      "color": "#a7aaad",
+                      "marginTop": "0",
+                      "marginRight": "0",
+                      "marginBottom": "0",
+                      "marginLeft": "0"
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_tapz5j",
+                  "__stylesEditor": {
+                    "backgroundColor": "transparent"
+                  }
+                },
+                "__attributes": {},
+                "__dynamicAttributes": {
+                  "__rules": []
+                },
+                "__template": "© WP-Next All rights reserved.",
+                "__settings": {},
+                "__elementType": "div"
+              }
+            ],
+            "direction": null,
+            "format": "",
+            "indent": 0,
+            "type": "wrapper",
+            "version": 1,
+            "__css": {
+              "__className": "pj6tqho",
+              "__externalClassNames": "footer",
+              "__styles": {
+                "desktop": {
+                  "paddingTop": "24px",
+                  "paddingBottom": "24px",
+                  "paddingLeft": "48px",
+                  "paddingRight": "48px",
+                  "__backgroundGlobal": {
+                    "$backgroundColor": "#1d2327"
+                  },
+                  "background": ["#1d2327"],
+                  "__border": {
+                    "$type": "individual",
+                    "$top": {
+                      "$width": "3px",
+                      "$style": "solid",
+                      "$color": "#0073aa"
+                    }
+                  },
+                  "borderTop": "3px solid #0073aa",
+                  "__layout": {
+                    "display": "flex",
+                    "justifyContent": "center",
+                    "alignItems": "center"
+                  }
+                }
+              },
+              "__stylesStates": {},
+              "__classNameEditor": "__editor_9snix",
+              "__stylesEditor": {
+                "backgroundColor": "transparent"
+              }
+            },
+            "__attributes": {},
+            "__dynamicAttributes": {
+              "__rules": []
+            }
+          }
+        ],
+        "direction": null,
+        "format": "",
+        "indent": 0,
+        "type": "body",
+        "version": 1,
+        "__css": {
+          "__className": "p9yblxk",
+          "__externalClassNames": "",
+          "__styles": {
+            "desktop": {
+              "__font": {
+                "$type": "google",
+                "$slug": "inter",
+                "fontFamily": "Inter"
+              },
+              "background": ["#ffffff"],
+              "__backgroundGlobal": {
+                "$backgroundColor": "#ffffff"
+              },
+              "marginTop": "0",
+              "marginRight": "0",
+              "marginBottom": "0",
+              "marginLeft": "0",
+              "paddingTop": "0",
+              "paddingRight": "0",
+              "paddingBottom": "0",
+              "paddingLeft": "0"
+            }
+          },
+          "__stylesStates": {},
+          "__classNameEditor": "__editor_ob8ds",
+          "__stylesEditor": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "__attributes": {},
+        "__dynamicAttributes": {
+          "__rules": []
+        }
+      },
+      {
+        "type": "googlefont",
+        "version": 1,
+        "fonts": {
+          "Roboto": {
+            "fontStyle": ["normal"]
+          },
+          "Open Sans": {
+            "fontStyle": ["normal"]
+          },
+          "Inter": {
+            "fontStyle": ["normal"]
+          }
+        }
+      },
+      {
+        "type": "customfonts-data",
+        "name": "name-36",
+        "ID": 51807,
+        "query": {
+          "slugs": []
+        },
+        "allowedQueryPassthroughKeys": [],
+        "version": 1
+      },
+      {
+        "type": "cssvariables-data",
+        "name": "name-76",
+        "ID": 5940,
+        "query": {
+          "slugs": ["collections"]
+        },
+        "allowedQueryPassthroughKeys": [],
+        "version": 1
+      },
+      {
+        "type": "animation",
+        "version": 1,
+        "__presets": [],
+        "__customKeyframes": {}
+      },
+      {
+        "type": "custom-code",
+        "version": 1,
+        "__slugs": {
+          "header": [],
+          "footer": []
+        }
+      },
+      {
+        "type": "cache",
+        "version": 1
+      }
+    ],
+    "direction": null,
+    "format": "",
+    "indent": 0,
+    "type": "root",
+    "version": 1
+  }
+}

@@ -36,7 +36,7 @@ export const Thumbnail = (props: {
   return (
     <Grid container spacing={1} columns={{ xs: 2, sm: 12, md: 12, xl: 12 }}>
       {posts?.map((post) => (
-        <Grid key={post.ID} gap={0} size={{ xs: 1, sm: 4, md: 3, xl: 2 }}>
+        <Grid key={post.ID} sx={{ gap: 0 }} size={{ xs: 1, sm: 4, md: 3, xl: 2 }}>
           <CardImage
             src={post.guid}
             alt={post.post_title}

@@ -1,14 +1,99 @@
 # WP-Next
 
-WP-Next is built with [Next.js](https://nextjs.org/) and [WP-Node](https://github.com/rnaga/wp-node). It provides a modern **React-based Admin Dashboard** and utilities for building applications that interact directly with a WordPress database — **no PHP required**.
+WP-Next is built with [Next.js](https://nextjs.org/) and [WP-Node](https://github.com/rnaga/wp-node). It provides two complementary products for building WordPress-powered applications where every layer is written from scratch in TypeScript and React — **no PHP involved**.
 
-👉 **View [Full Documentation](https://rnaga.github.io/wp-next/)**
+---
+
+## 📖 [Full Documentation → rnaga.github.io/wp-next](https://rnaga.github.io/wp-next/)
+
+> For guides, concepts, and examples, the documentation site is the best starting point.
+
+---
+
+## WP-Next Editor
+
+WP-Next Editor is a visual, drag-and-drop page editor for building public-facing pages directly connected to your WordPress database. Pages are stored as structured [Lexical](https://lexical.dev/docs/intro) JSON in the WordPress database — making them version-controllable, programmatically manipulable, and AI-ready.
+
+<img width="1200" alt="WP-Next Editor canvas" src="https://rnaga.github.io/wp-next/assets/editor/canvas/canvas.png" />
+
+### Key Features
+
+- **Drag-and-drop canvas** — build pages visually with a live preview. Select, resize, nest, and animate elements directly on the canvas.
+- **Responsive design** — set per-device breakpoints (desktop, tablet, mobile) and CSS states (hover, focus, etc.). Each device gets its own `@media` query at render time.
+- **Dynamic data binding** — pull posts, users, taxonomies, and options directly from the WordPress database into any element. No custom API endpoints required.
+- **Widget system** — embed sub-templates (widgets) inside other templates for reusable headers, footers, and components. Widget variants let the same widget render different content per embedding.
+- **CSS variables** — define design tokens at the template level and reference them across all elements for consistent theming.
+- **Animations** — attach CSS keyframe animations (98 Animate.css presets) to any element, triggered by hover, click, scroll, and more.
+- **JSON editor** — edit the raw Lexical JSON directly in a built-in code editor for precise control over template structure.
+- **Save history** — create and manage template save points with preview and restore support.
+
+### Initialize the Editor
+
+```bash
+npx @rnaga/wp-next-cli -- initEditor
+```
+
+See the [Editor Installation guide](https://rnaga.github.io/wp-next/docs/editor/installation) for the full setup walkthrough.
+
+> `wp-next-editor` includes `wp-next-admin` out of the box. See [WP-Next Admin](#wp-next-admin) below for what it provides.
+
+### AI-Powered Template Authoring — Built-in Agent Skills
+
+WP-Next Editor ships with a built-in **[Agent Skill](https://agentskills.io/home)** (`/wp-next-editor-template`) that lets you build and modify templates using natural-language prompts. All templates are stored as Lexical JSON, so AI agents can read, write, and transform them directly.
+
+[Agent Skills](https://agentskills.io/home) is an open standard supported by Claude Code, OpenAI Codex, GitHub Copilot, Cursor, Gemini CLI, VS Code, and more. Install the skill once and use it with whichever coding agent you prefer.
+
+The skill supports four modes:
+
+| Mode      | What it does                                                |
+| --------- | ----------------------------------------------------------- |
+| `create`  | Scaffold a new template from a natural-language description |
+| `update`  | Modify an existing template based on a prompt               |
+| `convert` | Convert HTML/CSS into a Lexical JSON template               |
+| `help`    | Describe available nodes, styles, and patterns              |
+
+Install the skill with:
+
+```bash
+npx @rnaga/wp-next-cli -- editor agentSkills add
+```
+
+Example prompt:
+
+```
+/wp-next-editor-template create src/templates/home.json "A hero section with a full-width background image, centered headline, subtitle, and a CTA button"
+```
+
+See [Using AI](https://rnaga.github.io/wp-next/docs/editor/concepts-features/using-ai) for installation details and more examples.
+
+---
+
+## WP-Next Admin
+
+WP-Next Admin is a **React-based Admin Dashboard** — a headless CMS that serves as a modern alternative to the traditional WordPress Admin Dashboard.
 
 <a href="https://vimeo.com/1112693769?share=copy#t=0" target="_blank" rel="noopener">
-  <img width="1200" height="699" alt="dashboard-vimeo" src="https://rnaga.github.io/wp-next/images/dashboard-vimeo.png" />
+  <img width="1200" height="699" alt="WP-Next Admin dashboard demo" src="https://rnaga.github.io/wp-next/images/dashboard-vimeo.png" />
 </a>
 
-## Quick Demo
+### Key Features
+
+Out of the box, it includes:
+
+- Posts & Pages
+- Media
+- Terms (Categories, Tags)
+- Comments
+- Profile & Settings
+- Users and Roles
+- Revisions
+
+In **multisite mode**, it also supports:
+
+- Sites
+- Blogs (per-site content such as posts, media, comments)
+
+### Quick Demo
 
 Run a ready-made WP-Next example using Docker:
 
@@ -27,265 +112,33 @@ Username: wp
 Password: wp
 ```
 
-To stop and remove the running example container, use:
+To stop the container:
 
-```sh
+```bash
 docker stop wp-next-example
 ```
 
-## Admin Dashboard
-
-The main feature of WP-Next is the **Admin Dashboard**, a headless CMS that serves as an alternative to the traditional WordPress Admin Dashboard.
-
-Out of the box, it includes:
-
-- Posts & Pages
-- Media
-- Terms (Categories, Tags)
-- Comments
-- Profile & Settings
-- Users and Roles
-- Revisions
-
-In **multisite mode**, it also supports:
-
-- Sites
-- Blogs (per-site content such as posts, media, comments)
-
-### Notes
-
-Since WP-Next is entirely written in TypeScript and React, some WordPress features are **not supported**, including:
-
-- WordPress Themes and appearance settings
-- WordPress Block Editor (Gutenberg)
-- WordPress template rendering APIs
-- WordPress plugins
-
-## Core Libraries
-
-- [`@rnaga/wp-node`](https://github.com/rnaga/wp-node) — TypeScript-first WordPress database integration.
-- [`next`](https://nextjs.org/) — Next.js framework for SSR/SSG, routing, and APIs.
-- [`@mui/material`](https://mui.com/) — Material UI component library.
-- [`@tiptap/react`](https://tiptap.dev/), [`mui-tiptap`](https://github.com/sjdemartini/mui-tiptap) — TipTap rich-text editor with Material UI integration.
-
-## Installation
-
-### Prerequisites
-
-WP-Next requires a running WordPress database. If you don’t already have WordPress installed, see the Prerequisites section in the WP-Node installation guide for instructions on running it with Docker:
-
-https://rnaga.github.io/wp-node/docs/getting-started/installation#prerequisites
-
-### Initialize Project (Admin Dashboard)
-
-WP-Next provides a CLI tool to initialize the Admin Dashboard. Run the following command and follow the prompts:
+### Initialize the Admin Dashboard
 
 ```bash
 npx @rnaga/wp-next-cli -- initAdmin
 ```
 
-Example setup prompts you may see:
+See the [Admin Getting Started guide](https://rnaga.github.io/wp-next/docs/admin/getting-started) for the full setup walkthrough.
 
-```text
-✔ Enter your database hostname: · localhost
-✔ Enter your database port: · 33306
-✔ Enter your database username: · wp
-✔ Enter your database password: · **
-✔ Enter your database name: · wordpress
-✔ Is it a multi-site? · No
-✔ Enter your static assets path: · public
-✔ Enter your Admin URL: · http://localhost:3000
-✔ Enter project path (What is your project named?): · admin
-```
+### Extensibility
 
-The CLI will automatically install and configure:
+WP-Next Admin supports **custom pages** and a **hook system** (filters and actions) inspired by WordPress hooks but built for TypeScript and Node.js. Frontend hooks extend the Admin UI in the browser; backend hooks handle server-side concerns such as authentication, media uploads, and integrations.
 
-- A Next.js project (App Router enabled) for the Admin Dashboard
-- Pages and layouts required by the Admin Dashboard
-- Configuration files and the `_wp/hooks` scaffolding
+See [Hooks](https://rnaga.github.io/wp-next/docs/admin/concepts-features/hooks) and [Custom Admin Pages](https://rnaga.github.io/wp-next/docs/admin/concepts-features/custom-pages) in the documentation.
 
-### Run and Build the Admin Dashboard
+---
 
-Run in development mode:
+## Prerequisites
 
-```bash
-npm run dev
-```
+Both products require a running WordPress database. If you don't already have WordPress installed, see the [WP-Node installation guide](https://rnaga.github.io/wp-node/docs/getting-started/installation#prerequisites) for instructions on running it with Docker.
 
-Build and start for production:
-
-```bash
-npm run build
-npm run start
-```
-
-For more on production deployment, refer to the Next.js deployment guide:
-
-https://nextjs.org/docs/pages/getting-started/deploying
-
-## Hooks (Filter and Action)
-
-WP-Next uses [WP-Node](https://github.com/rnaga/wp-node) hook system which is inspired by WordPress hooks but designed for TypeScript and Node.js. The system supports both filters (which transform data) and actions (which run side effects). Because WP-Node is TypeScript-first, hooks are type-safe and can be asynchronous — they are not directly compatible with WordPress core PHP hooks.
-
-Key points:
-
-- Filters: transform and return data; they may be async.
-- Actions: perform side effects and do not return data.
-- Hooks can be registered either with TypeScript decorators (static / application lifecycle) or with the functional HookCommand utilities (runtime / dynamic).
-
-### Frontend vs Backend hooks
-
-When initialized, WP-Next generates a `_wp/hooks` directory where you can add your own hooks:
-
-```txt
-hooks/
-├── client
-│   └── index.tsx
-└── server
-    ├── admin-media.hook.ts
-    ├── index.ts
-    ├── nextauth-providers.hook.ts
-    └── notifications.hook.ts
-```
-
-#### Frontend Hooks
-
-Frontend hooks (place under `_wp/hooks/client/`) are bundled into the Admin UI and run in the browser. Use them to register UI extensions such as sidebar menus, custom admin pages, or client-side theming. Frontend hooks must contain only client-safe code (no direct access to the filesystem, process env secrets, or server-only Node APIs).
-
-#### Backend Hooks
-
-Backend hooks (place under `_wp/hooks/server/`) run inside the server-side application/context. Use them for server responsibilities like media upload handling, authentication providers, email sending, or other integrations that require Node APIs, credentials, or synchronous server-side state.
-
-For more details about hooks, how they work, and usage examples, see the WP-Node hooks documentation:
-
-https://rnaga.github.io/wp-node/docs/concepts-features/hooks
-
-## Custom Admin Pages
-
-You can extend the Admin Dashboard by registering **custom pages**:
-
-Below are minimal, illustrative examples (a page component and a frontend hook) you can copy into `_wp/hooks/client/` and adapt to your project.
-
-1. **Create a React component** (`CustomPage.tsx`) to render your page.
-2. **Write a frontend hook** (`menu-custom.hook.tsx`) to add a sidebar menu and route.
-3. **Register the hook** in `_wp/hooks/client/index.tsx`.
-
-Example menu item route:  
-`http://localhost:3000/admin/blog/custom`
-
-This allows you to build fully custom interfaces inside the Admin while reusing the WP-Next shell.
-
-Example code (illustrative — example usage)
-
-These snippets show one way to implement `CustomPage.tsx` and `menu-custom.hook.tsx`. Adapt imports, types, and `capabilities` to your project; they are examples, not production-ready code.
-
-CustomPage.tsx
-
-```tsx
-import React from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-
-export const CustomPage = () => {
-  return (
-    <Box sx={{ p: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        Custom Page
-      </Typography>
-
-      <Typography paragraph>
-        This is a simple custom admin page. Put your React UI here — forms,
-        lists, editor components, etc.
-      </Typography>
-
-      <ul>
-        <li>Example item 1</li>
-        <li>Example item 2</li>
-      </ul>
-    </Box>
-  );
-};
-```
-
-menu-custom.hook.tsx
-
-```tsx
-"use client";
-
-import { filter as clientFilter } from "@rnaga/wp-next-core/decorators";
-import { hook } from "@rnaga/wp-node/decorators/hooks";
-import CircleIcon from "@mui/icons-material/Circle";
-import { CustomPage } from "./CustomPage";
-
-@hook("next_admin_custom_menu")
-export class MenuCustomHook {
-  @clientFilter("next_admin_menu")
-  hookFilter(adminMenus: any[] = [], segment?: string) {
-    // Only show in blog/dashboard segments
-    if (!["blog", "dashboard"].includes(segment || "")) {
-      return adminMenus;
-    }
-
-    const blogMenu = [
-      {
-        icon: <CircleIcon />,
-        displayOnSidebar: true,
-        component: <CustomPage />,
-        capabilities: ["read"], // control access
-        label: "Custom Page",
-        // final route: /admin/blog/custom
-        path: `/${"blog"}/custom`,
-      },
-    ];
-
-    return [...adminMenus, ...blogMenu];
-  }
-}
-```
-
-index.tsx (register hooks)
-
-```ts
-import { getDefaultAdminHooks } from "@rnaga/wp-next-admin/client/utils";
-import { MenuCustomHook } from "./menu-custom.hook";
-
-// include defaults first, then your custom hook
-export const hooks = [...getDefaultAdminHooks(), MenuCustomHook];
-```
-
-Summary and quick how-to
-
-- Prerequisite: WP-Next Admin initialized (project creates `_wp/hooks/` on first run).
-
-- Key files (place under `_wp/hooks/client/`):
-
-  - `CustomPage.tsx` — minimal React page component that renders when the route is visited.
-  - `menu-custom.hook.tsx` — frontend hook that adds a sidebar menu entry and maps a path (e.g. `/admin/blog/custom`) to your component. Use the `@hook(...)` class decorator and a client filter such as `@clientFilter('next_admin_menu')` to contribute menu items.
-  - `index.tsx` — export the frontend hooks array. Include defaults first, then your custom hook: `export const hooks = [...getDefaultAdminHooks(), MenuCustomHook];`
-
-- Important notes:
-
-  - Admin routes are segmented (e.g. `dashboard`, `blog`). Hooks often check/normalize the current segment so the final URL becomes something like `/admin/blog/custom`.
-  - Use `capabilities` on menu items (for example `['read']` or `['edit_posts']`) to restrict access.
-  - Frontend hooks run in the browser bundle — avoid Node-only APIs, filesystem access, or secrets in client hooks.
-
-- Quick steps:
-
-  1. Create `_wp/hooks/client/CustomPage.tsx` with your React UI.
-  2. Add `_wp/hooks/client/menu-custom.hook.tsx` to register the menu item and route (set `component`, `path`, and `capabilities`).
-  3. Add your hook to `_wp/hooks/client/index.tsx` so the Admin shell loads it.
-  4. Run in dev or build for production.
-
-- Run:
-
-```bash
-npm run dev
-# or for production
-npm run build
-npm run start
-```
-
-Example menu route: `http://localhost:3000/admin/blog/custom`
+---
 
 ## License
 

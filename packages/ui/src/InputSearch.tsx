@@ -17,12 +17,14 @@ export const InputSearch = (props: {
 
   const handleClear = () => {
     updateRouter({ search: "" });
-    ref.current.value = "";
+    if (ref.current) {
+      ref.current.value = "";
+    }
   };
 
   const handleChange = (
     value: string,
-    e: React.ChangeEvent<HTMLInputElement>
+    e?: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (props.onChange) {
       props.onChange(value, e);

@@ -57,17 +57,17 @@ export const Create = (props: {
           minWidth: 400,
         }}
       >
-        <Typography bold fontSize={18} mb={2}>
+        <Typography bold fontSize={18} sx={{ mb: 2 }}>
           Create New Password
         </Typography>
         {response?.error && (
-          <Typography color="error" mb={2}>
+          <Typography color="error" sx={{ mb: 2 }}>
             {response.error}
           </Typography>
         )}
         {response?.success && response.data && (
           <>
-            <Typography mb={2} size="medium">
+            <Typography sx={{ mb: 2 }} size="medium">
               Please copy your new application password.
             </Typography>
             <Typography

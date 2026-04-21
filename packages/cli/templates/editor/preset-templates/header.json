@@ -1,0 +1,476 @@
+{
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "detail": 0,
+                    "format": 0,
+                    "mode": "normal",
+                    "style": "",
+                    "text": "",
+                    "type": "template-text",
+                    "version": 1,
+                    "__css": {
+                      "__className": "pg7g0z9",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "__font": {
+                            "$type": "google",
+                            "$slug": "inter",
+                            "fontFamily": "Inter"
+                          },
+                          "fontSize": "22px",
+                          "fontWeight": "700",
+                          "color": "#1d2327",
+                          "letterSpacing": "-0.5px"
+                        },
+                        "mobile": {
+                          "color": "#1d2327",
+                          "fontSize": "16px"
+                        }
+                      },
+                      "__stylesStates": {},
+                      "__classNameEditor": "__editor_9xdt4u",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": [
+                        {
+                          "conditionOperator": "all",
+                          "conditions": [
+                            {
+                              "type": "data-fetching",
+                              "key": "${%variant.hide-title}",
+                              "operator": "is_true",
+                              "value": ""
+                            }
+                          ],
+                          "settings": {
+                            "display": false,
+                            "customAttributes": {}
+                          }
+                        }
+                      ]
+                    },
+                    "__template": "${%variant.title}",
+                    "__settings": {},
+                    "__elementType": "span"
+                  }
+                ],
+                "direction": null,
+                "format": "",
+                "indent": 0,
+                "type": "wrapper",
+                "version": 1,
+                "__css": {
+                  "__className": "phdr_brand",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "__layout": {
+                        "display": "flex",
+                        "alignItems": "center"
+                      }
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_brand1",
+                  "__stylesEditor": {
+                    "backgroundColor": "none"
+                  }
+                },
+                "__attributes": {},
+                "__dynamicAttributes": {
+                  "__rules": []
+                }
+              },
+              {
+                "children": [
+                  {
+                    "detail": 0,
+                    "format": 0,
+                    "mode": "normal",
+                    "style": "",
+                    "text": "",
+                    "type": "button-link",
+                    "version": 1,
+                    "__css": {
+                      "__className": "phdr_nav1",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "__font": {
+                            "$type": "google",
+                            "$slug": "inter",
+                            "fontFamily": "Inter"
+                          },
+                          "fontSize": "14px",
+                          "fontWeight": "500",
+                          "color": "#3c434a",
+                          "backgroundColor": "transparent",
+                          "paddingTop": "8px",
+                          "paddingBottom": "8px",
+                          "paddingLeft": "4px",
+                          "paddingRight": "4px",
+                          "__border": {
+                            "$type": "all",
+                            "$all": {
+                              "$width": "0",
+                              "$style": "solid",
+                              "$color": "#000000"
+                            }
+                          },
+                          "border": "none",
+                          "cursor": "pointer"
+                        }
+                      },
+                      "__stylesStates": {
+                        "hover": {
+                          "desktop": {
+                            "color": "#0073aa"
+                          }
+                        }
+                      },
+                      "__classNameEditor": "__editor_nav1",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    },
+                    "__template": "",
+                    "__settings": {},
+                    "__elementType": "div",
+                    "__href": "/",
+                    "__target": "_self",
+                    "__label": "Home"
+                  },
+                  {
+                    "detail": 0,
+                    "format": 0,
+                    "mode": "normal",
+                    "style": "",
+                    "text": "",
+                    "type": "button-link",
+                    "version": 1,
+                    "__css": {
+                      "__className": "phdr_nav2",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "__font": {
+                            "$type": "google",
+                            "$slug": "inter",
+                            "fontFamily": "Inter"
+                          },
+                          "fontSize": "14px",
+                          "fontWeight": "500",
+                          "color": "#3c434a",
+                          "backgroundColor": "transparent",
+                          "paddingTop": "8px",
+                          "paddingBottom": "8px",
+                          "paddingLeft": "4px",
+                          "paddingRight": "4px",
+                          "__border": {
+                            "$type": "all",
+                            "$all": {
+                              "$width": "0",
+                              "$style": "solid",
+                              "$color": "#000000"
+                            }
+                          },
+                          "border": "none",
+                          "cursor": "pointer"
+                        }
+                      },
+                      "__stylesStates": {
+                        "hover": {
+                          "desktop": {
+                            "color": "#0073aa"
+                          }
+                        }
+                      },
+                      "__classNameEditor": "__editor_nav2",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    },
+                    "__template": "",
+                    "__settings": {},
+                    "__elementType": "div",
+                    "__href": "/posts",
+                    "__target": "_self",
+                    "__label": "Posts"
+                  },
+                  {
+                    "detail": 0,
+                    "format": 0,
+                    "mode": "normal",
+                    "style": "",
+                    "text": "",
+                    "type": "button-link",
+                    "version": 1,
+                    "__css": {
+                      "__className": "phdr_nav3",
+                      "__externalClassNames": "",
+                      "__styles": {
+                        "desktop": {
+                          "__font": {
+                            "$type": "google",
+                            "$slug": "inter",
+                            "fontFamily": "Inter"
+                          },
+                          "fontSize": "14px",
+                          "fontWeight": "500",
+                          "color": "#3c434a",
+                          "backgroundColor": "transparent",
+                          "paddingTop": "8px",
+                          "paddingBottom": "8px",
+                          "paddingLeft": "4px",
+                          "paddingRight": "4px",
+                          "__border": {
+                            "$type": "all",
+                            "$all": {
+                              "$width": "0",
+                              "$style": "solid",
+                              "$color": "#000000"
+                            }
+                          },
+                          "border": "none",
+                          "cursor": "pointer"
+                        }
+                      },
+                      "__stylesStates": {
+                        "hover": {
+                          "desktop": {
+                            "color": "#0073aa"
+                          }
+                        }
+                      },
+                      "__classNameEditor": "__editor_nav3",
+                      "__stylesEditor": {
+                        "backgroundColor": "none"
+                      }
+                    },
+                    "__attributes": {},
+                    "__dynamicAttributes": {
+                      "__rules": []
+                    },
+                    "__template": "",
+                    "__settings": {},
+                    "__elementType": "div",
+                    "__href": "/about",
+                    "__target": "_self",
+                    "__label": "About"
+                  }
+                ],
+                "direction": null,
+                "format": "",
+                "indent": 0,
+                "type": "wrapper",
+                "version": 1,
+                "__css": {
+                  "__className": "phdr_nav",
+                  "__externalClassNames": "",
+                  "__styles": {
+                    "desktop": {
+                      "__layout": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "columnGap": "28px"
+                      }
+                    },
+                    "mobile": {
+                      "__layout": {
+                        "display": "flex",
+                        "alignItems": "center",
+                        "columnGap": "28px"
+                      }
+                    }
+                  },
+                  "__stylesStates": {},
+                  "__classNameEditor": "__editor_nav",
+                  "__stylesEditor": {
+                    "backgroundColor": "none"
+                  }
+                },
+                "__attributes": {},
+                "__dynamicAttributes": {
+                  "__rules": []
+                }
+              }
+            ],
+            "direction": null,
+            "format": "",
+            "indent": 0,
+            "type": "wrapper",
+            "version": 1,
+            "__css": {
+              "__className": "pdvhgrf",
+              "__externalClassNames": "header",
+              "__styles": {
+                "desktop": {
+                  "paddingTop": "20px",
+                  "paddingBottom": "20px",
+                  "paddingLeft": "20px",
+                  "paddingRight": "20px",
+                  "__backgroundGlobal": {
+                    "$backgroundColor": "#ffffff"
+                  },
+                  "background": ["#ffffff"],
+                  "__border": {
+                    "$type": "individual",
+                    "$bottom": {
+                      "$width": "3px",
+                      "$style": "solid",
+                      "$color": "#0073aa"
+                    }
+                  },
+                  "borderBottom": "3px solid #0073aa",
+                  "__layout": {
+                    "display": "flex",
+                    "justifyContent": "space-between"
+                  }
+                },
+                "mobile": {
+                  "paddingBottom": "10px",
+                  "height": "30px",
+                  "__layout": {
+                    "justifyContent": "space-between",
+                    "alignItems": "center",
+                    "gridTemplateColumns": "1fr",
+                    "gridTemplateRows": "auto",
+                    "gridAutoFlow": "column",
+                    "rowGap": "0px",
+                    "columnGap": "0px",
+                    "flexDirection": "row",
+                    "display": "flex"
+                  },
+                  "paddingTop": "10px",
+                  "paddingLeft": "10px",
+                  "paddingRight": "10px",
+                  "marginTop": "0px"
+                }
+              },
+              "__stylesStates": {},
+              "__classNameEditor": "__editor_d3jak",
+              "__stylesEditor": {
+                "backgroundColor": "none"
+              }
+            },
+            "__attributes": {},
+            "__dynamicAttributes": {
+              "__rules": []
+            }
+          }
+        ],
+        "direction": null,
+        "format": "",
+        "indent": 0,
+        "type": "body",
+        "version": 1,
+        "__css": {
+          "__className": "p9yblxk",
+          "__externalClassNames": "",
+          "__styles": {
+            "desktop": {
+              "__font": {
+                "$type": "google",
+                "$slug": "inter",
+                "fontFamily": "Inter"
+              },
+              "background": ["#ffffff"],
+              "__backgroundGlobal": {
+                "$backgroundColor": "#ffffff"
+              },
+              "margin": "0",
+              "padding": "0"
+            }
+          },
+          "__stylesStates": {},
+          "__classNameEditor": "__editor_ob8ds",
+          "__stylesEditor": {
+            "backgroundColor": "none"
+          }
+        },
+        "__attributes": {},
+        "__dynamicAttributes": {
+          "__rules": []
+        }
+      },
+      {
+        "type": "googlefont",
+        "version": 1,
+        "fonts": {
+          "Roboto": {
+            "fontStyle": ["normal"]
+          },
+          "Open Sans": {
+            "fontStyle": ["normal"]
+          },
+          "Inter": {
+            "fontStyle": ["normal"]
+          }
+        }
+      },
+      {
+        "type": "customfonts-data",
+        "name": "name-36",
+        "ID": 51807,
+        "query": {
+          "slugs": []
+        },
+        "allowedQueryPassthroughKeys": [],
+        "version": 1
+      },
+      {
+        "type": "cssvariables-data",
+        "name": "name-76",
+        "ID": 5940,
+        "query": {
+          "slugs": ["collections"]
+        },
+        "allowedQueryPassthroughKeys": [],
+        "version": 1
+      },
+      {
+        "type": "animation",
+        "version": 1,
+        "__presets": [],
+        "__customKeyframes": {}
+      },
+      {
+        "type": "custom-code",
+        "version": 1,
+        "__slugs": {
+          "header": [],
+          "footer": []
+        }
+      },
+      {
+        "type": "cache",
+        "version": 1
+      }
+    ],
+    "direction": null,
+    "format": "",
+    "indent": 0,
+    "type": "root",
+    "version": 1
+  }
+}

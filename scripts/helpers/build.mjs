@@ -1,7 +1,7 @@
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
 import fs from "fs";
 import path from "path";
-import { copyFiles } from "./copy-files.mjs";
+import { mergeFiles } from "./copy-files.mjs";
 
 export const build = ({
   exclude = [],
@@ -12,6 +12,24 @@ export const build = ({
 }) => {
   try {
     const baseDir = path.resolve(process.cwd(), ".");
+
+    // Resolve the TypeScript CLI from the current package first, then fall back
+    // to the monorepo root. This keeps builds consistent even when PATH does not
+    // include the workspace-local `tsc` binary.
+    const localTsc = path.join(baseDir, "node_modules", ".bin", "tsc");
+    const rootTsc = path.resolve(
+      baseDir,
+      "..",
+      "..",
+      "node_modules",
+      ".bin",
+      "tsc"
+    );
+    const tscBin = fs.existsSync(localTsc)
+      ? localTsc
+      : fs.existsSync(rootTsc)
+        ? rootTsc
+        : "tsc";
 
     outDir = path.resolve(baseDir, outDir);
     srcDir = path.resolve(baseDir, srcDir);
@@ -25,11 +43,15 @@ export const build = ({
       fs.rmSync(outDir, { recursive: true, force: true });
     }
 
-    console.log(`Building project... tsc --project ${tsConfigFile}`);
-    execSync(`tsc --project ${tsConfigFile}`);
+    console.log(
+      `Building project... ${tscBin} --project ${tsConfigFile} --noEmitOnError`
+    );
+    execFileSync(tscBin, ["--project", tsConfigFile, "--noEmitOnError"], {
+      stdio: "inherit",
+    });
 
     console.log("Copying .d.ts, .css and other files...");
-    copyFiles(srcDir, outDir, [".d.ts", ".css", ...copyFileExtensions]);
+    mergeFiles(srcDir, outDir, [".d.ts", ".css", ...copyFileExtensions]);
 
     console.log("Copying package.json to outDir...");
     fs.copyFileSync(
@@ -50,5 +72,6 @@ export const build = ({
   } catch (error) {
     console.error("An error occurred during the build process.");
     console.error(String(error));
+    throw error;
   }
 };

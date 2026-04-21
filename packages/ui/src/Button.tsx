@@ -29,7 +29,7 @@ export const Button = (
   return (
     <MuiButton
       {...rest}
-      component={component}
+      {...(component !== undefined ? ({ component } as any) : {})}
       variant="contained"
       size="small"
       disableElevation

@@ -66,17 +66,21 @@ export const SelectWPTerm = <T extends FreeSolo = false>(props: {
     setTerms(response.data);
   };
 
-  const areTermsEqual = (a: Value, b: Value) => {
+  const areTermsEqual = (a: Value, b: Value | string) => {
+    if (typeof b === "string") {
+      return false;
+    }
     return a.term_id === b.term_id;
   };
 
-  const getTermKey = (term: Value) => `${Math.random()}-${term.term_id}`;
+  const getTermKey = (term: Value | string) =>
+    typeof term === "string" ? term : `${Math.random()}-${term.term_id}`;
 
   if (!terms || (defaultValue && !currentTerm)) {
     return <Typography>Loading..</Typography>;
   }
 
-  let value: Value = currentTerm;
+  let value: Value = currentTerm as Value;
   if (!currentTerm) {
     value = {
       term_id: 0,
@@ -112,7 +116,7 @@ export const SelectWPTerm = <T extends FreeSolo = false>(props: {
             handleSearch(value);
           }
         }}
-        getOptionKey={getTermKey}
+        getOptionKey={getTermKey as any}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;
@@ -121,7 +125,7 @@ export const SelectWPTerm = <T extends FreeSolo = false>(props: {
           return typeof option !== "string" ? option.name : "";
         }}
         // getOptionLabel={(option) => option.name}
-        isOptionEqualToValue={areTermsEqual}
+        isOptionEqualToValue={areTermsEqual as any}
         options={[...terms]}
         renderInput={(params) => (
           <SelectAutocompleteTextField

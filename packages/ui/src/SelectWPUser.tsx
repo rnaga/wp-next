@@ -101,17 +101,21 @@ export const SelectWPUser = <T extends FreeSolo = false>(props: {
     setUsers(response.data);
   };
 
-  const arePostsEqual = (a: Value<T>, b: Value<T>) => {
+  const arePostsEqual = (a: Value<T>, b: Value<T> | string) => {
+    if (typeof b === "string") {
+      return false;
+    }
     return a.ID === b.ID;
   };
 
-  const getUserKey = (user: Value<T>) => `${Math.random()}-${user.ID}`;
+  const getUserKey = (user: Value<T> | string) =>
+    typeof user === "string" ? user : `${Math.random()}-${user.ID}`;
 
   if (!users || (defaultValue && !currentUser)) {
     return <Typography>Loading..</Typography>;
   }
 
-  let value: Value<T> = currentUser;
+  let value: Value<T> = currentUser as Value<T>;
 
   return (
     <SelectAutocomplete.Wrapper size={size} slotSxProps={slotSxProps}>
@@ -140,7 +144,7 @@ export const SelectWPUser = <T extends FreeSolo = false>(props: {
             handleSearch(value);
           }
         }}
-        getOptionKey={getUserKey}
+        getOptionKey={getUserKey as any}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;
@@ -149,7 +153,7 @@ export const SelectWPUser = <T extends FreeSolo = false>(props: {
           return typeof option !== "string" ? option.user_nicename : "";
         }}
         // getOptionLabel={(option) => option.post_title}
-        isOptionEqualToValue={arePostsEqual}
+        isOptionEqualToValue={arePostsEqual as any}
         options={[...users]}
         renderInput={(params) => (
           <SelectAutocompleteTextField

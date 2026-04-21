@@ -35,8 +35,8 @@ export const MediaSelectorModal = () => {
   return (
     <Modal open={mediaSelector.isOpen} onClose={handleClose}>
       <ModalContent
-        minWidth="95%"
         sx={{
+          minWidth: "95%",
           minHeight: "90%",
           maxHeight: "90%",
           overflowY: "auto",

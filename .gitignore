@@ -5,7 +5,7 @@
 .pnp.js
 
 # exclude .npmrc
-/.npmrc
+**/.npmrc
 
 /node_modules
 packages/**/node_modules
@@ -79,4 +79,5 @@ out/**/*
 .vscode/
 
 # ignore .claude paths for now
-.claude/
+.claude/settings.json
+.claude/settings.local.json

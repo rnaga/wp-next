@@ -28,7 +28,7 @@ export const Reply = (props: {
   }
 
   const handleExpandedItemsChange = (
-    event: React.SyntheticEvent,
+    event: React.SyntheticEvent | null,
     itemIds: string[]
   ) => {
     setExpandedItems(itemIds);

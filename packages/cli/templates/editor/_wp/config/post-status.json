@@ -1,0 +1,7 @@
+{
+  "custom": {
+    "public": true,
+    "private": false,
+    "internal": true
+  }
+}

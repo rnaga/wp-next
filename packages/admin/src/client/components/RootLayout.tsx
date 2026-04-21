@@ -1,4 +1,7 @@
 "use client";
+
+import "@rnaga/wp-next-ui/font/import-fonts";
+
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 

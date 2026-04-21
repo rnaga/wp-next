@@ -90,17 +90,21 @@ export const SelectWPPost = <T extends FreeSolo = false>(props: {
     setPosts(currentPost ? [...response.data, currentPost] : response.data);
   };
 
-  const arePostsEqual = (a: Value<T>, b: Value<T>) => {
+  const arePostsEqual = (a: Value<T>, b: Value<T> | string) => {
+    if (typeof b === "string") {
+      return false;
+    }
     return a.ID === b.ID;
   };
 
-  const getPostKey = (post: Value<T>) => `${Math.random()}-${post.ID}`;
+  const getPostKey = (post: Value<T> | string) =>
+    typeof post === "string" ? post : `${Math.random()}-${post.ID}`;
 
   if (!posts || (defaultValue && !currentPost)) {
     return <Typography>Loading..</Typography>;
   }
 
-  let value: Value<T> = currentPost;
+  let value: Value<T> = currentPost as Value<T>;
   if (freeSolo && !currentPost) {
     value = {
       ID: 0,
@@ -113,7 +117,7 @@ export const SelectWPPost = <T extends FreeSolo = false>(props: {
       <Autocomplete
         key={`post-${defaultValue ?? 0}`}
         size="small"
-        freeSolo={freeSolo}
+        freeSolo={freeSolo as T}
         disableClearable
         value={value as AutocompleteValue<Value<T>, T, true, false | T>}
         onChange={(e, v) => {
@@ -135,7 +139,7 @@ export const SelectWPPost = <T extends FreeSolo = false>(props: {
             handleSearch(value);
           }
         }}
-        getOptionKey={getPostKey}
+        getOptionKey={getPostKey as any}
         getOptionLabel={(option) => {
           if (freeSolo && typeof option === "string") {
             return option;
@@ -144,7 +148,7 @@ export const SelectWPPost = <T extends FreeSolo = false>(props: {
           return typeof option !== "string" ? option.post_title : "";
         }}
         // getOptionLabel={(option) => option.post_title}
-        isOptionEqualToValue={arePostsEqual}
+        isOptionEqualToValue={arePostsEqual as any}
         options={[...posts]}
         renderInput={(params) => (
           <SelectAutocompleteTextField

@@ -1,12 +1,12 @@
 {
   "name": "@rnaga/wp-next-rte",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Rich Text Editor components for WP Next",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
     "build:tinymce": "node ./tinymce.build.js",
     "release-old": "node ../../scripts/release.mjs",
-    "release": "../../scripts/release.sh"
+    "release": "../../scripts/release-gh.sh"
   },
   "keywords": [
     "rte",
@@ -18,7 +18,7 @@
   "author": "Ryohei Nagatsuka",
   "license": "MIT",
   "dependencies": {
-    "@mui/material": "^7",
+    "@mui/material": "^9",
     "@rnaga/wp-next-core": "^1.0",
     "@rnaga/wp-next-ui": "^1.0",
     "@tinymce/tinymce-react": "^6",

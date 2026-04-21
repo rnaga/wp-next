@@ -317,7 +317,7 @@ export const SortableList = <T extends any = string>(props: {
       index,
       value: item.value,
       label: item.label,
-      ref: null,
+      ref: undefined,
     }));
     setItems(initialItems);
   }, [props.enum]);
@@ -370,7 +370,7 @@ export const SortableList = <T extends any = string>(props: {
         <ListBase
           items={items}
           size={size}
-          sx={{ ...sx, ...props.sx }}
+          sx={{ ...sx, ...props.sx } as SxProps}
           displayType={displayType}
           renderItem={(item) =>
             renderItem ? renderItem(item) : <>{item.label}</>

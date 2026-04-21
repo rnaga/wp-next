@@ -1,10 +1,10 @@
 {
   "name": "@rnaga/wp-next-ui",
-  "version": "1.1.10",
+  "version": "1.1.12",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
     "release-old": "node ../../scripts/release.mjs",
-    "release": "../../scripts/release.sh"
+    "release": "../../scripts/release-gh.sh"
   },
   "keywords": [
     "ui",
@@ -17,9 +17,10 @@
   "license": "MIT",
   "description": "User Interface components for WP Next",
   "dependencies": {
-    "@mui/icons-material": "^7.3.6",
-    "@mui/material": "^7",
-    "@mui/x-date-pickers": "^7.29.4",
+    "@fontsource/roboto": "^5.2.10",
+    "@mui/icons-material": "^9",
+    "@mui/material": "^9",
+    "@mui/x-date-pickers": "^9",
     "@rnaga/wp-next-core": "^1"
   },
   "devDependencies": {

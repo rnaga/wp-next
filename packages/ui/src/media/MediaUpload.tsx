@@ -98,7 +98,7 @@ export const MediaUpload = (
           </IconButton>
         </Box>
       )}
-      <Box textAlign="center" sx={{ display: "grid", rowGap: 1 }}>
+      <Box sx={{ textAlign: "center", display: "grid", rowGap: 1 }}>
         {loading ? (
           <>
             <Typography>Uploading...</Typography>
