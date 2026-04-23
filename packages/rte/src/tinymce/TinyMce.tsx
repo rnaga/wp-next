@@ -5,6 +5,7 @@ import { Editor as TinyMCEEditor } from "tinymce";
 
 import { GlobalStyles, useColorScheme } from "@mui/material";
 import { useWP } from "@rnaga/wp-next-core/client/wp";
+import type * as wpCoreTypes from "@rnaga/wp-next-core/types";
 import { useMediaSelector } from "@rnaga/wp-next-ui/hooks/use-media-selector";
 import { Editor } from "@tinymce/tinymce-react";
 
@@ -123,7 +124,7 @@ export const TinyMce = (
               text: "Media Library",
               tooltip: "Insert Attachment",
               onAction: () => {
-                mediaSelector.open((post) => {
+                mediaSelector.open((post: wpCoreTypes.actions.Posts[number]) => {
                   editor.insertContent(`<img src="${post.guid}" />`);
                 });
               },

@@ -1,12 +1,12 @@
 {
   "name": "@rnaga/wp-next-rte",
-  "version": "1.1.2",
+  "version": "1.2.1",
   "description": "Rich Text Editor components for WP Next",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
     "build:tinymce": "node ./tinymce.build.js",
     "release-old": "node ../../scripts/release.mjs",
-    "release": "../../scripts/release-gh.sh"
+    "release": "../../scripts/release.sh"
   },
   "keywords": [
     "rte",
