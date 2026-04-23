@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-cli",
-  "version": "1.1.18",
+  "version": "1.1.20",
   "description": "A command-line interface for managing WP Next projects",
   "bin": {
     "wp-next": "./index.js"

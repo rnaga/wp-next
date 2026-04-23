@@ -14,7 +14,9 @@ WP-Next is built with [Next.js](https://nextjs.org/) and [WP-Node](https://githu
 
 WP-Next Editor is a visual, drag-and-drop page editor for building public-facing pages directly connected to your WordPress database. Pages are stored as structured [Lexical](https://lexical.dev/docs/intro) JSON in the WordPress database — making them version-controllable, programmatically manipulable, and AI-ready.
 
-<img width="1200" alt="WP-Next Editor canvas" src="https://rnaga.github.io/wp-next/assets/editor/canvas/canvas.png" />
+<a href="https://vimeo.com/1185738064?share=copy#t=0" target="_blank" rel="noopener">
+  <img width="1200" height="699" alt="WP-Next Editor canvas demo" src="https://rnaga.github.io/wp-next/assets/editor/canvas/canvas.png" />
+</a>
 
 ### Key Features
 
@@ -26,6 +28,33 @@ WP-Next Editor is a visual, drag-and-drop page editor for building public-facing
 - **Animations** — attach CSS keyframe animations (98 Animate.css presets) to any element, triggered by hover, click, scroll, and more.
 - **JSON editor** — edit the raw Lexical JSON directly in a built-in code editor for precise control over template structure.
 - **Save history** — create and manage template save points with preview and restore support.
+
+### Quick Demo
+
+Run a ready-made WP-Next Editor example using Docker:
+
+```bash
+docker run --rm --init -it --name wp-next-editor-example -p 3000:3000 \
+  -v wp-next-editor_public:/app/editor/public \
+  -v wp-next-editor_db:/var/lib/mysql \
+  rnagat/wp-next-editor-example:latest
+```
+
+Log in with:
+
+```text
+Username: wp
+Password: wp
+```
+
+- Editor: [http://localhost:3000/admin/1/editor](http://localhost:3000/admin/1/editor)
+- Admin Dashboard: [http://localhost:3000/admin](http://localhost:3000/admin)
+
+To stop the container:
+
+```bash
+docker stop wp-next-editor-example
+```
 
 ### Initialize the Editor
 
