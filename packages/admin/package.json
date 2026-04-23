@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-admin",
-  "version": "1.1.5",
+  "version": "1.2.1",
   "license": "MIT",
   "description": "Admin interface for WP Next",
   "author": "Ryohei Nagatsuka",
@@ -17,7 +17,7 @@
     "lint": "next lint",
     "build": "node ../../scripts/build-admin.mjs",
     "release-old": "node ../../scripts/release.mjs",
-    "release": "../../scripts/release-gh.sh",
+    "release": "../../scripts/release.sh",
     "telemery:disable": "npx next telemetry disable #https://nextjs.org/telemetry"
   },
   "dependencies": {

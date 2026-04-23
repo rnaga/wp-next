@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-cli",
-  "version": "1.1.20",
+  "version": "1.2.1",
   "description": "A command-line interface for managing WP Next projects",
   "bin": {
     "wp-next": "./index.js"
@@ -12,7 +12,7 @@
     "sync-templates": "npm run sync-templates:admin && npm run sync-templates:editor",
     "sync-templates:admin": "node ./scripts/sync-templates-admin.mjs",
     "sync-templates:editor": "node ./scripts/sync-templates-editor.mjs",
-    "release": "../../scripts/release-gh.sh"
+    "release": "../../scripts/release.sh"
   },
   "keywords": [
     "wordpress",

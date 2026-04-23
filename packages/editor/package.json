@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-editor",
-  "version": "0.1.33",
+  "version": "0.2.1",
   "license": "MIT",
   "description": "Editor interface for WP Next",
   "author": "Ryohei Nagatsuka",
@@ -18,7 +18,7 @@
     "build": "node ../../scripts/build-editor.mjs",
     "start": "next start",
     "lint": "next lint",
-    "release": "../../scripts/release-gh.sh",
+    "release": "../../scripts/release.sh",
     "google-fonts:local": "node --env-file=.env.local --experimental-strip-types google-fonts.ts"
   },
   "dependencies": {

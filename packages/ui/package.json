@@ -1,10 +1,10 @@
 {
   "name": "@rnaga/wp-next-ui",
-  "version": "1.1.13",
+  "version": "1.2.1",
   "scripts": {
     "build": "node ../../scripts/build-ui.mjs",
     "release-old": "node ../../scripts/release.mjs",
-    "release": "../../scripts/release-gh.sh"
+    "release": "../../scripts/release.sh"
   },
   "keywords": [
     "ui",
