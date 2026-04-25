@@ -10,7 +10,7 @@ WP-Next is built with [Next.js](https://nextjs.org/) and [WP-Node](https://githu
 
 ## WP-Next Editor
 
-WP-Next Editor is a visual, drag-and-drop page editor for building public-facing pages directly connected to your WordPress database. Pages are stored as structured [Lexical](https://lexical.dev/docs/intro) JSON in the WordPress database — making them version-controllable, programmatically manipulable, and AI-ready.
+WP-Next Editor is a visual, drag-and-drop website builder for building public-facing WordPress sites directly connected to your WordPress database. Templates and pages are stored as structured [Lexical](https://lexical.dev/docs/intro) JSON in the WordPress database — making them version-controllable, programmatically manipulable, and AI-ready.
 
 <a href="https://vimeo.com/1185738064?share=copy#t=0" target="_blank" rel="noopener">
   <img width="1200" height="699" alt="WP-Next Editor canvas demo" src="https://rnaga.github.io/wp-next/assets/editor/canvas/drag-drop-0.gif" />
