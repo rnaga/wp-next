@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-core",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Core functionality for WP Next",
   "scripts": {
     "test": "jest",
@@ -30,7 +30,7 @@
     "nodemailer": "^7.0.0",
     "react": "^19",
     "react-dom": "^19",
-    "zod": "^4.0"
+    "zod": "^4.4"
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.24",
@@ -43,6 +43,6 @@
     "jest": "^30",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9"
+    "typescript": "^6.0"
   }
 }

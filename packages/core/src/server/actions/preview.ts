@@ -52,12 +52,14 @@ export const get = async (token: string) => {
     });
   }
 
-  const preview = await wp.current.user?.meta.get<Record<string, any>>(
-    PREVIEW_META_KEY
-  );
+  const preview =
+    await wp.current.user?.meta.get<Record<string, any>>(PREVIEW_META_KEY);
 
   try {
-    if (preview.token !== token || preview.time < Date.now() - 1000 * 60 * 60) {
+    if (
+      preview?.token !== token ||
+      preview?.time < Date.now() - 1000 * 60 * 60
+    ) {
       return createResponsePayload({
         success: false,
         error: "Invalid preview token",
