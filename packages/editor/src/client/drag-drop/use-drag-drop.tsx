@@ -42,6 +42,11 @@ const __handlers = new Set<{
   event: "post" | "replace";
 }>();
 
+// Node type strings (from LexicalNode.getType()) that always receive drops inside,
+// regardless of cursor zone. Add known container types directly.
+// See drag-drop.md — "Drop-inside containers" section.
+const __dropInsideNodeTypes = new Set<string>(["grid-cell"]);
+
 let activeIndex = 0;
 const defaultActive = () => ({
   index: activeIndex++,
@@ -90,6 +95,24 @@ export const useDragDrop = () => {
     klass?: Klass<LexicalNode>[]
   ) => {
     __validators.add([validator, klass]);
+  };
+
+  /**
+   * @deprecated Add the node type string directly to `__dropInsideNodeTypes` instead.
+   */
+  const registerDropInsideNode = (_klass: Klass<LexicalNode>) => {};
+
+  /**
+   * Returns true when the given node's type is listed in `__dropInsideNodeTypes`,
+   * meaning drops must always land inside it regardless of cursor zone.
+   * Used by `shouldRedirectToCenter` and TreeNavigatorPlugin for position and border logic.
+   */
+  const isDropInsideTarget = (node: LexicalNode | null | undefined): boolean => {
+    if (!node) {
+      return false;
+    }
+
+    return __dropInsideNodeTypes.has(node.getType());
   };
 
   const registerDropEventHandler = (handler: DropEventHandler) => {
@@ -238,6 +261,11 @@ export const useDragDrop = () => {
         // Only redirect for top/bottom edge positions; center positions are already inside.
         if (position !== "top" && position !== "bottom") {
           return false;
+        }
+
+        // Registered container nodes always receive drops inside, regardless of parent.
+        if (isDropInsideTarget(targetNode)) {
+          return true;
         }
 
         // Only redirect when the target is a direct child of root.
@@ -638,6 +666,8 @@ export const useDragDrop = () => {
 
   return {
     registerDragDropValidator,
+    registerDropInsideNode,
+    isDropInsideTarget,
     registerDropEventHandler,
     registerDropPostEventHandler,
     isDragging,

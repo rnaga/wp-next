@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-editor",
-  "version": "0.2.2",
+  "version": "0.2.5",
   "license": "MIT",
   "description": "Editor interface for WP Next",
   "author": "Ryohei Nagatsuka",

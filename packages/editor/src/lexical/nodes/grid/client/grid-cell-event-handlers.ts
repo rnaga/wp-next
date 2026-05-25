@@ -15,7 +15,7 @@ export const gridDragDropValidator: DragDropValidator = (args) => {
   // - position is not top or bottom
   // This is to prevent any node from being dropped into a grid node
   if ($isGridNode(targetNode) && position !== "top" && position !== "bottom") {
-    logger.log( "Node cannot be dropped into a grid node", position);
+    logger.log("Node cannot be dropped into a grid node", position);
     return [false, "Node cannot be dropped into a grid node"];
   }
 
@@ -33,6 +33,10 @@ export const gridCellDragDropValidator: DragDropValidator = (args) => {
     position !== "center-top" &&
     position !== "center-bottom"
   ) {
+    logger.log(
+      "Node cannot be dropped into a grid cell at this position",
+      position
+    );
     return [false, "Node cannot be dropped into a grid cell at this position"];
   }
 
@@ -47,7 +51,7 @@ export const gridCellDragDropValidator: DragDropValidator = (args) => {
   const draggedParentGridNode = draggedNode.getParents().find($isGridNode);
 
   if (!draggedParentGridNode) {
-    logger.log( "Dragged node is not in a grid node");
+    logger.log("Dragged node is not in a grid node");
     return [false, "Dragged node is not in a grid node"];
   }
 
@@ -59,7 +63,7 @@ export const gridCellDragDropValidator: DragDropValidator = (args) => {
     !targetParentGridNode ||
     draggedParentGridNode.getKey() !== targetParentGridNode.getKey()
   ) {
-    logger.log( "Dragged node cannot be dropped outside of the grid node");
+    logger.log("Dragged node cannot be dropped outside of the grid node");
     return [false, "Dragged node cannot be dropped outside of the grid node"];
   }
 
@@ -69,9 +73,7 @@ export const gridCellDragDropValidator: DragDropValidator = (args) => {
     : editor.read(() => targetNode.getParents().find($isGridCellNode));
 
   if (!targetGridCellNode) {
-    logger.log(
-      "Target node is neither a grid cell nor a child of a grid cell"
-    );
+    logger.log("Target node is neither a grid cell nor a child of a grid cell");
     return [
       false,
       "Target node is neither a grid cell nor a child of a grid cell",
@@ -85,7 +87,7 @@ export const gridCellDragDropValidator: DragDropValidator = (args) => {
   );
 
   if (!canSwap) {
-    logger.log( "Cannot swap grid cells");
+    logger.log("Cannot swap grid cells");
     return [false, "Cannot swap grid cells"];
   }
 

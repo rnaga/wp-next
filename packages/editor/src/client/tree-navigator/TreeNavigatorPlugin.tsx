@@ -164,7 +164,10 @@ const NodeTreeItem = (props: {
     // If the node is expanded, collapse it
     if (refExpanded.current == true) {
       refExpanded.current = false;
-      apiRef?.current?.setItemExpansion?.({ itemId: node.getKey(), shouldBeExpanded: false });
+      apiRef?.current?.setItemExpansion?.({
+        itemId: node.getKey(),
+        shouldBeExpanded: false,
+      });
     }
 
     // Notify the dragDrop that the dragging has started
@@ -241,11 +244,15 @@ const NodeTreeItem = (props: {
      * the visual shows a line border (insert before/after), but the drop handler
      * would normally append inside. Override the stored position so both agree.
      * The tree navigator needs this remapping; the canvas/PreviewLayer does not.
+     *
+     * Registered drop-inside containers (e.g. GridCellNode) are excluded: they
+     * must always receive drops inside, so their center position must be preserved.
      */
     if (
       !isSiblingDrop &&
       $isElementNode(targetNode) &&
-      $isElementNode(parentTargetNode)
+      $isElementNode(parentTargetNode) &&
+      !dragDrop.isDropInsideTarget(targetNode)
     ) {
       if (position === "center-top") {
         dragDrop.overridePosition("top");
@@ -264,7 +271,7 @@ const NodeTreeItem = (props: {
       }
     } else if (
       $isElementNode(targetNode) &&
-      !$isElementNode(parentTargetNode) &&
+      (!$isElementNode(parentTargetNode) || dragDrop.isDropInsideTarget(targetNode)) &&
       (!$isWPElementNode(draggedNode) ||
         ($isElementNode(draggedNode) && position == "center-top") ||
         position == "center-bottom")
@@ -285,7 +292,10 @@ const NodeTreeItem = (props: {
 
     // toggle the expansion using the api and refExpaned
     refExpanded.current = !refExpanded.current;
-    apiRef?.current?.setItemExpansion?.({ itemId: node.getKey(), shouldBeExpanded: refExpanded.current });
+    apiRef?.current?.setItemExpansion?.({
+      itemId: node.getKey(),
+      shouldBeExpanded: refExpanded.current,
+    });
 
     const nodeKey = node.getKey();
     const nodeDOM = editor.read(() => editor.getElementByKey(nodeKey));
