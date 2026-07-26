@@ -10,6 +10,7 @@ import {
   $storeCacheData,
 } from "./nodes/cache/CacheNode";
 import { $isCSSVariablesNode } from "./nodes/css-variables/CSSVariablesNode";
+import { $ensureMetaChild } from "./nodes/meta/MetaNode";
 import { CUSTOM_CODE_INJECT_LOCATIONS } from "./nodes/custom-code/constants";
 import {
   $isCustomCodeNode,
@@ -68,18 +69,10 @@ export const processAndGetTemplateSync = (
   stateString: string,
   cacheData: Record<string, any>
 ) => {
-  const cacheNode = editor
-    .getEditorState()
-    .read(() => $getRoot().getChildren().find($isCacheNode));
-
-  // Create CacheNode if it doesn't exist
+  // Create CacheNode (under MetaNode) if it doesn't exist
   editor.update(
     () => {
-      if (!cacheNode) {
-        const cacheNode = $createCacheNode();
-        $getRoot().getWritable().append(cacheNode);
-      }
-
+      $ensureMetaChild($isCacheNode, $createCacheNode);
       $storeCacheData(cacheData);
     },
     {

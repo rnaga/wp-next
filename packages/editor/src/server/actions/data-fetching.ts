@@ -18,22 +18,14 @@ import {
   processAllWidgets,
   processAllWidgetsSync,
 } from "../../lexical/nodes/widget/WidgetNode";
-import {
-  $getRoot,
-  EditorState,
-  HISTORY_MERGE_TAG,
-  LexicalEditor,
-} from "lexical";
+import { EditorState, HISTORY_MERGE_TAG, LexicalEditor } from "lexical";
 import {
   $isDataFetchingNode,
   DataFetchingNode,
   DataFetchingPagination,
   fetchDataFetchingNode,
 } from "../../lexical/nodes/data-fetching/DataFetchingNode";
-import {
-  $createCacheNode,
-  $isCacheNode,
-} from "../../lexical/nodes/cache/CacheNode";
+import { $storeCacheData } from "../../lexical/nodes/cache/CacheNode";
 import { getServerActionsUtils } from "@rnaga/wp-next-core/server/utils/get-server-actions-utils";
 import { getEditorServerActionsUtils } from "./get-editor-server-actions-utils";
 import { $isWPLexicalNode } from "../../lexical/nodes/wp";
@@ -188,10 +180,7 @@ export const get = async (args: {
   if (cacheData) {
     editor.update(
       () => {
-        const cacheNode = $getRoot().getChildren().find($isCacheNode);
-        if (cacheNode) {
-          cacheNode.setData(cacheData);
-        }
+        $storeCacheData(cacheData);
       },
       { discrete: true, tag: HISTORY_MERGE_TAG }
     );

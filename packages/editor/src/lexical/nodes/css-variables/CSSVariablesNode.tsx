@@ -23,6 +23,7 @@ import {
 } from "../font/GoogleFontNode";
 import { $isWPLexicalNode } from "../wp/guards";
 import type { WPLexicalNode } from "../wp/types";
+import { $getMetaNode } from "../meta/MetaNode";
 import {
   NODE_CSS_VARIABLES_DATA_UPDATED_COMMAND,
   NODE_CSS_VARIABLES_FETCHED_COMMAND,
@@ -317,7 +318,7 @@ export const fetchCSSVariablesNode = async (editor: LexicalEditor) => {
 };
 
 export const $getCSSVariablesNode = () => {
-  const node = $getRoot().getChildren().find($isCSSVariablesNode);
+  const node = $getMetaNode().getChildren().find($isCSSVariablesNode);
   if (!node) {
     throw new Error("CCSSVariablesNode not found");
   }

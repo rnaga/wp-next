@@ -56,6 +56,7 @@ import { $createImageNode, ImageNode } from "./image/ImageNode";
 import { $createLinkNode, LinkNode } from "./link/LinkNode";
 import { $createListItemNode, ListItemNode } from "./list/ListItemNode";
 import { $createListNode, ListNode } from "./list/ListNode";
+import { $createMetaNode, MetaNode } from "./meta/MetaNode";
 import {
   $createPaginationNode,
   PaginationNode,
@@ -103,6 +104,7 @@ export const nodeDefaultCreators = new Map<
   (...args: any[]) => any
 >([
   [BodyNode, $createBodyNode],
+  [MetaNode, $createMetaNode],
   [WrapperNode, $createWrapperNode],
   [TemplateTextNode, $createTemplateTextNode],
   [TextNode, $createTextNode],

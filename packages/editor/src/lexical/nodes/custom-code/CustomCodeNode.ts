@@ -11,6 +11,7 @@ import {
 } from "lexical";
 import type * as types from "../../../types";
 import { createVoidElement } from "../wp/create-void-element";
+import { $isMetaNode } from "../meta/MetaNode";
 
 export type SerializedCustomCodeNode = Spread<
   {
@@ -105,7 +106,12 @@ export const $isCustomCodeNode = (
 };
 
 export const $getCustomCodeNode = (): CustomCodeNode | null => {
-  return $getRoot()
+  const metaNode = $getRoot().getChildren().find($isMetaNode);
+  if (!metaNode) {
+    return null;
+  }
+
+  return metaNode
     .getChildren()
     .find((node) => node instanceof CustomCodeNode) as CustomCodeNode | null;
 };

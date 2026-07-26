@@ -91,16 +91,17 @@ const parseHtmlToElements = (
 
   return children.map((node, i) => {
     const key = `${keyPrefix}-${i}`;
+    const lexicalNode = node as unknown as Node;
 
     if (node.nodeType === node.TEXT_NODE) {
       return node.textContent || null;
     }
 
-    if (node.nodeType !== node.ELEMENT_NODE) {
+    if (lexicalNode.nodeType !== lexicalNode.ELEMENT_NODE) {
       return null;
     }
 
-    const el = node as Element;
+    const el = lexicalNode as Element;
     const tag = el.tagName.toLowerCase();
     const attrs: Record<string, string> = injectCustomCodeAttribute
       ? { key, [CUSTOM_CODE_ATTRIBUTE]: customCodeTitle }

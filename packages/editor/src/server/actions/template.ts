@@ -40,9 +40,13 @@ import {
 } from "./editor-terms";
 import { isErrorSlug, isValidPageSlug } from "../../lexical/validate-slug";
 import { auditServerDom } from "../setup-dom";
-import { $getRoot, createEditor, HISTORY_MERGE_TAG } from "lexical";
+import { HISTORY_MERGE_TAG } from "lexical";
 import { createLexicalEditor } from "../../lexical";
-import { $createErrorDataFetchingNode } from "../../lexical/nodes/error-data-fetching/ErrorDataFetchingNode";
+import {
+  $createErrorDataFetchingNode,
+  $isErrorDataFetchingNode,
+} from "../../lexical/nodes/error-data-fetching/ErrorDataFetchingNode";
+import { $ensureMetaChild } from "../../lexical/nodes/meta/MetaNode";
 import { deleteAllPreviews, savePreview } from "./preview";
 import { checkPermission } from "./check-permission";
 
@@ -543,8 +547,7 @@ export const create = async (
 
     editor.update(
       () => {
-        const errorDataFetchingNode = $createErrorDataFetchingNode();
-        $getRoot().append(errorDataFetchingNode);
+        $ensureMetaChild($isErrorDataFetchingNode, $createErrorDataFetchingNode);
       },
       {
         discrete: true,

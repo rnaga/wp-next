@@ -42,6 +42,7 @@ import {
   DataFetchingQuery,
   fetchDataFetchingNode,
 } from "../DataFetchingNode";
+import { $getOrCreateMetaNode } from "../../meta/MetaNode";
 
 type FormItem = {
   title: string;
@@ -296,8 +297,7 @@ export const DataFetchingFormModal = (props: {
         if (!currentNode) {
           let newNode = $getDataFetchingNodeByType(options.dataType);
 
-          const firstChild = $getRoot().getFirstChild();
-          firstChild?.insertBefore(newNode);
+          $getOrCreateMetaNode().append(newNode);
 
           writable = newNode.getWritable();
 

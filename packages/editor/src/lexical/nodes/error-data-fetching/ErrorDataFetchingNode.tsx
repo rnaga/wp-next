@@ -13,6 +13,7 @@ import { isErrorSlug } from "../../validate-slug";
 import { $getRoot, LexicalEditor } from "lexical";
 import { $walkNode } from "../../walk-node";
 import { $getAllCacheData, $storeCacheData } from "../cache/CacheNode";
+import { $getOrCreateMetaNode } from "../meta/MetaNode";
 
 type Data = z.infer<typeof errorDataFetchingValidator>;
 
@@ -141,10 +142,10 @@ export const $checkAndInsertErrorDataFetchingNode = (slug: string) => {
     return true;
   });
 
-  // Error Node doesn't exits. Create and insert it.
+  // Error Node doesn't exits. Create and insert it under MetaNode.
   if (!errorNode) {
     const newErrorNode = $createErrorDataFetchingNode();
-    $getRoot().getWritable().append(newErrorNode);
+    $getOrCreateMetaNode().append(newErrorNode);
   }
 };
 

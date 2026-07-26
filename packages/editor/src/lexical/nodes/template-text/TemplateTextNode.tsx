@@ -3,7 +3,6 @@ import { extractTemplateExpressions } from "./parse-template-pipe";
 
 import {
   $getEditor,
-  $getRoot,
   EditorConfig,
   LexicalEditor,
   LexicalNode,
@@ -14,9 +13,9 @@ import { CSS } from "../../styles-core/css";
 import { $deferredSyncParentCollections } from "../collection/sync";
 
 import {
+  $getAllDataFetchingNodes,
   $getFetchedData,
   $getFetchedPagination,
-  $isDataFetchingNode,
 } from "../data-fetching/DataFetchingNode";
 import {
   $afterWPTextNodeCreation,
@@ -251,7 +250,7 @@ export const $processTemplateText = (
   }
 
   // Get the data nodes
-  const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+  const dataNodes = $getAllDataFetchingNodes();
 
   for (const { fullMatch, varPath, pipeName, pipeParams } of expressions) {
     const [name, ...keys] = varPath.split(".").map((s) => s.trim());

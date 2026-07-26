@@ -1,6 +1,6 @@
 {
   "name": "@rnaga/wp-next-core",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Core functionality for WP Next",
   "scripts": {
     "test": "jest",
@@ -43,6 +43,6 @@
     "jest": "^30",
     "ts-jest": "^29",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0"
+    "typescript": "^6"
   }
 }

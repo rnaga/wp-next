@@ -1,7 +1,7 @@
 "use server";
 
 import { JSDOM } from "jsdom";
-import { $getRoot, HISTORY_MERGE_TAG, LexicalEditor } from "lexical";
+import { HISTORY_MERGE_TAG, LexicalEditor } from "lexical";
 import { cache } from "react";
 
 import { $generateHtmlFromNodes } from "@lexical/html";
@@ -16,6 +16,7 @@ import {
   storeQueryCache,
   storeURLQueryCache,
 } from "../lexical/nodes/cache/CacheNode";
+import { $ensureMetaChild } from "../lexical/nodes/meta/MetaNode";
 import { WP_VOID_ELEMENT_ATTRIBUTE } from "../lexical/nodes/wp/constants";
 import { processAndGetTemplate } from "../lexical/template";
 import { auditServerDom } from "../server/setup-dom";
@@ -128,23 +129,16 @@ export const getWpPage = cache(
     //
     // NOTE: This MUST be done before calling processAndGetTemplate so that widget editors
     // can access query parameters during template processing.
-    const cacheNode = editor
-      .getEditorState()
-      .read(() => $getRoot().getChildren().find($isCacheNode));
-
-    // Create CacheNode if it doesn't exist
-    if (!cacheNode) {
-      editor.update(
-        () => {
-          const cacheNode = $createCacheNode();
-          $getRoot().getWritable().append(cacheNode);
-        },
-        {
-          discrete: true,
-          tag: HISTORY_MERGE_TAG,
-        }
-      );
-    }
+    // Create CacheNode (under MetaNode) if it doesn't exist
+    editor.update(
+      () => {
+        $ensureMetaChild($isCacheNode, $createCacheNode);
+      },
+      {
+        discrete: true,
+        tag: HISTORY_MERGE_TAG,
+      }
+    );
 
     const templateWithConfig = await getTemplateWithConfig(idOrSlug).catch(
       (error) => {

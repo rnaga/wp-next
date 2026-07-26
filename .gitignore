@@ -20,8 +20,11 @@ google-client-secret.json
 /coverage
 **/.env.test
 
-# exclude test folder 
+# exclude test folder
 /test/
+
+# exclude issues folder (local notes/investigation writeups, not repo docs)
+/issues/
 
 # exclude "editor" folder
 # /packages/editor/

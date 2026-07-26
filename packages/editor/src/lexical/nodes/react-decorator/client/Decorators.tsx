@@ -3,17 +3,11 @@
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
-import { $createNode } from "../../../lexical";
-
 import type * as types from "../../../../types";
 import { getDecoratorsSync } from "./decorator-loader";
 import { useEffect, useRef, useState } from "react";
-import { $getRoot } from "lexical";
-import {
-  $isCacheNode,
-  $storeCacheData,
-  CacheNode,
-} from "../../cache/CacheNode";
+import { $createCacheNode, $isCacheNode, $storeCacheData } from "../../cache/CacheNode";
+import { $ensureMetaChild } from "../../meta/MetaNode";
 import { registerNodeCreators } from "../..";
 
 import { getLexicalEditorConfig } from "../../../editor";
@@ -68,15 +62,8 @@ const PrepareContent = () => {
           nodeRegisteredRef.current = true;
         }
 
-        // Check if CacheNode already exists
-        const root = $getRoot();
-        const existingCacheNode = root.getChildren().find($isCacheNode);
-
-        if (!existingCacheNode) {
-          // Create and add CacheNode
-          const cacheNode = $createNode(CacheNode);
-          $getRoot().append(cacheNode);
-        }
+        // Ensure CacheNode exists under MetaNode
+        $ensureMetaChild($isCacheNode, $createCacheNode);
 
         // Store cached data into CacheNode
         $storeCacheData(globalThis.__cachedData);

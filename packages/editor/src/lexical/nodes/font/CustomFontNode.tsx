@@ -17,6 +17,7 @@ import { getEditorServerActionsUtils } from "../../../server/actions/get-editor-
 import { $walkNode } from "../../walk-node";
 import { $isWPLexicalNode } from "../wp/guards";
 import { $getCSSVariableContentItem } from "../css-variables/css-variables-access";
+import { $getMetaNode } from "../meta/MetaNode";
 import { STYLE_DEVICES } from "../../styles-core/constants";
 import { CSSDevice } from "../../styles-core/css-device";
 
@@ -119,7 +120,7 @@ export const $createCustomFontNode = () => {
 };
 
 export const $getCustomFontNode = () => {
-  const node = $getRoot().getChildren().find($isCustomFontNode);
+  const node = $getMetaNode().getChildren().find($isCustomFontNode);
   if (!node) {
     throw new Error("CustomFontNode not found");
   }
@@ -134,13 +135,14 @@ export const $isCustomFontNode = (node: any): node is CustomFontNode => {
 };
 
 export const $appendCustomFontNode = () => {
-  // Check if font node exists in the root node
-  if ($getRoot().getChildren().find($isCustomFontNode)) {
+  // Check if font node already exists under MetaNode
+  const metaNode = $getMetaNode();
+  if (metaNode.getChildren().find($isCustomFontNode)) {
     return false;
   }
 
   const node = $createCustomFontNode();
-  $getRoot().append(node);
+  metaNode.append(node);
 
   return true;
 };

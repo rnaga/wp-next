@@ -11,6 +11,7 @@ import type * as types from "../../../types";
 import { $isDataFetchingNode } from "../data-fetching/DataFetchingNode";
 import { $isWPLexicalNode } from "../wp";
 import { $getCSSVariableContentItem } from "../css-variables/css-variables-access";
+import { $getMetaNode } from "../meta/MetaNode";
 import { $walkNode } from "../../walk-node";
 import { STYLE_DEVICES } from "../../styles-core/constants";
 import { CSSDevice } from "../../styles-core/css-device";
@@ -92,7 +93,7 @@ export const $isGoogleFontNode = (node: any): node is GoogleFontNode => {
 };
 
 export const $getGoogleFontNode = (editor: LexicalEditor) => {
-  const node = $getRoot().getChildren().find($isGoogleFontNode);
+  const node = $getMetaNode().getChildren().find($isGoogleFontNode);
 
   // Create a new GoogleFontNode if it doesn't exist
   if (!node) {

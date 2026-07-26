@@ -1,9 +1,9 @@
-import { $getRoot, Klass, LexicalEditor } from "lexical";
+import { Klass, LexicalEditor } from "lexical";
 import { z } from "zod";
 import {
+  $getAllDataFetchingNodes,
   $getDataKlassNodeByType,
   $getDataFetchingNodeByName,
-  $isDataFetchingNode,
 } from "./DataFetchingNode";
 import { WPLexicalNode } from "../wp";
 import {
@@ -126,7 +126,7 @@ export const getAllArrayKeysFromDataFetchingNodes = (
   const arrayKeys: string[] = [];
 
   return editor.read(() => {
-    const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+    const dataNodes = $getAllDataFetchingNodes();
 
     dataNodes.forEach((node) => {
       const klassNode = $getDataKlassNodeByType(node.getType());
@@ -174,7 +174,7 @@ export const getArrayKeysInArray = (
 
   const objectKeys: string[] = [];
   return editor.read(() => {
-    const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+    const dataNodes = $getAllDataFetchingNodes();
     dataNodes.forEach((node) => {
       const klassNode = $getDataKlassNodeByType(node.getType());
       if (!klassNode) {
@@ -225,7 +225,7 @@ export const getObjectKeysInArray = (
 
   const objectKeys: string[] = [];
   return editor.read(() => {
-    const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+    const dataNodes = $getAllDataFetchingNodes();
     dataNodes.forEach((node) => {
       const klassNode = $getDataKlassNodeByType(node.getType());
       if (!klassNode) {
@@ -270,7 +270,7 @@ export const getObjectKeysInArray = (
 
 export const getPaginationKeys = (editor: LexicalEditor): string[] => {
   return editor.read(() => {
-    const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+    const dataNodes = $getAllDataFetchingNodes();
     const keys: string[] = [];
     dataNodes.forEach((node) => {
       if (!node.__hasPagination) return;
@@ -290,7 +290,7 @@ export const getAllObjectKeys = (editor: LexicalEditor): string[] => {
   const objectKeys: string[] = [];
 
   return editor.read(() => {
-    const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+    const dataNodes = $getAllDataFetchingNodes();
     dataNodes.forEach((node) => {
       const nodeType = node.getType();
       const klassNode = $getDataKlassNodeByType(node.getType());

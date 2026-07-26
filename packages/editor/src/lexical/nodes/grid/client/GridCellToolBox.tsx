@@ -185,7 +185,10 @@ export const GridCellToolBox = () => {
         () => {
           editor.update(
             () => {
-              $unmergeGridCell(editor, $getNodeByKey(gridCellNode.getKey())!);
+              $unmergeGridCell(
+                editor,
+                $getNodeByKey(gridCellNode.getKey()) as GridCellNode
+              );
               //refresh(["mousetool"]);
             },
             {

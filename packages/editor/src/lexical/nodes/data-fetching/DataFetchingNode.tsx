@@ -29,6 +29,7 @@ import {
   getCacheData,
 } from "../cache/CacheNode";
 import { createVoidElement } from "../wp/create-void-element";
+import { $isMetaNode } from "../meta/MetaNode";
 import { DATA_FETCHING_NODE_FETCHED_COMMAND } from "./commands";
 
 import type * as types from "../../../types";
@@ -332,11 +333,23 @@ export const $getDataFetchingNodeByType = (type: string) => {
   return $createDataFetchingNode(klassNode, {}) as DataFetchingNode;
 };
 
+// All DataFetchingNode instances live nested under MetaNode, not as direct
+// root children (see issues/lexical-0.48-root-decorator-gc-bug.md) — this is
+// the single shared way to collect them; every other lookup should go through
+// this instead of re-deriving MetaNode's children.
+export const $getAllDataFetchingNodes = (): DataFetchingNode[] => {
+  const metaNode = $getRoot().getChildren().find($isMetaNode);
+  if (!metaNode) {
+    return [];
+  }
+
+  return metaNode.getChildren().filter($isDataFetchingNode);
+};
+
 export const $getDataFetchingNodeByName = (name: string) => {
-  const dataNode = $getRoot()
-    .getChildren()
-    .filter($isDataFetchingNode)
-    .find((node) => node.getName() === name);
+  const dataNode = $getAllDataFetchingNodes().find(
+    (node) => node.getName() === name
+  );
 
   if (!dataNode) {
     return undefined;
@@ -573,7 +586,7 @@ export const fetchAllDataFetchingNodes = async (
 ): Promise<types.FetchedDataMapping> => {
   const dataNodes = editor
     .getEditorState()
-    .read(() => $getRoot().getChildren().filter($isDataFetchingNode));
+    .read(() => $getAllDataFetchingNodes());
 
   let fetchedDataMapping: types.FetchedDataMapping = {};
 

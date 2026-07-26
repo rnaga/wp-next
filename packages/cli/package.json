@@ -26,7 +26,7 @@
     "@rnaga/wp-next-editor": "*",
     "@rnaga/wp-node": "^1",
     "@rnaga/wp-node-cli": "^1",
-    "commander": "^14.0.3",
+    "commander": "^15.0",
     "dotenv": "^16.0.0",
     "enquirer": "^2.4.1"
   },

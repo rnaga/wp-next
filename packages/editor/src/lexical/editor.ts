@@ -8,9 +8,9 @@ import { getWPLexicalNodes, registerNodeCreators } from "./nodes";
 import {
   $createCacheNode,
   $isCacheNode,
-  CacheNode,
   syncCacheData,
 } from "./nodes/cache/CacheNode";
+import { $ensureMetaChild } from "./nodes/meta/MetaNode";
 import { $walkNode } from "./walk-node";
 import { logger } from "./logger";
 
@@ -92,11 +92,11 @@ export const createLexicalEditor = (
       return found;
     });
 
-    // If no CacheNode found, create one and append to root
+    // If no CacheNode found, create one under MetaNode
     if (!hasCacheNode) {
       editor.update(
         () => {
-          $getRoot().append($createCacheNode());
+          $ensureMetaChild($isCacheNode, $createCacheNode);
         },
         { discrete: true, tag: HISTORY_MERGE_TAG }
       );

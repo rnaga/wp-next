@@ -57,11 +57,18 @@ import {
   CSSVariablesNode,
 } from "./nodes/css-variables/CSSVariablesNode";
 import {
+  $getDataKlassNodes,
   $isDataFetchingNode,
   fetchAllDataFetchingNodes,
 } from "./nodes/data-fetching/DataFetchingNode";
 import { $isCustomFontNode, CustomFontNode } from "./nodes/font/CustomFontNode";
 import { $isGoogleFontNode, GoogleFontNode } from "./nodes/font/GoogleFontNode";
+import {
+  $createMetaNode,
+  $getOrCreateMetaNode,
+  $isMetaNode,
+  MetaNode,
+} from "./nodes/meta/MetaNode";
 import { $isLinkRelatedNode, $loadTemplateLink } from "./nodes/link/LinkNode";
 import { $isReactDecoratorNode } from "./nodes/react-decorator/ReactDecoratorNode";
 import {
@@ -85,7 +92,22 @@ import { CUSTOM_CODE_INJECT_LOCATIONS } from "./nodes/custom-code/constants";
 import { $isBodyNode, BodyNode } from "./nodes/body/BodyNode";
 import { logger } from "./logger";
 
-export const defaultNodes: Array<
+// Nodes that must always exist as direct children of RootNode.
+// IMPORTANT: only ElementNode types belong here. Lexical's reconciler garbage-collects
+// DecoratorNode instances that are direct root children (see
+// issues/lexical-0.48-root-decorator-gc-bug.md) — any "always present" DecoratorNode
+// metadata must live under MetaNode instead (see defaultMetaNodes below).
+export const defaultRootNodes: Array<
+  [Klass<LexicalNode>, (...args: any[]) => boolean]
+> = [
+  [MetaNode, $isMetaNode],
+  [BodyNode, $isBodyNode],
+];
+
+// Singleton metadata nodes that must always exist as children of MetaNode
+// (never as direct children of root — see defaultRootNodes above). Auto-created
+// under MetaNode the first time a template is parsed if missing.
+export const defaultMetaNodes: Array<
   [Klass<LexicalNode>, (...args: any[]) => boolean]
 > = [
   [GoogleFontNode, $isGoogleFontNode],
@@ -94,8 +116,86 @@ export const defaultNodes: Array<
   [AnimationNode, $isAnimationNode],
   [CustomCodeNode, $isCustomCodeNode],
   [CacheNode, $isCacheNode],
-  [BodyNode, $isBodyNode],
 ];
+
+// All node type strings that must live under MetaNode rather than as direct
+// root children: the six singleton metadata types above, plus every
+// registered DataFetchingNode subtype (posts, users, terms, settings, etc.),
+// which can appear 0-to-many times per template.
+const $getLegacyRootMetaTypeSet = (): Set<string> => {
+  const types = new Set<string>();
+
+  for (const [klass] of defaultMetaNodes) {
+    types.add(klass.getType());
+  }
+
+  for (const klass of $getDataKlassNodes()) {
+    types.add(klass.getType());
+  }
+
+  return types;
+};
+
+/**
+ * Rewrites a template's raw JSON so that any of the metadata/data-fetching
+ * node types are still direct children of root (the legacy shape used before
+ * MetaNode existed) get nested under a "meta" wrapper node instead.
+ *
+ * This MUST run on the raw JSON string before it is ever handed to
+ * `editor.parseEditorState()`. Lexical's reconciler silently prunes
+ * DecoratorNode instances that are direct children of root on the very first
+ * commit — by the time any `editor.update()` could react to the parsed tree,
+ * the node is already gone. See issues/lexical-0.48-root-decorator-gc-bug.md.
+ */
+export const migrateLegacyRootMetaChildren = (jsonString: string): string => {
+  let parsed: any;
+  try {
+    parsed = JSON.parse(jsonString);
+  } catch {
+    return jsonString;
+  }
+
+  const rootChildren = parsed?.root?.children;
+  if (!Array.isArray(rootChildren)) {
+    return jsonString;
+  }
+
+  const metaTypes = $getLegacyRootMetaTypeSet();
+  const strayMetaChildren = rootChildren.filter(
+    (child: any) => child && metaTypes.has(child.type)
+  );
+
+  if (strayMetaChildren.length === 0) {
+    return jsonString;
+  }
+
+  const remainingChildren = rootChildren.filter(
+    (child: any) => !child || !metaTypes.has(child.type)
+  );
+
+  const existingMeta = remainingChildren.find(
+    (child: any) => child?.type === "meta"
+  );
+
+  if (existingMeta) {
+    existingMeta.children = [
+      ...(existingMeta.children || []),
+      ...strayMetaChildren,
+    ];
+  } else {
+    remainingChildren.push({
+      children: strayMetaChildren,
+      direction: null,
+      format: "",
+      indent: 0,
+      type: "meta",
+      version: 1,
+    });
+  }
+
+  parsed.root.children = remainingChildren;
+  return JSON.stringify(parsed);
+};
 
 const creators = new Map<Klass<LexicalNode>, (...args: any[]) => LexicalNode>([
   [TextNode, $createTextNode],
@@ -501,7 +601,7 @@ export const parseJsonString = (
       let jsonString: string | undefined;
       try {
         JSON.parse(content);
-        jsonString = content;
+        jsonString = migrateLegacyRootMetaChildren(content);
       } catch (e) {
         reject(e instanceof Error ? e : new Error(String(e)));
         return;
@@ -522,16 +622,28 @@ export const parseJsonString = (
       }
     }
 
-    // Create and append default nodes
+    // Create and append default nodes: root-level containers first (MetaNode,
+    // BodyNode), then the singleton metadata nodes as children of MetaNode.
     editor.update(
       () => {
         const rootNode = $getRoot();
-        for (const [klass, $isNode] of defaultNodes) {
+        for (const [klass, $isNode] of defaultRootNodes) {
           if (!rootNode.getChildren().find($isNode)) {
             rootNode.append($createNode(klass));
             editor.dispatchCommand(DEFAULT_NODE_CREATED_COMMAND, {
               klass,
               node: rootNode.getChildren().find($isNode)!,
+            });
+          }
+        }
+
+        const metaNode = $getOrCreateMetaNode();
+        for (const [klass, $isNode] of defaultMetaNodes) {
+          if (!metaNode.getChildren().find($isNode)) {
+            metaNode.append($createNode(klass));
+            editor.dispatchCommand(DEFAULT_NODE_CREATED_COMMAND, {
+              klass,
+              node: metaNode.getChildren().find($isNode)!,
             });
           }
         }
@@ -549,7 +661,7 @@ export const parseJsonString = (
     editor.update(
       () => {
         const rootNode = $getRoot();
-        const defaultNodeCheckers = defaultNodes.map(([, $isNode]) => $isNode);
+        const defaultNodeCheckers = defaultRootNodes.map(([, $isNode]) => $isNode);
         const isDefaultNode = (node: LexicalNode) =>
           defaultNodeCheckers.some((check) => check(node));
 
@@ -631,7 +743,7 @@ export const parseJsonStringSync = (
   let jsonString: string | undefined;
   try {
     JSON.parse(content);
-    jsonString = content;
+    jsonString = migrateLegacyRootMetaChildren(content);
   } catch (e) {
     throw e instanceof Error ? e : new Error(String(e));
   }
@@ -654,16 +766,28 @@ export const parseJsonStringSync = (
     );
   }
 
-  // Create and append default nodes
+  // Create and append default nodes: root-level containers first (MetaNode,
+  // BodyNode), then the singleton metadata nodes as children of MetaNode.
   editor.update(
     () => {
       const rootNode = $getRoot();
-      defaultNodes.forEach(([klass, $isNode]) => {
+      defaultRootNodes.forEach(([klass, $isNode]) => {
         if (!rootNode.getChildren().find($isNode)) {
           rootNode.append($createNode(klass));
           editor.dispatchCommand(DEFAULT_NODE_CREATED_COMMAND, {
             klass,
             node: rootNode.getChildren().find($isNode)!,
+          });
+        }
+      });
+
+      const metaNode = $getOrCreateMetaNode();
+      defaultMetaNodes.forEach(([klass, $isNode]) => {
+        if (!metaNode.getChildren().find($isNode)) {
+          metaNode.append($createNode(klass));
+          editor.dispatchCommand(DEFAULT_NODE_CREATED_COMMAND, {
+            klass,
+            node: metaNode.getChildren().find($isNode)!,
           });
         }
       });

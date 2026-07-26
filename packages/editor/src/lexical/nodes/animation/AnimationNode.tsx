@@ -13,6 +13,7 @@ import { ANIMATION_PRESETS } from "./presets";
 import type * as types from "../../../types/css-animation";
 import { $isWPLexicalNode, WPLexicalNode } from "../wp";
 import { createVoidElement } from "../wp/create-void-element";
+import { $getMetaNode } from "../meta/MetaNode";
 
 type AnimationPresets = AnimationPreset[];
 
@@ -143,7 +144,7 @@ export const $isAnimationNode = (node: LexicalNode): node is AnimationNode => {
 };
 
 export const $getAnimationNode = () => {
-  const node = $getRoot().getChildren().find($isAnimationNode);
+  const node = $getMetaNode().getChildren().find($isAnimationNode);
 
   // Create a new AnimationNode if it doesn't exist
   if (!node) {

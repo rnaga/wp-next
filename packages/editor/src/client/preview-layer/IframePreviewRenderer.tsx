@@ -4,11 +4,7 @@ import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { logger } from "../../lexical/logger";
 
-import {
-  $createNode,
-  setEditorMode,
-  setFullScreenPreviewMode,
-} from "../../lexical/lexical";
+import { setEditorMode, setFullScreenPreviewMode } from "../../lexical/lexical";
 
 import { $generateHtmlFromNodes } from "@lexical/html";
 import {
@@ -21,9 +17,11 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getLexicalEditorConfig } from "../../lexical/editor";
 import { registerNodeCreators } from "../../lexical/nodes";
 import {
+  $createCacheNode,
+  $isCacheNode,
   $storeCacheData,
-  CacheNode,
 } from "../../lexical/nodes/cache/CacheNode";
+import { $ensureMetaChild } from "../../lexical/nodes/meta/MetaNode";
 import { getDecoratorsSync } from "../../lexical/nodes/react-decorator/client/decorator-loader";
 import {
   gatherResourcesFromEditor,
@@ -92,9 +90,8 @@ const Content = () => {
         () => {
           $getRoot().clear();
 
-          // Create and add CacheNode
-          const cacheNode = $createNode(CacheNode);
-          $getRoot().append(cacheNode);
+          // Create and add CacheNode under MetaNode
+          $ensureMetaChild($isCacheNode, $createCacheNode);
 
           // Store received cache data
           $storeCacheData(cacheData);

@@ -10,14 +10,14 @@
     "sync-wp-node": "rsync -avz ../wp-node/packages/core/dist/ ./node_modules/\\@rnaga/wp-node/"
   },
   "devDependencies": {
-    "@lexical/headless": "^0.44.0",
+    "@lexical/headless": "^0.48.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^30",
     "dotenv": "^16.4.7",
     "jest": "^30",
     "jest-environment-jsdom": "^30",
-    "lexical": "^0.44.0",
+    "lexical": "^0.48",
     "next-router-mock": "^0.9.13",
     "prettier": "^3.7.4",
     "react": "^19",
@@ -36,6 +36,6 @@
       "react-dom": "$react-dom"
     },
     "glob": "^13",
-    "lexical": "^0.44.0"
+    "lexical": "^0.48"
   }
 }

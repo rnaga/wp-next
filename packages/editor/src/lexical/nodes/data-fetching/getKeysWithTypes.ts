@@ -1,9 +1,8 @@
 import { z } from "zod";
-import { $getRoot } from "lexical";
 
 import {
+  $getAllDataFetchingNodes,
   $getDataKlassNodeByType,
-  $isDataFetchingNode,
 } from "./DataFetchingNode";
 
 import type { KeyWithType } from "../../dynamic-attributes/types";
@@ -146,7 +145,7 @@ const pushPaginationKeys = (
 export const getAllKeysWithTypes = (node?: WPLexicalNode): KeyWithType[] => {
   const keysWithTypes: KeyWithType[] = [];
 
-  const dataNodes = $getRoot().getChildren().filter($isDataFetchingNode);
+  const dataNodes = $getAllDataFetchingNodes();
 
   dataNodes.forEach((dataNode) => {
     const klassNode = $getDataKlassNodeByType(dataNode.getType());

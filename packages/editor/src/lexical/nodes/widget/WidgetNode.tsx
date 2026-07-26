@@ -265,9 +265,11 @@ export const processWidget = async (args: {
 
   const nestedEditor = createNestedEditor(editor);
 
-  let widgetNode: WidgetNode | null = editor.read(() => $getNodeByKey(nodeKey));
+  let widgetNode: WidgetNode | null = editor.read(
+    () => $getNodeByKey(nodeKey) as WidgetNode | null
+  );
   if (!widgetNode || !$isWidgetNode(widgetNode)) {
-    logger.warn( "Widget node not found or invalid for key:", nodeKey);
+    logger.warn("Widget node not found or invalid for key:", nodeKey);
     return [nestedEditor, ""];
   }
 
@@ -299,11 +301,7 @@ export const processWidget = async (args: {
   try {
     JSON.parse(editorStateString);
   } catch (e) {
-    logger.error(
-      "Invalid JSON for widget editor state:",
-      editorStateString,
-      e
-    );
+    logger.error("Invalid JSON for widget editor state:", editorStateString, e);
     editorStateString = DEFAULT_TEMPLATE_JSON_STRING_CONTENT;
   }
 
@@ -403,7 +401,7 @@ export const processWidget = async (args: {
   const cachedData = nestedEditor.read(() => $getAllCacheData());
 
   // Get the node again since the editor has been updated - the node reference is stale
-  widgetNode = editor.read(() => $getNodeByKey(nodeKey));
+  widgetNode = editor.read(() => $getNodeByKey(nodeKey) as WidgetNode | null);
   if (!widgetNode || !$isWidgetNode(widgetNode)) {
     return [nestedEditor, ""];
   }
@@ -735,7 +733,9 @@ export const processWidgetSync = (args: {
 
   const nestedEditor = createNestedEditor(editor);
 
-  let widgetNode: WidgetNode | null = editor.read(() => $getNodeByKey(nodeKey));
+  let widgetNode: WidgetNode | null = editor.read(
+    () => $getNodeByKey(nodeKey) as WidgetNode | null
+  );
 
   if (!widgetNode || !$isWidgetNode(widgetNode)) {
     return [nestedEditor, ""];
@@ -784,7 +784,7 @@ export const processWidgetSync = (args: {
       if (collectionElementData) {
         // Store collection element data specifically as well to cache as data fetching nodes rely on these keys
         for (const [key, value] of Object.entries(collectionElementData)) {
-          logger.log( `Storing mergedDataMapping: key=${key}, value=`, value);
+          logger.log(`Storing mergedDataMapping: key=${key}, value=`, value);
           $storeFetchedData(key, value);
         }
       }
@@ -818,7 +818,7 @@ export const processWidgetSync = (args: {
     .read(() => $generateHtmlFromNodes(nestedEditor, null));
 
   // Get the node again since the editor has been updated
-  widgetNode = editor.read(() => $getNodeByKey(nodeKey));
+  widgetNode = editor.read(() => $getNodeByKey(nodeKey) as WidgetNode | null);
   if (!widgetNode || !$isWidgetNode(widgetNode)) {
     return [nestedEditor, ""];
   }
@@ -861,7 +861,7 @@ export const $processAllWidgetsSync = (
   });
 
   if (!hasWidgetNode) {
-    logger.log( "$processAllWidgetsSync: No widget nodes found.");
+    logger.log("$processAllWidgetsSync: No widget nodes found.");
     setTimeout(() => {
       callback?.(editor);
     });
